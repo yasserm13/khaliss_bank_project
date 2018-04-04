@@ -1,6 +1,6 @@
 package khaliss_bank_project;
 
-public interface interfaceKB {
+public interface InterfaceKB {
 	public Client creerClient();
 
 }

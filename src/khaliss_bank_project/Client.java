@@ -37,5 +37,17 @@ public class Client extends Personne{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	public String toString() {
+		return this.m_nom+" "+this.m_prenom+" "+this.m_mail+" "+this.m_motDePasse+" ";
+	}
+	
+	public Client() { //constructeur par defaut
+		super ();
+	}; 
+	
+	public Client(String N,String P, String M, String MDP) { //constructeur 2
+		super (N,P,M,MDP);
+	}; 
 
 }
