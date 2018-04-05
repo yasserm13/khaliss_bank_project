@@ -46,7 +46,7 @@ public abstract class Personne {
 	@Override 
 	//Override signifie qu'on redefini une class mere
 	public String toString() {
-		return this.m_nom+" "+this.m_prenom+" "+this.m_mail+" "+this.m_motDePasse+" ";
+		return this.m_nom+" "+this.m_prenom+" "+this.m_mail+" ";
 	}
 	
 	public Personne() { //constructeur par defaut

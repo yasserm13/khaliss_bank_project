@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Client extends Personne{
 	private String m_addDomicile = "";
-	private String nomConseiller = "";
+	private String m_nomConseiller = "";
 	private int m_numCompte;
 	public ArrayList<Compte> m_listeCompte;
 	
@@ -16,12 +16,12 @@ public class Client extends Personne{
 		this.m_addDomicile = m_addDomicile;
 	}
 	
-	public String getNomConseiller() {
-		return nomConseiller;
+	public String getM_nomConseiller() {
+		return m_nomConseiller;
 	}
 	
-	public void setNomConseiller(String nomConseiller) {
-		this.nomConseiller = nomConseiller;
+	public void setM_nomConseiller(String nomConseiller) {
+		this.m_nomConseiller = nomConseiller;
 	}
 	
 	public int getM_numCompte() {
@@ -39,15 +39,16 @@ public class Client extends Personne{
 	}
 	
 	public String toString() {
-		return this.m_nom+" "+this.m_prenom+" "+this.m_mail+" "+this.m_motDePasse+" ";
+		return this.m_nom+" "+this.m_prenom+" "+this.m_mail+" "+this.m_addDomicile+" "+this.m_nomConseiller+" ";
 	}
 	
 	public Client() { //constructeur par defaut
 		super ();
 	}; 
 	
-	public Client(String N,String P, String M, String MDP) { //constructeur 2
+	public Client(String N,String P, String M, String MDP, String AD, String NC) { //constructeur 2
 		super (N,P,M,MDP);
+		this.m_addDomicile = AD;
+		this.m_nomConseiller = NC;
 	}; 
-
 }

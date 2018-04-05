@@ -1,4 +1,4 @@
-package khaliss_bank_project_divers;
+package divers;
 import java.util.Scanner;
 import java.io.*;
 
@@ -89,22 +89,28 @@ public class Menu{
 			System.out.println("│                     LOGIN                       │");
 			System.out.println("├─────────────────────────────────────────────────┤");
 			System.out.println("│                                                 │");
-			System.out.println("│               ┌───────────────────────────────┐ │");
-			System.out.println("│ Adresse mail :│                               │ │");
-			System.out.println("│               └───────────────────────────────┘ │");
-			System.out.println("│               ┌───────────────────────────────┐ │");
-			System.out.println("│ Mot de Passe :│                               │ │");
-			System.out.println("│               └───────────────────────────────┘ │");
+			System.out.println("│                  ┌────────────────────────────┐ │");
+			System.out.println("│ Adresse mail [1] │                            │ │");
+			System.out.println("│                  └────────────────────────────┘ │");
+			System.out.println("│                  ┌────────────────────────────┐ │");
+			System.out.println("│ Mot de Passe [2] │                            │ │");
+			System.out.println("│                  └────────────────────────────┘ │");
 			System.out.println("│                                                 │");
 			System.out.println("│*****************KHALISS BANK********************│");
 			System.out.println("│                                                 │");
-			System.out.println("│ 0: Menu principal                               │");
+			System.out.println("│ [0]: Menu principal                             │");
 			System.out.println("└─────────────────────────────────────────────────┘");
-			choix = lireEntreeInt (0, 0);
+			choix = lireEntreeInt (0, 2);
 			switch (choix) {
 	        case 0:
 	        	demarrer();
 	            break;
+	        case 1:
+            	System.out.print("Saisir votre @ mail: ");
+                break;
+            case 2: 
+            	System.out.print("Saisir mot de passe: ");
+                break;
 	        default:
 	        	 System.out.println("Mauvais choix, recommencez !"); // Action par défaut en cas de mauvais choix
 			}
