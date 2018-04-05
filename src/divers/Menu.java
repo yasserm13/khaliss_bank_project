@@ -1,16 +1,29 @@
 package divers;
-import java.util.Scanner;
 import java.io.*;
 
 public class Menu{
-	
-	private Scanner scan;
-	private BufferedReader br = new BufferedReader (new InputStreamReader (System.in));
+	private BufferedReader br;
 	
 	public Menu() { //constructeur par defaut
-        this.scan = new Scanner(System.in);
+        this.br = new BufferedReader (new InputStreamReader (System.in));
     }
-
+	
+	public int lireEntreeInt(int min, int max) {
+	       int choix;
+	       while (true) {
+	           try {
+	               choix = Integer.parseInt(br.readLine()); 
+	               if (choix >= min && choix <= max) {
+	                    break;
+	               }
+	           } catch (Exception e) {
+	        	   e.printStackTrace();
+	        	   System.out.println("Mauvaise valeur, veuillez saisir un entier !"); 
+	       }
+	   }
+	    return choix;
+	}
+	
 	private int menu_01() {
 		int choix;
 		System.out.println("");
@@ -64,7 +77,7 @@ public class Menu{
 			System.out.println("│  0: Menu principal                              │");
 			System.out.println("└─────────────────────────────────────────────────┘");
 			System.out.print("Votre choix : ");
-			choix = lireEntreeInt (0, 2);
+			choix = lireEntreeInt(0, 2);
 			switch (choix) {
             case 0:
             	demarrer();
@@ -100,7 +113,7 @@ public class Menu{
 			System.out.println("│                                                 │");
 			System.out.println("│ [0]: Menu principal                             │");
 			System.out.println("└─────────────────────────────────────────────────┘");
-			choix = lireEntreeInt (0, 2);
+			choix = lireEntreeInt(0, 2);
 			switch (choix) {
 	        case 0:
 	        	demarrer();
@@ -117,36 +130,4 @@ public class Menu{
 		}
 	}
 	
-	private int lireEntreeInt(int min, int max) {
-	       int choix;
-	       while (true) {
-	           try {
-	               //choix = Integer.parseInt(scan.nextLine());
-	               choix = Integer.parseInt(br.readLine()); 
-	               if (choix >= min && choix <= max) {
-	                    break;
-	               }
-	           } catch (Exception e) {
-	        	   e.printStackTrace();
-	        	   System.out.println("Mauvaise valeur, veuillez saisir un entier !"); 
-	       }
-	   }
-	    return choix;
-	}
-	 /*
-	private float lireEntreeFloat(int min, float max) {
-		float montant;
-	    	while (true) {
-	            try {
-	                montant = Float.parseFloat(scan.nextLine());
-	                if (montant >= min && montant <= max) {
-	                    break;
-	                }
-	            } catch (Exception e) {
-	              	e.printStackTrace();
-	                System.out.println("Mauvaise valeur, veuillez saisir un reel !");
-	        }
-	    }
-	    return montant;
-	}*/
 }
