@@ -1,16 +1,10 @@
 package khaliss_bank_project;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.io.*;
+import java.util.*;
+import divers.*;
 
 public class Banquier extends Personne {
 	public ArrayList<Client> m_listeClient;
-	
-	public Banquier() { //constructeur par defaut
-		super ();
-	}; 
 	
 	public Banquier(String N,String P, String M, String MDP) { //constructeur 2
 		super (N,P,M,MDP);
@@ -26,43 +20,44 @@ public class Banquier extends Personne {
 		return false;
 	}
 	
-	public void affListeClient() {
-		//Accès au fichier CSV avec un chemin absolu 
-        String FichierCSV = "Fichiers\\listeBanquierClients.csv";
-        BufferedReader br = null;
-        String line = "";//caractère de fin de ligne valeurs du CSV
-        String cvsSplitBy = ","; //caractère de séparation des valeurs du CSV
-
-        try {
-
-            br = new BufferedReader(new FileReader(FichierCSV));
-            line = br.readLine();
-            while ((line = br.readLine()) != null) {
-
-	            // utiliser la virgule comme séparateur
-	            String[] ligne = line.split(cvsSplitBy);
-	            
-	            //Affichage de sa liste de client
-	            if (this.m_nom.equals(ligne[4])) {
-	            	System.out.println(ligne[0]+'\t'+ ligne[1]+'\t'+ ligne[2]+'\t'+ligne[3]);
-	            } 
-            }
-            // Exception fichier non trouvé
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            // Input-Output (Flux) Exception
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+	public ArrayList<Client> LClient(){
+		ArrayList<Client> lstClient = new ArrayList<>();
+		LoadSaveFile.getListFromFile("C:\\Users\\yasser.moussa\\eclipse-workspace-projets\\khaliss_bank_project\\src\\khaliss_bank_project\\fichiers\\listeBanquiersClients.csv", lstClient);
+		return lstClient;
 	}
-
 	
+	public void affListeClient() {
+		m_listeClient = LClient();
+		int detect = 0 ;
+		for(int i=0; i<m_listeClient.get(0).getNbValues(); ++i ) {
+			ArrayList<String> gVal = new ArrayList<>();
+				
+			for(int j=0;j<m_listeClient.size(); ++j) {
+				detect=0;
+				if (this.m_nom.equals(m_listeClient.get(4).getValue(i)))
+				{
+					System.out.print(m_listeClient.get(j).getValue(i)+'\t');
+					detect=1;
+				}
+			}
+			if(detect == 1)
+				System.out.println("");						
+		}
+	}
+/*
+	private void deleteClient() {
+		BufferedReader br = new BufferedReader (new InputStreamReader (System.in));
+		m_listeClient = LClient() ;
+		try {
+			System.out.println("Saisir le mail du client à supprimer: ");
+			String tmp_mail = br.readLine();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+		
+		
+		if (tmp_mail.equals(ligne[2]))) {
+			
+		}
+	}*/
 }

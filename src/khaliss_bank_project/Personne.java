@@ -7,10 +7,29 @@ public abstract class Personne {
 	protected String m_motDePasse = "";
 	static final String UNKNOWN = "XXXX";
 	
+	public Personne() { //constructeur par defaut
+		this.m_nom =UNKNOWN;
+		this.m_prenom = UNKNOWN;
+		this.m_mail = UNKNOWN;
+		this.m_motDePasse = UNKNOWN;
+	}; 
+	
+	public Personne(String N,String P, String M, String MDP) { //constructeur 2
+		this.m_nom = N;
+		this.m_prenom = P;
+		this.m_mail = M;
+		this.m_motDePasse = MDP;
+	};
+
+	@Override 
+	//Override signifie qu'on redefini une class mere
+	public String toString() {
+		return this.m_nom+" "+this.m_prenom+" "+this.m_mail+" ";
+	}
+	
 	public String getM_nom() {
 		return m_nom;
 	}
-
 
 	public void setM_nom(String m_nom) {
 		this.m_nom = m_nom;
@@ -30,7 +49,7 @@ public abstract class Personne {
 		return m_mail;
 	}
 
-	public void setM_mail(String m_prenom) {
+	public void setM_mail(String m_mail) {
 		this.m_mail = m_mail;
 	}
 	
@@ -39,30 +58,10 @@ public abstract class Personne {
 	}
 
 
-	public void setM_motDePasse(String m_prenom) {
+	public void setM_motDePasse(String m_motDePasse) {
 		this.m_motDePasse = m_motDePasse;
 	}
-
-	@Override 
-	//Override signifie qu'on redefini une class mere
-	public String toString() {
-		return this.m_nom+" "+this.m_prenom+" "+this.m_mail+" ";
-	}
-	
-	public Personne() { //constructeur par defaut
-		this.m_nom =UNKNOWN;
-		this.m_prenom = UNKNOWN;
-		this.m_mail = UNKNOWN;
-		this.m_motDePasse = UNKNOWN;
-	}; 
-	
-	public Personne(String N,String P, String M, String MDP) { //constructeur 2
-		this.m_nom = N;
-		this.m_prenom = P;
-		this.m_mail = M;
-		this.m_motDePasse = MDP;
-	}; 
-	
+	 
 	public abstract boolean modifInfoPerso(int infoAmodif); //methode virtuel a implementer dans les classes filles
 		
 	

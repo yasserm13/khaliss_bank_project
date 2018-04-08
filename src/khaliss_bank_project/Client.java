@@ -7,6 +7,22 @@ public class Client extends Personne{
 	private String m_nomConseiller = "";
 	private int m_numCompte;
 	public ArrayList<Compte> m_listeCompte;
+	private ArrayList<String> values;
+	
+	public Client() { //constructeur par defaut
+		super ();
+	}; 
+	
+	public Client(String N,String P, String M, String MDP, String AD, String NC) { //constructeur 2
+		super (N,P,M,MDP);
+		this.m_addDomicile = AD;
+		this.m_nomConseiller = NC;
+	}; 
+	
+
+	public String toString() {
+		return this.m_nom+" "+this.m_prenom+" "+this.m_mail+" "+this.m_addDomicile+" "+this.m_nomConseiller+" ";
+	}
 	
 	public String getM_addDomicile() {
 		return m_addDomicile;
@@ -38,17 +54,20 @@ public class Client extends Personne{
 		return false;
 	}
 	
-	public String toString() {
-		return this.m_nom+" "+this.m_prenom+" "+this.m_mail+" "+this.m_addDomicile+" "+this.m_nomConseiller+" ";
-	}
+	// Test avec la fonction load file
+	public Client(ArrayList<String> values) {
+        this.values = values;
+    }
 	
-	public Client() { //constructeur par defaut
-		super ();
-	}; 
-	
-	public Client(String N,String P, String M, String MDP, String AD, String NC) { //constructeur 2
-		super (N,P,M,MDP);
-		this.m_addDomicile = AD;
-		this.m_nomConseiller = NC;
-	}; 
+	public void printValue() {
+        this.values.forEach(System.out::println);
+    }
+
+    public String getValue(int i) {
+        return this.values.get(i);
+    }
+
+    public int getNbValues() {
+        return this.values.size();
+    }
 }
