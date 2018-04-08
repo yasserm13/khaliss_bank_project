@@ -6,6 +6,10 @@ import divers.*;
 public class Banquier extends Personne {
 	public ArrayList<Client> m_listeClient;
 	
+	public Banquier() { //constructeur 2
+		super ();
+	}; 
+	
 	public Banquier(String N,String P, String M, String MDP) { //constructeur 2
 		super (N,P,M,MDP);
 	}; 

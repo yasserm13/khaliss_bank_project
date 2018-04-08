@@ -19,7 +19,6 @@ public class Client extends Personne{
 		this.m_nomConseiller = NC;
 	}; 
 	
-
 	public String toString() {
 		return this.m_nom+" "+this.m_prenom+" "+this.m_mail+" "+this.m_addDomicile+" "+this.m_nomConseiller+" ";
 	}

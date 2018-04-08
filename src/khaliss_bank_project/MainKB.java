@@ -38,8 +38,10 @@ public class MainKB {
 		System.out.println("");
 		System.out.println("Au banquier 2 maintenant");
 		b2.affListeClient();
+		
 		//System.out.println(b1);
-		*/
+	
+		// Cryptage MD5
 		System.out.println(CryptageMdpMD5.avoirMdpCrypte("monmdp44"));
 		try {
 			if (CryptageMdpMD5.testMdp("sqsq", "1165a5154f5cb"));
@@ -47,5 +49,12 @@ public class MainKB {
 		}catch(NoSuchAlgorithmException e){
 			e.printStackTrace();
 		} 
+		
+		//
+		ClientServer ai = new ClientServer();
+		//ai.getIpClientServer("www.openclassrooms.com");
+		//ai.Server();
+		ai.ClientLocale();
+		*/
 	}
 }
