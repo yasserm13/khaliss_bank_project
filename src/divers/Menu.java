@@ -1,7 +1,11 @@
 package divers;
 import java.io.*;
+import java.util.ArrayList;
 
-public class Menu{
+import khaliss_bank_project.*;
+
+
+public class Menu implements InterfaceKB{
 	private BufferedReader br;
 	
 	public Menu() { //constructeur par defaut
@@ -130,4 +134,74 @@ public class Menu{
 		}
 	}
 	
+	
+	public Client creerClient(String p_mail)
+	{
+		Client newClient = new Client();
+		
+		newClient.setM_mail(p_mail);
+		
+		System.out.println("Veuillez saisie votre nom : ");
+		newClient.setM_nom(LectureClavier.saisirPhrase());
+		
+		System.out.println("Veuillez saisie votre prenom : ");
+		newClient.setM_prenom(LectureClavier.saisirPhrase());
+		
+		System.out.println("Veuillez saisie votre adresse : ");
+		newClient.setM_addDomicile(LectureClavier.saisirPhrase());
+		
+		// mot de passe
+		
+		newClient.setM_nomConseiller(selectBanquier());
+		
+		
+		
+		
+		
+		return newClient;
+	}
+	
+	public String selectBanquier()
+	
+	{	
+		String nomBanquier = new String(""); 
+		ArrayList<Client> list = new ArrayList<>();
+		ArrayList<String> listBanquiers = new ArrayList<>();
+		String khalissMail = new String("@khaliss-bank.fr");
+		
+		/*Banquier B = new Banquier("MOUSSA","YASSER","yassermoussa@","kdjf");
+		
+		int detect = 0;
+		
+		B.affListeClient();*/
+		
+		
+		/*
+
+		for(int i=0; i<list.get(0).getNbValues(); ++i ) 
+		{
+			
+			
+			for(int j=0;j<list.size(); ++j) 
+			{
+				detect=0;
+				if (list.get(2).getValue(i).endsWith(khalissMail))
+				{
+					listBanquiers.add(list.get(2).getValue(i));
+					detect=1;
+				}
+			}
+				
+		}
+		
+		for(int i=0; i<listBanquiers.size(); ++i)
+		{
+			System.out.println(i+1 + ": "+listBanquiers.get(i));
+		}
+		*/
+
+	
+	return nomBanquier;
+
+	}
 }

@@ -1,4 +1,5 @@
 package divers;
+import java.util.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -10,6 +11,7 @@ public class LectureClavier {
 	public LectureClavier() { //constructeur par defaut
         this.br = new BufferedReader (new InputStreamReader (System.in));
     }
+
 
 	public float lireEntreeFloat(int min, float max) {
 		float montant;
@@ -26,4 +28,16 @@ public class LectureClavier {
 	    }
 	    return montant;
 	}
+	
+	public static String saisirPhrase()
+	{
+		String mot = new String();
+		Scanner saisie = new Scanner(System.in);
+		
+		mot = saisie.nextLine();
+		
+		return mot;
+	}
+	
 }
+

@@ -6,6 +6,16 @@ import divers.*;
 public class MainKB {
 
 	public static void main(String[] args) {
+		
+		Menu m = new Menu();
+		//m.demarrer();
+		
+		//m.creerClient("ououi");
+		
+		Banquier B = new Banquier("MOUSSA","YASSER","yassermoussa@","kdjf");
+		B.affListeClient();
+		
+		
 		/*
 		ArrayList<Client> lstClient = new ArrayList<>();
 		LoadSaveFile.getListFromFile("C:\\Users\\yasser.moussa\\eclipse-workspace-projets\\khaliss_bank_project\\src\\khaliss_bank_project\\fichiers\\listeBanquiersClients.csv", lstClient);
@@ -40,12 +50,13 @@ public class MainKB {
 		b2.affListeClient();
 		//System.out.println(b1);
 		*/
-		System.out.println(CryptageMdpMD5.avoirMdpCrypte("monmdp44"));
+		/*System.out.println(CryptageMdpMD5.avoirMdpCrypte("monmdp44"));
 		try {
 			if (CryptageMdpMD5.testMdp("sqsq", "1165a5154f5cb"));
 				System.out.println("les mdp sont vérifés");
 		}catch(NoSuchAlgorithmException e){
 			e.printStackTrace();
-		} 
+		} */
+		
 	}
 }

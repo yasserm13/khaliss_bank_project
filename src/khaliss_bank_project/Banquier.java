@@ -6,6 +6,11 @@ import divers.*;
 public class Banquier extends Personne {
 	public ArrayList<Client> m_listeClient;
 	
+	public Banquier() {
+		
+		super();
+	}
+	
 	public Banquier(String N,String P, String M, String MDP) { //constructeur 2
 		super (N,P,M,MDP);
 	}; 
@@ -20,17 +25,17 @@ public class Banquier extends Personne {
 		return false;
 	}
 	
-	public ArrayList<Client> LClient(){
+	public static ArrayList<Client> LClientBanquier(){
 		ArrayList<Client> lstClient = new ArrayList<>();
-		LoadSaveFile.getListFromFile("C:\\Users\\yasser.moussa\\eclipse-workspace-projets\\khaliss_bank_project\\src\\khaliss_bank_project\\fichiers\\listeBanquiersClients.csv", lstClient);
+		LoadSaveFile.getListFromFile("C:\\Users\\el-arif.ahamada\\eclipse-workspace\\khaliss_bank_project\\src\\khaliss_bank_project\\fichiers\\listeBanquiersClients.csv", lstClient);
 		return lstClient;
 	}
 	
 	public void affListeClient() {
-		m_listeClient = LClient();
+		m_listeClient = LClientBanquier();
 		int detect = 0 ;
 		for(int i=0; i<m_listeClient.get(0).getNbValues(); ++i ) {
-			ArrayList<String> gVal = new ArrayList<>();
+			
 				
 			for(int j=0;j<m_listeClient.size(); ++j) {
 				detect=0;
