@@ -10,10 +10,8 @@ public class MainKB {
 		Menu m = new Menu();
 		//m.demarrer();
 		
-		//m.creerClient("ououi");
+		m.creerClient("ououi");
 		
-		Banquier B = new Banquier("MOUSSA","YASSER","yassermoussa@","kdjf");
-		B.affListeClient();
 		
 		
 		/*

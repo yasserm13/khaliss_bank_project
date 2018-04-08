@@ -169,14 +169,9 @@ public class Menu implements InterfaceKB{
 		ArrayList<String> listBanquiers = new ArrayList<>();
 		String khalissMail = new String("@khaliss-bank.fr");
 		
-		/*Banquier B = new Banquier("MOUSSA","YASSER","yassermoussa@","kdjf");
-		
 		int detect = 0;
 		
-		B.affListeClient();*/
-		
-		
-		/*
+		list = Banquier.LClientBanquier();
 
 		for(int i=0; i<list.get(0).getNbValues(); ++i ) 
 		{
@@ -198,7 +193,7 @@ public class Menu implements InterfaceKB{
 		{
 			System.out.println(i+1 + ": "+listBanquiers.get(i));
 		}
-		*/
+		
 
 	
 	return nomBanquier;
