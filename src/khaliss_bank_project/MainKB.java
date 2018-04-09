@@ -50,11 +50,10 @@ public class MainKB {
 			e.printStackTrace();
 		} 
 		
-		//
-		ClientServer ai = new ClientServer();
-		//ai.getIpClientServer("www.openclassrooms.com");
-		//ai.Server();
-		ai.ClientLocale();
+		//Test client serveur
+		Server ai = new Server();
+		//ai.getIpClientServer("www.notepad.pw");
+		ai.ServerMethode2();
 		*/
 	}
 }
