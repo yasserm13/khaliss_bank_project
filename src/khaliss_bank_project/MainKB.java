@@ -34,7 +34,7 @@ public class MainKB {
 		System.out.println(c1);
 		System.out.println(c2);
 		
-	   
+				
 		/*Banquier b1 = new Banquier("MOUSSA","Yasser","yasser.moussa@niama.fr","monMDP");
 		Banquier b2 = new Banquier("Test1","Yasser","test1.t1@niama.fr","monMDP");
 		
@@ -44,7 +44,7 @@ public class MainKB {
 		System.out.println("Au banquier 2 maintenant");
 		b2.affListeClient();
 		*/
-		LoadSaveFile.setListToFile(c1);
+		LoadSaveFile.setListToFile(c2);
 		
 		//System.out.println(b1);
 		

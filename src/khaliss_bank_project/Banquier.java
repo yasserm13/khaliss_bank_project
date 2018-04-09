@@ -21,8 +21,11 @@ public class Banquier extends Personne {
 	}
 	
 	public ArrayList<Client> LClient(){
+		String chemin;
+		chemin = System.getProperty("user.dir");//Permet d'avoir le répertoire courant de l'utilisateur
+		
 		ArrayList<Client> lstClient = new ArrayList<>();
-		LoadSaveFile.getListFromFile("C:\\Users\\mamadou.marega\\eclipse-workspace\\khaliss_bank_project\\src\\khaliss_bank_project\\fichiers\\listeBanquiersClients.csv", lstClient);
+		LoadSaveFile.getListFromFile(chemin+"/"+"src\\khaliss_bank_project\\fichiers"+"/"+"listeBanquiersClients.csv", lstClient);
 		return lstClient;
 	}
 	
