@@ -60,8 +60,8 @@ public class LoadSaveFile {
 					fich = new PrintWriter(new BufferedWriter(new FileWriter(fichier, true))); //true c'est elle qui permet d'écrire à la suite des données enregistrées et non de les remplacer
 					System.out.println("le fichier vient d'être créé");
 					//chemin = fichier.getPath();
-					fich.println("Nom,Prenom,@mail,@domicile,Nom_conseiller");
-					fich.println(clBanque.getM_nom()+","+clBanque.getM_prenom()+","+clBanque.getM_mail()+","+clBanque.getM_addDomicile()+","+clBanque.getM_nomConseiller());
+					fich.println("Nom,Prenom,Adresse_Email,Mot_De_Passe_Crypte,Adresse_Domicile,Numero__De_Compte,Nom_Conseiller");
+					fich.println(clBanque.getM_nom()+","+clBanque.getM_prenom()+","+clBanque.getM_mail()+","+clBanque.getM_motDePasse()+","+clBanque.getM_addDomicile()+","+clBanque.getM_numCompte()+","+clBanque.getM_nomConseiller());
 					fich.close();
 				 }
 		

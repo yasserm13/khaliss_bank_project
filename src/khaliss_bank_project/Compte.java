@@ -58,20 +58,4 @@ public class Compte {
 		
 	}
 	
-	public void creerCompte(String nomFichier) { //Creer compte
-		Scanner sc = new Scanner(System.in);
-		int choix;
-		System.out.println("Vous êtes sur le point de creer un compte");
-		System.out.println("0 --> pour quitter\n1 --> pour poursuivre");
-		choix = sc.nextInt();
-		do {
-			
-			if(choix == 1)
-				System.out.println("Choix 1");
-			else
-				System.out.println("Choix 0");
-		}while(choix != 0 && choix != 1);
-		
-	}
-	
 }

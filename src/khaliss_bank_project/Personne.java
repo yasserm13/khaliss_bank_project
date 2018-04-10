@@ -1,5 +1,11 @@
 package khaliss_bank_project;
 
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+
+import divers.LectureClavier;
+
 public abstract class Personne {
 	protected String m_nom = "";
 	protected String m_prenom = ""; 
@@ -70,14 +76,16 @@ public abstract class Personne {
 		return true;
 	}
 	
-	public boolean openCompte(String addMail) {
+	public int openCompte() {
 		//A faire
-		return true;
+		return 0;
 	}
 	
 	public boolean sendArgent(Compte cptDebit, Compte cptCredit) {
 		//A faire
 		return true;
 	}
+	
+
 
 }

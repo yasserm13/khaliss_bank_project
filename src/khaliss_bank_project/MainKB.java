@@ -1,5 +1,7 @@
 package khaliss_bank_project;
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+
 import java.util.*;
 import divers.*;
 
@@ -33,7 +35,7 @@ public class MainKB {
 		Client c2 = new Client("MOUSSA","Yasser","yasser.moussa@niama.fr","monMDP","Marseille","MOUSSA");
 		System.out.println(c1);
 		System.out.println(c2);
-		
+		int numCompte = 0;
 				
 		/*Banquier b1 = new Banquier("MOUSSA","Yasser","yasser.moussa@niama.fr","monMDP");
 		Banquier b2 = new Banquier("Test1","Yasser","test1.t1@niama.fr","monMDP");
@@ -44,8 +46,16 @@ public class MainKB {
 		System.out.println("Au banquier 2 maintenant");
 		b2.affListeClient();
 		*/
-		LoadSaveFile.setListToFile(c2);
+		//LoadSaveFile.setListToFile(c2);
 		
+		try {
+			numCompte = c1.openCompte(c1.getM_mail());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
 		//System.out.println(b1);
 		
 		/*
