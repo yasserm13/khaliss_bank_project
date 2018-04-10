@@ -1,37 +1,44 @@
 package divers;
-import java.security.*;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class CryptageMdpMD5 {
 	
-	//Permet d'encoder une chaine passé en pramètre avec l'algo MD5
-	public static String avoirMdpCrypte(String cle) {
-		byte[] cleUnique = cle.getBytes(); // ma cle unique
-		byte[] hash = null; //mon hash
-		
-		try {
-			hash = MessageDigest.getInstance("MD5").digest(cleUnique); // on choisi l'algorithme MD5
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-			System.out.println("Pas de cryptage MD5 dans cette VM");
+	//Permet d'encoder une chaine passe en prametre avec l'algo MD5
+	public static String avoirMdpCrypte(String password) throws NoSuchAlgorithmException{
+		MessageDigest md = MessageDigest.getInstance("MD5"); //// on choisi l'algorithme MD5 ou SHA
+		md.update(password.getBytes());
+		byte[] b  = md.digest();
+		StringBuffer sb  = new StringBuffer();
+		for(byte b1 : b ){
+			sb.append(Integer.toHexString(b1 & 0xff)).toString();
 		}
-		
-		StringBuffer chaineHashe = new StringBuffer();
-		for (int i=0 ; i < hash.length; ++i) {
-			String hexa = Integer.toHexString(hash[i]);
-			if (hexa.length() == 1) {
-				chaineHashe.append('0');
-				chaineHashe.append(hexa.charAt(hexa.length()-1));
-			}else
-			{
-				chaineHashe.append(hexa.charAt(hexa.length()-2));
-			}		
-		}
-		return chaineHashe.toString();
+		//System.out.println("Vue dans la fonction de cryptage: "+sb.toString());
+		return sb.toString();
 	}
-	
-	//Permer de tester une chaine et une valeur encodé (la chaine est en héxa)
+
+	//Permet de tester une chaine (mdp) et une valeur encode en hÃ©xa
 	public static boolean testMdp(String chaineNonEncode, String valeurHexaMD5DeRef) throws NoSuchAlgorithmException {
 		String testMdpEncode = CryptageMdpMD5.avoirMdpCrypte(chaineNonEncode);
 		return (testMdpEncode.equals(valeurHexaMD5DeRef));
+	}
+	
+	//Permet de faire un essai de crptage avec un mot de passe passÃ© en paramÃ¨tre (exemple toto)
+	public static void essaiCryptageMdp(String mdp){
+		System.out.println("Voici le mdp: "+mdp);
+		
+		try {
+			System.out.println("Voici le mdp cryptee en MD5: "+avoirMdpCrypte(mdp));
+			
+			if (CryptageMdpMD5.testMdp(mdp ,"f71dbe52628a3f83a77ab494817525c6")){
+				System.out.println("Le mdp est vÃ©rifiÃ©");
+			}
+			else
+				System.out.println("Le mdp n'est pas vÃ©rifiÃ©");
+			
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}		
 	}
 }

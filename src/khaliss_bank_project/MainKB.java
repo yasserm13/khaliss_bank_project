@@ -23,7 +23,7 @@ public class MainKB {
 				System.out.print(lstClient.get(j).getValue(i)+" ");
 			System.out.println("");
 		}
-
+	
 		Menu m = new Menu();
 		m.demarrer();
 		
@@ -40,16 +40,11 @@ public class MainKB {
 		b2.affListeClient();
 		
 		//System.out.println(b1);
+		 */
+		// Cryptage MD5	
+		CryptageMdpMD5.essaiCryptageMdp("toto");
 	
-		// Cryptage MD5
-		System.out.println(CryptageMdpMD5.avoirMdpCrypte("monmdp44"));
-		try {
-			if (CryptageMdpMD5.testMdp("sqsq", "1165a5154f5cb"));
-				System.out.println("les mdp sont vérifés");
-		}catch(NoSuchAlgorithmException e){
-			e.printStackTrace();
-		} 
-		
+		/*
 		//Test client serveur
 		Server ai = new Server();
 		//ai.getIpClientServer("www.notepad.pw");
