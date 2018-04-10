@@ -32,10 +32,10 @@ public class CryptageMdpMD5 {
 			System.out.println("Voici le mdp cryptee en MD5: "+avoirMdpCrypte(mdp));
 			
 			if (CryptageMdpMD5.testMdp(mdp ,"f71dbe52628a3f83a77ab494817525c6")){
-				System.out.println("Le mdp est vérifié");
+				System.out.println("Le mdp est verifie");
 			}
 			else
-				System.out.println("Le mdp n'est pas vérifié");
+				System.out.println("Le mdp n'est pas verifie");
 			
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();

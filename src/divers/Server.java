@@ -10,8 +10,10 @@ public class Server {
 	public InetAddress m_serverAddress;
 	
 	//Pour la méthode  ServerMethode() 
-	public ServerSocket socketServeur;
-	public Socket socketDuServeur;
+	public static ServerSocket m_socketServeur = null;
+	public Socket m_socketDuServeur;
+	public static  Thread m_t;
+	
 	public BufferedReader input;
 	public PrintWriter output;
 	
@@ -30,23 +32,26 @@ public class Server {
 		}catch(UnknownHostException e){
 			e.printStackTrace();
 		}
-		
+	
 	}
 	
 	public void ServerMethode1() { //sans Thread
 			
 		try {
 			
-			 socketServeur = new ServerSocket(2018);
-			 System.out.println("Le serveur est à l'écoute du port : "+socketServeur.getLocalPort());
-			 socketDuServeur = socketServeur.accept();
-			 	System.out.println("Une personne s'est connecte ");
-			 output = new PrintWriter(socketDuServeur.getOutputStream());
+			 m_socketServeur = new ServerSocket(2018);
+			 System.out.println("Le serveur est à l'écoute du port : "+m_socketServeur.getLocalPort());
+			 
+			 m_socketDuServeur = m_socketServeur.accept();
+			 
+			 System.out.println("Une personne s'est connecte ");
+			 	
+			 output = new PrintWriter(m_socketDuServeur.getOutputStream());
 			 output.println("Vous êtes connectee !! ");
 			 output.flush();
 			 
-			 socketServeur.close();
-			 socketDuServeur.close();
+			 m_socketServeur.close();
+			 m_socketDuServeur.close();
 		 
 		}catch(IOException ioe) {
 			ioe.printStackTrace();
@@ -57,24 +62,37 @@ public class Server {
 		
 		try {
 			
-		 socketServeur = new ServerSocket(2018);
-		 System.out.println("Le serveur est à l'écoute du port : "+socketServeur.getLocalPort());
+		 //m_localAddress = InetAddress.getLocalHost();
+		 m_socketServeur = new ServerSocket(2018);
 		 
-		 Thread t = new Thread(new AccepterClients(socketServeur));
-		 t.start();
-		 System.out.println("Mes employeurs sont prêts !");
+		 System.out.println("Le serveur est à l'écoute du port : "+m_socketServeur.getLocalPort());
+		 
+		 m_t = new Thread(new AccepterClients(m_socketServeur)); //thread
+		 m_t.start();
+		 
+		 System.out.println("Serveur : mes employeurs sont prêts !");
+		 
+		 //Ecriture sur le client ?
+		 /*
+		 output = new PrintWriter(m_socketDuServeur.getOutputStream());
+		 output.println("Vous êtes connectee !! ");
+		 output.flush();
+		 m_socketDuServeur.close();
+		 */
 		}catch(IOException ioe) {
 			ioe.printStackTrace();
+			System.out.println("Le port "+ m_socketServeur.getLocalPort()+ " est deja utilise !");
 		}
 	}
 }
 
 class AccepterClients implements Runnable{
+	
 	private ServerSocket socketServeur;
 	private Socket socketDuServeur;
 	private int nbClient = 1;
 
-	public AccepterClients(ServerSocket s) {
+	public AccepterClients(ServerSocket s) { //constructeur
 		socketServeur = s;
 	}
 
@@ -82,6 +100,7 @@ class AccepterClients implements Runnable{
 	public void run() {
 		 try {
 			 while(true) {
+				 
 				 socketDuServeur = socketServeur.accept(); // si un client se co on l'accepte
 				 System.out.println("Le client numero "+nbClient+" est connecté !");
 				 nbClient ++;
@@ -90,6 +109,5 @@ class AccepterClients implements Runnable{
 		 }catch(IOException ioe){
 			 ioe.printStackTrace();
 		 }
-		
 	}
 }

@@ -40,15 +40,15 @@ public class MainKB {
 		b2.affListeClient();
 		
 		//System.out.println(b1);
-		 */
+		
 		// Cryptage MD5	
 		CryptageMdpMD5.essaiCryptageMdp("toto");
 	
-		/*
+		*/
 		//Test client serveur
 		Server ai = new Server();
 		//ai.getIpClientServer("www.notepad.pw");
 		ai.ServerMethode2();
-		*/
+		
 	}
 }
