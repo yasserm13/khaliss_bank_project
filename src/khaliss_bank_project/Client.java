@@ -70,4 +70,5 @@ public class Client extends Personne{
     public int getNbValues() {
         return this.values.size();
     }
+    
 }

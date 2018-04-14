@@ -1,5 +1,6 @@
 package divers;
 import java.io.*;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 
@@ -139,11 +140,8 @@ public class Menu implements InterfaceKB{
 	public Client creerClient(String p_mail)
 	{
 		Client newClient = new Client();
-		
+				
 		newClient.setM_mail(p_mail);
-		
-		// mot de passe
-		//newClient.setM_motDePasse("rantsi");
 		
 		System.out.println("Veuillez saisir votre nom: ");
 		newClient.setM_nom(LectureClavier.saisirPhrase());
@@ -157,14 +155,22 @@ public class Menu implements InterfaceKB{
 		newClient.setM_addDomicile(LectureClavier.saisirPhrase());
 		System.out.println("");
 		
+		//mot de passe
+		
+		System.out.println("Veuillez saisir votre mot de passe: ");
+		try {
+				newClient.setM_motDePasse(CryptageMdpMD5.avoirMdpCrypte(LectureClavier.saisirPhrase()));	
+			} catch (NoSuchAlgorithmException e) {
+				e.printStackTrace();
+			} 
+		
+		
 		System.out.println("Veuillez selectioner un conseiller bancaire: ");
 		newClient.setM_nomConseiller(selectBanquier());
 		System.out.println("");
 		
+		
 		LoadSaveFile.setListToFile(newClient);
-		
-		
-		
 		
 		
 		return newClient;

@@ -45,21 +45,20 @@ public class LectureClavier {
 		Scanner saisie = new Scanner(System.in);
 		
 		int Int = 0;
-				
-    	while (true) 
-    	{
+		
             try 
             {
             	Int = saisie.nextInt();
             	saisie.nextLine();
-            	return Int;
             }
             catch (Exception e) 
             {
               	e.printStackTrace();
                 System.out.println("Mauvaise valeur, veuillez saisir un entier!");
-            }     
-    	} 
+                Int=saisirInt();
+            }
+            
+            return Int;
 	}
 	
 	
@@ -71,8 +70,6 @@ public class LectureClavier {
 		
 		double Double = 0;
 		
-		while (true) 
-    	{
             try 
             {
             	Double = saisie.nextDouble();
@@ -84,9 +81,9 @@ public class LectureClavier {
             {
               	e.printStackTrace();
                 System.out.println("Mauvaise valeur, veuillez saisir un entier!");
-            }     
-    	}
-		
-	}	
+                Double = saisirDouble();
+            }
+            return Double;
+    	}	
 }
 
