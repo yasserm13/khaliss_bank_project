@@ -39,5 +39,16 @@ public class LectureClavier {
 		return mot;
 	}
 	
+	public static int saisirInt()
+	{
+		Scanner saisie = new Scanner(System.in);
+		
+		int Int = saisie.nextInt();
+		saisie.nextLine();
+		
+		return Int ;
+	}
+	
+	
 }
 
