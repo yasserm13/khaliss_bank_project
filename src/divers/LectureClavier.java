@@ -46,7 +46,7 @@ public class LectureClavier {
 		int Int = saisie.nextInt();
 		saisie.nextLine();
 		
-		return Int ;
+		return Int;
 	}
 	
 	
