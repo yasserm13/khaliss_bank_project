@@ -143,18 +143,25 @@ public class Menu implements InterfaceKB{
 		newClient.setM_mail(p_mail);
 		
 		// mot de passe
+		//newClient.setM_motDePasse("rantsi");
 		
-		System.out.println("Veuillez saisir votre nom : ");
+		System.out.println("Veuillez saisir votre nom: ");
 		newClient.setM_nom(LectureClavier.saisirPhrase());
+		System.out.println("");
 		
-		System.out.println("Veuillez saisir votre prenom : ");
+		System.out.println("Veuillez saisir votre prenom: ");
 		newClient.setM_prenom(LectureClavier.saisirPhrase());
+		System.out.println("");
 		
-		System.out.println("Veuillez saisir votre adresse : ");
+		System.out.println("Veuillez saisir la ville dans laquelle vous êtes domicilié: ");
 		newClient.setM_addDomicile(LectureClavier.saisirPhrase());
+		System.out.println("");
 		
-		System.out.println("Veuillez selectioner un conseiller bancaire : ");
+		System.out.println("Veuillez selectioner un conseiller bancaire: ");
 		newClient.setM_nomConseiller(selectBanquier());
+		System.out.println("");
+		
+		LoadSaveFile.setListToFile(newClient);
 		
 		
 		
@@ -183,7 +190,7 @@ public class Menu implements InterfaceKB{
 			
 				if (list.get(2).getValue(i).endsWith(khalissMail))
 				{
-					listBanquiers.add(list.get(1).getValue(i) + " " + list.get(0).getValue(i));
+					listBanquiers.add(list.get(0).getValue(i));
 				}
 		}
 				

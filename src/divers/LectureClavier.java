@@ -2,6 +2,7 @@ package divers;
 import java.util.*;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class LectureClavier {
@@ -43,10 +44,49 @@ public class LectureClavier {
 	{
 		Scanner saisie = new Scanner(System.in);
 		
-		int Int = saisie.nextInt();
-		saisie.nextLine();
+		int Int = 0;
+				
+    	while (true) 
+    	{
+            try 
+            {
+            	Int = saisie.nextInt();
+            	saisie.nextLine();
+            	return Int;
+            }
+            catch (Exception e) 
+            {
+              	e.printStackTrace();
+                System.out.println("Mauvaise valeur, veuillez saisir un entier!");
+            }     
+    	} 
+	}
+	
+	
+	
+	
+	public static double saisirDouble()
+	{
+		Scanner saisie = new Scanner(System.in);
 		
-		return Int;
+		double Double = 0;
+		
+		while (true) 
+    	{
+            try 
+            {
+            	Double = saisie.nextDouble();
+            	saisie.nextLine();
+            	
+            	return Double;
+            }
+            catch (Exception e) 
+            {
+              	e.printStackTrace();
+                System.out.println("Mauvaise valeur, veuillez saisir un entier!");
+            }     
+    	}
+		
 	}
 	
 	
