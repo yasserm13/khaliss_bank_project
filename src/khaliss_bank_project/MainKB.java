@@ -8,9 +8,12 @@ public class MainKB {
 	public static void main(String[] args) {
 		
 		Menu m = new Menu();
+		Banquier Moussa = new Banquier("MOUSSA","Yasser","yasser.moussa@niama.fr","monMDP");
 		//m.demarrer();
 		
-		m.creerClient("ououi");
+		//m.creerClient("ououi");
+		Moussa.affListeClient();
+		
 		
 		
 		
