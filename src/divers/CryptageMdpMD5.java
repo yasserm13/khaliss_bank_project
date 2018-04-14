@@ -24,14 +24,14 @@ public class CryptageMdpMD5 {
 		return (testMdpEncode.equals(valeurHexaMD5DeRef));
 	}
 	
-	//Permet de faire un essai de crptage avec un mot de passe passé en paramètre (exemple toto)
-	public static void essaiCryptageMdp(String mdp){
+	//Permet de faire un essai de cryptage avec un mdp et un hash (ex: mdp = toto, hash = f71dbe52628a3f83a77ab494817525c6 )
+	public static void CryptageMdp(String mdp, String mdpHashe){
 		System.out.println("Voici le mdp: "+mdp);
 		
 		try {
 			System.out.println("Voici le mdp cryptee en MD5: "+avoirMdpCrypte(mdp));
 			
-			if (CryptageMdpMD5.testMdp(mdp ,"f71dbe52628a3f83a77ab494817525c6")){
+			if (CryptageMdpMD5.testMdp(mdp, mdpHashe)){
 				System.out.println("Le mdp est verifie");
 			}
 			else

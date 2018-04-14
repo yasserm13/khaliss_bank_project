@@ -3,7 +3,7 @@ package khaliss_bank_project;
 public class Compte {
 	
 	private String m_mailTitulaire;
-	private int m_numCompte;
+	private int m_numCompte; 
 	private String m_typeCompte;
 	private String m_historique; //Fichier
 	private double m_solde;

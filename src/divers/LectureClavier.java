@@ -10,7 +10,7 @@ public class LectureClavier {
 	public LectureClavier() { //constructeur par defaut
         this.br = new BufferedReader (new InputStreamReader (System.in));
     }
-
+	
 	public float lireEntreeFloat(int min, float max) {
 		float montant;
 	    	while (true) {
