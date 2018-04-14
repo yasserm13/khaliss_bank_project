@@ -9,8 +9,10 @@ public class MainKB {
 
 	public static void main(String[] args) {
 		
+		String chemin;
+		chemin = System.getProperty("user.dir");
 		ArrayList<Client> lstClient = new ArrayList<>();
-		LoadSaveFile.getListFromFile("C:\\Users\\mamadou.marega\\eclipse-workspace\\khaliss_bank_project\\src\\khaliss_bank_project\\fichiers\\listeBanquiersClients.csv", lstClient);
+		//LoadSaveFile.getListFromFile(chemin+"/"+"src\\khaliss_bank_project\\fichiers"+"/"+"listeBanquiersClients.csv", lstClient);
 		
 		
 		/*lstClient.get(4).printValue();
@@ -48,12 +50,7 @@ public class MainKB {
 		*/
 		//LoadSaveFile.setListToFile(c2);
 		
-		try {
-			numCompte = c1.openCompte(c1.getM_mail());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		c2.openCompte(c2.getM_mail());
 
 
 		//System.out.println(b1);

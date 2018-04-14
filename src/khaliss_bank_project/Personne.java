@@ -3,8 +3,10 @@ package khaliss_bank_project;
 import java.io.*;
 import java.util.*;
 import java.lang.*;
+import divers.*;
+import java.math.*;
 
-import divers.LectureClavier;
+
 
 public abstract class Personne {
 	protected String m_nom = "";
@@ -86,6 +88,46 @@ public abstract class Personne {
 		return true;
 	}
 	
+    public void openCompte(String p_mailClient){
+    //Creer le compte
+    	double solde;
+    	Compte newCompte = new Compte();
+    	int choix;
+    	newCompte.setM_numCompte((int)( Math.random()*( 99999999 - 1111 + 1 ) ) + 1111);
+    	
+    	newCompte.setM_mailTitulaire(p_mailClient);
+    	System.out.println("Veuillez choisir un type de compte");
+    	do {
+	    	System.out.println("01-	Livret A\n" + 
+	    			"02-   	Livret de développement durable et solidaire (LDDS)\n" + 
+	    			"03-   	Livret jeune\n" + 
+	    			"04-   	Plan épargne logement (PEL)\n");
+	    	choix = LectureClavier.saisirInt();
+	    	
+    	}while(choix < 1 || choix > 4);
+    	
+    	switch (choix){
+	    	case 1:	newCompte.setM_typeCompte("Livret_A");
+	    		break;
+	    	case 2:newCompte.setM_typeCompte("Livret_de_développement_durable_et_solidaire_(LDDS)");
+				break;
+	    	case 3:newCompte.setM_typeCompte("Livret_jeune");
+				break;
+	    	case 4:newCompte.setM_typeCompte("Plan_épargne_logement_(PEL)");
+				break;
+	    	default: System.out.println("Choix_non_existant");
+	    		break;
+		}
+    
+   		System.out.println("Veuillez saisir le solde");
+   		solde = LectureClavier.saisirDouble();
+    	
+    	newCompte.setM_solde(solde);
+    	
+    	LoadSaveFile.setListClientsToFile(newCompte);
 
+    	
+
+	}
 
 }

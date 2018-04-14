@@ -1,8 +1,8 @@
 package divers;
 import java.util.*;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
+
 
 public class LectureClavier {
 	
@@ -14,20 +14,24 @@ public class LectureClavier {
 
 
 	public float lireEntreeFloat(int min, float max) {
-		float montant;
-	    	while (true) {
+		float montant=0;
+		int erreur = 0; 
+	    	do{
+	    		erreur = 0;
 	            try {
 	                montant = Float.parseFloat(br.readLine());
 	                if (montant >= min && montant <= max) {
 	                    break;
 	                }
 	            } catch (Exception e) {
-	              	e.printStackTrace();
+	              	erreur=1;
 	                System.out.println("Mauvaise valeur, veuillez saisir un reel !");
-	        }
-	    }
+	                }
+	    }while(erreur == 1);
 	    return montant;
 	}
+	
+	
 	
 	public static String saisirPhrase()
 	{
@@ -39,19 +43,46 @@ public class LectureClavier {
 		return mot;
 	}
 	
-	public static char lireChar() {
-		char car ;
-		Scanner sc = new Scanner(System.in);
-		String str = new String();
-		System.out.println("Veuillez saisir le bon caractère caractère svp");
-		str = sc.nextLine();
-		car = str.charAt(0);
-		 
-		 return car;
+	public static int saisirInt()
+	{
+		Scanner saisie = new Scanner(System.in);
 		
+		int Int = 0;
+				
+            try 
+            {
+            	
+            	Int = saisie.nextInt();
+            	saisie.nextLine();
+            	
+            } catch (Exception e){
+           System.out.println("Mauvaise valeur, veuillez saisir un entier!");
+                Int = saisie.nextInt();
+            }
+            return Int;
+    	
 	}
 	
 	
+	
+	
+	public static double saisirDouble()
+	{
+		Scanner saisie = new Scanner(System.in);
+		double Double = 0;
+			
+			try {
+				Double = saisie.nextDouble();
+            	saisie.nextLine();
+            	
+				}catch(InputMismatchException e) {
+					System.out.println("Mauvaise valeur, veuillez saisir un chiffre correct!");
+					Double = saisirDouble();
+				}
+	
+          return Double;
+    	}
+		
 	
 }
 

@@ -1,10 +1,10 @@
 package khaliss_bank_project;
 
-import java.io.IOException;
-import java.util.ArrayList;
+import java.io.*;
+import java.util.*;
 
-import divers.LectureClavier;
-import divers.LoadSaveFile;
+import divers.*;
+
 
 public class Client extends Personne{
 	private String m_addDomicile = "";
@@ -84,50 +84,4 @@ public class Client extends Personne{
 		return lstClient;
 	}
 	
-    public int openCompte(String mailClient) throws IOException{//Creer le compte
-		int random = 0;
-		String numCompte;
-		char reponse;
-		ArrayList<Client> m_listClient ;
-		System.out.println("Fonction Open Compte");
-		do {
-			do{ 
-				System.out.println("Vous êtes sur le point de creer un compte");
-				System.out.println("O --> pour quitter\nN --> pour poursuivre");
-				reponse = LectureClavier.lireChar();
-			}while(reponse != 'O' && reponse != 'N');
-			
-			if(reponse == 'O') {
-				System.out.println("Generation de rand");
-				random =(int) (Math.random()*999999999);     //Génération d'un chiffre aléatoire
-				//numCompte = String.valueOf(random);
-				numCompte = "999999999";
-				System.out.println("Chargement de la liste des clients");
-				m_listClient = LClient();
-				System.out.println("Fin Chargement de la liste des clients");
-				int detect = 0;
-				do {
-					System.out.println("Test si numéro existe");
-					for(int i=0; i<m_listClient.get(0).getNbValues(); ++i ) {
-						System.out.println("Première boucle fo");
-						ArrayList<String> gVal = new ArrayList<>();
-						for(int j=0;j<m_listClient.size(); ++j) {
-							System.out.println("Deuxième boucle for");
-							if (numCompte.equals(m_listClient.get(5).getValue(i))){
-								random =(int) (Math.random()*999999999);
-								//numCompte = String.valueOf(random);
-								detect++;
-								System.out.println("J'ai un compte de même numéro "+detect+1+" fois");
-							}
-						}
-					}
-				}while(detect == 4);
-				System.out.println("Le compte est ouvert");
-			}
-			
-			reponse = 'N';
-		}while(reponse != 'O' && reponse != 'N');
-		
-		return random;
-	}
 }
