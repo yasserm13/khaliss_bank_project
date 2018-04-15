@@ -67,6 +67,31 @@ public class Authentification implements Runnable {
 		boolean connexion = false;
 		String chemin;
 		chemin = System.getProperty("user.dir");
+		
+		try {
+				Scanner sc = new Scanner(new File(chemin+"/"+"src\\client_serveur\\serveur"+"/"+"clients.txt"));//cible to do : listeBanquiersClients.csv
+			
+				while(sc.hasNext()){
+					if(sc.nextLine().equals(login+" "+pass)){ //on suppose que le fichier se presente comme ça : (login mdp) to do
+	              	  connexion=true;
+	              	  break;
+					}
+	             }
+			
+		} catch (FileNotFoundException e) {	
+			e.printStackTrace();
+			System.out.println("Le fichier n'existe pas !");
+		}
+		return connexion;
+	}
+	
+	//adaptation pour lire dans notre fichier csv
+	private static boolean isValid2(String login, String pass) {
+		
+		boolean connexion = false;
+		String chemin;
+		chemin = System.getProperty("user.dir");
+		
 		try {
 				Scanner sc = new Scanner(new File(chemin+"/"+"src\\client_serveur\\serveur"+"/"+"clients.txt"));//cible to do : listeBanquiersClients.csv
 			
