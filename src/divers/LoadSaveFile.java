@@ -2,7 +2,7 @@ package divers;
 
 import java.io.*;
 import java.util.*;
-import khaliss_bank_project.Client;
+import khaliss_bank_project.*;
 
 public class LoadSaveFile {
 	   /*-----------------Class pour la lecture du fichier cible-----------------*/
@@ -39,5 +39,36 @@ public class LoadSaveFile {
         }
         
     }
+    
+    public static void setListToFile(Client clBanque) {
+		PrintWriter fich;
+		
+		String chemin;
+		chemin = System.getProperty("user.dir");//Permet d'avoir le répertoire courant de l'utilisateur
+		
+    	try {
+				File fichier = new File(chemin+"/"+"src\\khaliss_bank_project\\fichiers","listeBanquiersClients.csv");//Créer un fichier dans le répertoire donné en paramètre
 
+				if(fichier.exists() && fichier.isFile()){
+					fich = new PrintWriter(new BufferedWriter(new FileWriter(fichier, true))); //true c'est elle qui permet d'écrire à la suite des données enregistrées et non de les remplacer
+					System.out.println("le fichier existe déjà");
+					fich.println(clBanque.getM_nom()+","+clBanque.getM_prenom()+","+clBanque.getM_mail()+","+clBanque.getM_motDePasse()+","+clBanque.getM_addDomicile()+","+clBanque.getM_nomConseiller());
+					fich.close();
+				
+				} else {
+					//String chemin;
+					fich = new PrintWriter(new BufferedWriter(new FileWriter(fichier, true))); //true c'est elle qui permet d'écrire à la suite des données enregistrées et non de les remplacer
+					System.out.println("le fichier vient d'être créé");
+					//chemin = fichier.getPath();
+					fich.println("Nom,Prenom,Adresse_Email,Mot_De_Passe_Crypte,Adresse_Domicile,Nom_Conseiller");
+					fich.println(clBanque.getM_nom()+","+clBanque.getM_prenom()+","+clBanque.getM_mail()+","+clBanque.getM_motDePasse()+","+clBanque.getM_addDomicile()+","+clBanque.getM_nomConseiller());
+					fich.close();
+				 }
+		
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		  }
+	 }
 }

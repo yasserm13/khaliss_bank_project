@@ -24,7 +24,7 @@ public class Banquier extends Personne {
 		return false;
 	}
 	
-	public ArrayList<Client> LClientBanquier(){
+	public static ArrayList<Client> LClientBanquier(){
 		String chemin;
 		chemin = System.getProperty("user.dir");//Permet d'avoir le répertoire courant de l'utilisateur
 		
@@ -37,13 +37,13 @@ public class Banquier extends Personne {
 		m_listeClient = LClientBanquier();
 		int detect = 0 ;
 		for(int i=0; i<m_listeClient.get(0).getNbValues(); ++i ) {
-			ArrayList<String> gVal = new ArrayList<>();
+			
 				
 			for(int j=0;j<m_listeClient.size(); ++j) {
 				detect=0;
-				if (this.m_nom.equals(m_listeClient.get(4).getValue(i)))
+				if (this.m_nom.equals(m_listeClient.get(5).getValue(i)))
 				{
-					System.out.print(m_listeClient.get(j).getValue(i)+'\t');
+					System.out.print(String.format("%-20s",m_listeClient.get(j).getValue(i)));
 					detect=1;
 				}
 			}

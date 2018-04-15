@@ -3,6 +3,7 @@ package khaliss_bank_project;
 import java.util.ArrayList;
 
 public class Client extends Personne{
+	
 	private String m_addDomicile = "";
 	private String m_nomConseiller = "";
 	private int m_numCompte;
