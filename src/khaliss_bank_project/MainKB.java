@@ -1,7 +1,11 @@
 package khaliss_bank_project;
+
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
+
 import divers.*;
+import client_serveur.serveur.*;
+import client_serveur.client.*;
 
 public class MainKB {
 
@@ -19,8 +23,7 @@ public class MainKB {
 		*/
 		
 		//Test client serveur
-		Server ai = new Server();
-		//ai.getIpClientServer("www.notepad.pw");
-		ai.ServerMethode2();
+		//Serveur.getIpLocale();
+		Serveur.LancerServeur();
 	}
 }

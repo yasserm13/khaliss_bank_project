@@ -24,14 +24,17 @@ public class Banquier extends Personne {
 		return false;
 	}
 	
-	public ArrayList<Client> LClient(){
+	public ArrayList<Client> LClientBanquier(){
+		String chemin;
+		chemin = System.getProperty("user.dir");//Permet d'avoir le répertoire courant de l'utilisateur
+		
 		ArrayList<Client> lstClient = new ArrayList<>();
-		LoadSaveFile.getListFromFile("C:\\Users\\yasser.moussa\\eclipse-workspace-projets\\khaliss_bank_project\\src\\khaliss_bank_project\\fichiers\\listeBanquiersClients.csv", lstClient);
+		LoadSaveFile.getListFromFile(chemin+"/"+"src\\khaliss_bank_project\\fichiers"+"/"+"listeBanquiersClients.csv", lstClient);
 		return lstClient;
 	}
 	
 	public void affListeClient() {
-		m_listeClient = LClient();
+		m_listeClient = LClientBanquier();
 		int detect = 0 ;
 		for(int i=0; i<m_listeClient.get(0).getNbValues(); ++i ) {
 			ArrayList<String> gVal = new ArrayList<>();
@@ -48,20 +51,4 @@ public class Banquier extends Personne {
 				System.out.println("");						
 		}
 	}
-/*
-	private void deleteClient() {
-		BufferedReader br = new BufferedReader (new InputStreamReader (System.in));
-		m_listeClient = LClient() ;
-		try {
-			System.out.println("Saisir le mail du client à supprimer: ");
-			String tmp_mail = br.readLine();
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
-		}
-		
-		
-		if (tmp_mail.equals(ligne[2]))) {
-			
-		}
-	}*/
 }
