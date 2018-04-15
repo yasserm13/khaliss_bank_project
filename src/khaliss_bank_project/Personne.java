@@ -92,6 +92,7 @@ public abstract class Personne {
 		
 		if(num == 1) {
 			System.out.println("La Ligne: "+ligneNumCompteToDelete+" est selectionnée pour être supprimée");
+			LoadSaveFile.deleteLine("listeComptes.csv",ligneNumCompteToDelete);
 			System.out.println("Le compte est supprimé");
 			return true;
 		}else {

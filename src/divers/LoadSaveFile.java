@@ -99,6 +99,40 @@ public class LoadSaveFile {
 			e.printStackTrace();
 		  }
 		  }
+    
+	public static boolean deleteLine(String fileName, int lineNumber) {
+        try {
+            //BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
+        	String chemin;
+    		chemin = System.getProperty("user.dir");
+    		
+            BufferedReader reader = new BufferedReader(new FileReader(chemin+"/"+"src\\khaliss_bank_project\\fichiers\\listeComptes.csv"));
+            /*String line;
+            while ((line = br.readLine()) != null) {
+               // process the line.
+            }
+            br.close();*/
+            
+            
+            StringBuffer sb = new StringBuffer(); 
+            String line;    
+            int nbLinesRead = 0;       
+            while ((line = reader.readLine()) != null) {
+                if (nbLinesRead != lineNumber) {
+                    sb.append(line + "\n");
+                }
+                nbLinesRead++;
+            }
+            reader.close();
+            BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
+            out.write(sb.toString());
+            out.close();
+ 
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
  
 
 }
