@@ -159,9 +159,9 @@ public class Menu implements InterfaceKB{
 		System.out.println("Veuillez saisir votre mot de passe: ");
 		try {
 				newClient.setM_motDePasse(CryptageMdpMD5.avoirMdpCrypte(LectureClavier.saisirPhrase()));	
-			} catch (NoSuchAlgorithmException e) {
+		} catch (NoSuchAlgorithmException e) {
 				e.printStackTrace();
-			} 
+		} 
 		
 		
 		System.out.println("Veuillez selectioner un conseiller bancaire: ");

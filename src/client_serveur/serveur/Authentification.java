@@ -93,7 +93,7 @@ public class Authentification implements Runnable {
 		chemin = System.getProperty("user.dir");
 		
 		try {
-				Scanner sc = new Scanner(new File(chemin+"/"+"src\\client_serveur\\serveur"+"/"+"clients.txt"));//cible to do : listeBanquiersClients.csv
+				Scanner sc = new Scanner(new File(chemin+"/"+"src\\khaliss_bank_project\\fichiers","listeBanquiersClients.csv"));//cible to do : listeBanquiersClients.csv
 			
 				while(sc.hasNext()){
 					if(sc.nextLine().equals(login+" "+pass)){ //on suppose que le fichier se presente comme ça : (login mdp) to do
