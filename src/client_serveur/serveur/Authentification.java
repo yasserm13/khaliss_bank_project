@@ -1,8 +1,14 @@
 package client_serveur.serveur;
 
 import java.net.*;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
+import divers.CryptageMdpMD5;
+import divers.LoadSaveFile;
+import khaliss_bank_project.Client;
+
 import java.io.*;
 
 public class Authentification implements Runnable {
@@ -14,10 +20,16 @@ public class Authentification implements Runnable {
 	public boolean authentifier = false;
 	public Thread t2;
 	private int nbClient = 1;
+	public ArrayList<Client> m_listeLoginMdp;
+	
+	public Authentification(){
+		 super();
+	}
 	
 	public Authentification(Socket s){
 		 socket = s;
-		}
+	}
+	
 	public void run() {
 	
 		try {
@@ -37,7 +49,7 @@ public class Authentification implements Runnable {
 			output.flush();
 			mdp = input.readLine();
 
-			if(isValid(login, mdp)){
+			if(isValid2(login, mdp)){
 				
 				output.println("connecte");
 				System.out.println(login +" vient de se connecter ");
@@ -50,6 +62,7 @@ public class Authentification implements Runnable {
 			}
 			else {
 				output.println("erreur"); output.flush();
+				output.println("erreur de login"); output.flush();
 			}
 		 }
 			t2 = new Thread(new Chat_ClientServeur(socket,login));
@@ -62,7 +75,7 @@ public class Authentification implements Runnable {
 	}
 	
 	//Lecture du fichier contenant la liste des clients/banquiers
-	private static boolean isValid(String login, String pass) {
+	private static boolean isValid(String login, String mdp) {
 		
 		boolean connexion = false;
 		String chemin;
@@ -72,7 +85,7 @@ public class Authentification implements Runnable {
 				Scanner sc = new Scanner(new File(chemin+"/"+"src\\client_serveur\\serveur"+"/"+"clients.txt"));//cible to do : listeBanquiersClients.csv
 			
 				while(sc.hasNext()){
-					if(sc.nextLine().equals(login+" "+pass)){ //on suppose que le fichier se presente comme ça : (login mdp) to do
+					if(sc.nextLine().equals(login+" "+mdp)){ //on suppose que le fichier se presente comme ça : (login mdp) to do
 	              	  connexion=true;
 	              	  break;
 					}
@@ -86,26 +99,54 @@ public class Authentification implements Runnable {
 	}
 	
 	//adaptation pour lire dans notre fichier csv
-	private static boolean isValid2(String login, String pass) {
+	public static ArrayList<Client> LloginMdp(){
+		String chemin;
+		chemin = System.getProperty("user.dir");//Permet d'avoir le répertoire courant de l'utilisateur
+		
+		ArrayList<Client> lstClient = new ArrayList<>();
+		LoadSaveFile.getListFromFile(chemin+"/"+"src\\khaliss_bank_project\\fichiers"+"/"+"listeBanquiersClients.csv", lstClient);
+		return lstClient;
+	}
+	
+	public ArrayList<String> affListeLoginMdp(String c_mail) {
+		
+		m_listeLoginMdp = LloginMdp();
+		int detect = 0 ;
+		int detect1 = 0 ;
+		ArrayList<String> lgMdp = new ArrayList<String>();
+		
+		for(int i=0; i<m_listeLoginMdp.get(0).getNbValues(); ++i ) {
+			detect1=0;
+			for(int j=0;j<m_listeLoginMdp.size(); ++j) {
+				detect=0;
+				if (c_mail.equals(m_listeLoginMdp.get(2).getValue(i))){
+					detect1++;
+					if(detect1 == 1) {
+						lgMdp.add(m_listeLoginMdp.get(3).getValue(i));
+					}
+					//System.out.print(String.format("%-35s",m_listeLoginMdp.get(j).getValue(i)));
+					detect=1;
+				}
+			}
+			if(detect == 1)
+				System.out.println("");						
+		}
+		return lgMdp;
+	}
+	
+	private static boolean isValid2(String login, String mdp) {
 		
 		boolean connexion = false;
-		String chemin;
-		chemin = System.getProperty("user.dir");
+		String mdp_recup;
+		ArrayList<String> lgMdp = new ArrayList<String>();
 		
-		try {
-				Scanner sc = new Scanner(new File(chemin+"/"+"src\\khaliss_bank_project\\fichiers","listeBanquiersClients.csv"));//cible to do : listeBanquiersClients.csv
-			
-				while(sc.hasNext()){
-					if(sc.nextLine().equals(login+" "+pass)){ //on suppose que le fichier se presente comme ça : (login mdp) to do
-	              	  connexion=true;
-	              	  break;
-					}
-	             }
-			
-		} catch (FileNotFoundException e) {	
-			e.printStackTrace();
-			System.out.println("Le fichier n'existe pas !");
-		}
+		Authentification a = new Authentification();
+		lgMdp=a.affListeLoginMdp(login);
+		
+		mdp_recup = lgMdp.get(0);
+		
+		//System.out.println("Le mot de passe récupéré est : "+mdp);
+		connexion = CryptageMdpMD5.CryptageMdp(mdp, mdp_recup);
 		return connexion;
 	}
 }

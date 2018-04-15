@@ -25,20 +25,25 @@ public class CryptageMdpMD5 {
 	}
 	
 	//Permet de faire un essai de cryptage avec un mdp et un hash (ex: mdp = toto, hash = f71dbe52628a3f83a77ab494817525c6 )
-	public static void CryptageMdp(String mdp, String mdpHashe){
-		System.out.println("Voici le mdp: "+mdp);
+	public static boolean CryptageMdp(String mdp, String mdpHashe){
+		//System.out.println("Voici le mdp: "+mdp);
 		
 		try {
-			System.out.println("Voici le mdp cryptee en MD5: "+avoirMdpCrypte(mdp));
+			//System.out.println("Voici le mdp cryptee en MD5: "+avoirMdpCrypte(mdp));
 			
 			if (CryptageMdpMD5.testMdp(mdp, mdpHashe)){
 				System.out.println("Le mdp est verifie");
+				return true;
 			}
-			else
+			else {
 				System.out.println("Le mdp n'est pas verifie");
-			
+				return false;
+			}
 		} catch (NoSuchAlgorithmException e) {
+			//System.out.println("Le mdp n'est pas verifie");
 			e.printStackTrace();
-		}		
+			return false;
+		}
+		
 	}
 }

@@ -5,7 +5,7 @@ import java.net.*;
 
 public class Serveur {
 	
-	//Pour la méthode getIpLocale();
+	//Pour la methode getIpLocale();
 	public static InetAddress m_localAddress;
 	
 	//Pour la méthode  ServerMethode()
@@ -34,7 +34,7 @@ public class Serveur {
 		
 			m_t = new Thread(new Accepter_connexion_clients(m_socketServeur));
 			m_t.start();
-		
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("Le port "+m_socketServeur.getLocalPort()+" est déjà utilisé !");

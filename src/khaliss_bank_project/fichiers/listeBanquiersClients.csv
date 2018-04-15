@@ -2,9 +2,5 @@ Nom,Prenom,Adresse_Email,Mot_De_Passe_Crypte,Adresse_Domicile,Nom_Conseiller
 MOUSSA,Yasser,yasser.moussa@khaliss-bank.fr,mdp,Marseille,XX
 MAREGA,mamadou,mamadou.marega@khaliss-bank.fr,mdp,Marseille,XX
 AHAMADA,El-Arif,el-arif.ahamada@khaliss-bank.fr,mdp,Marseille,XX
-ali,abdou,ououi,XXXX,mars,MAREGA
-Msaidie,Ali,ououi,XXXX,Nice,MOUSSA
-Boinahadji,Fahade,ououi,XXXX,Marseille,AHAMADA
-Antoine,Robert,ououi,XXXX,Marseille,MOUSSA
-Daba,Niama,ououi,XXXX,Morinie,MOUSSA
-IZI,BOOBA,ououi,60de30eca1945fedea1b8b6c40ee60b6,MIAMI,AHAMADA
+Ali,Abdou,ali.abdou@gmail.com,XXXX,mars,MAREGA
+Antoine,Robert,antoine.robert@gmail.com,60de30eca1945fedea1b8b6c40ee60b6,MIAMI,AHAMADA
