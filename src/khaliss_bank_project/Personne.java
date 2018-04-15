@@ -92,28 +92,28 @@ public abstract class Personne {
     //Creer le compte
     	double solde;
     	Compte newCompte = new Compte();
-    	int choix;
+    	char choix;
     	newCompte.setM_numCompte((int)( Math.random()*( 99999999 - 1111 + 1 ) ) + 1111);
     	
     	newCompte.setM_mailTitulaire(p_mailClient);
     	System.out.println("Veuillez choisir un type de compte");
     	do {
-	    	System.out.println("01-	Livret A\n" + 
-	    			"02-   	Livret de développement durable et solidaire (LDDS)\n" + 
-	    			"03-   	Livret jeune\n" + 
-	    			"04-   	Plan épargne logement (PEL)\n");
-	    	choix = LectureClavier.saisirInt();
+	    	System.out.println("A-	Livret A\n" + 
+	    			"B-   	Livret de développement durable et solidaire (LDDS)\n" + 
+	    			"C-   	Livret jeune\n" + 
+	    			"D-   	Plan épargne logement (PEL)\n");
+	    	choix = LectureClavier.saisirCaractere();
 	    	
-    	}while(choix < 1 || choix > 4);
+    	}while(choix != 'A' && choix != 'B' && choix != 'C' && choix != 'D');
     	
     	switch (choix){
-	    	case 1:	newCompte.setM_typeCompte("Livret_A");
+	    	case 'A':	newCompte.setM_typeCompte("Livret_A");
 	    		break;
-	    	case 2:newCompte.setM_typeCompte("Livret_de_développement_durable_et_solidaire_(LDDS)");
+	    	case 'B':newCompte.setM_typeCompte("Livret_de_développement_durable_et_solidaire_(LDDS)");
 				break;
-	    	case 3:newCompte.setM_typeCompte("Livret_jeune");
+	    	case 'C':newCompte.setM_typeCompte("Livret_jeune");
 				break;
-	    	case 4:newCompte.setM_typeCompte("Plan_épargne_logement_(PEL)");
+	    	case 'D':newCompte.setM_typeCompte("Plan_épargne_logement_(PEL)");
 				break;
 	    	default: System.out.println("Choix_non_existant");
 	    		break;

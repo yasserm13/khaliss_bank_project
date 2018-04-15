@@ -82,7 +82,26 @@ public class LectureClavier {
 	
           return Double;
     	}
-		
-	
+	public static char saisirCaractere()
+	{
+	    Scanner sc = new Scanner(System.in);
+	    String str;
+	    char reponse = '.';
+	    try
+	    {
+	        //System.out.println("Souhaitez-vous convertir une autre température ?(O/N)");
+	        str = sc.nextLine();
+	        str = str.toUpperCase();
+	        reponse = str.charAt(0);
+	        System.out.println("Lettre le charactère entré est: "+reponse);
+	    } catch(StringIndexOutOfBoundsException e) {
+	    	System.out.println("Saisie non valide");
+	    	reponse = saisirCaractere();
+	    }
+	    
+       	return reponse;
+
+     		
+	}
 }
 
