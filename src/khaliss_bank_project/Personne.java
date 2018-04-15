@@ -14,6 +14,8 @@ public abstract class Personne {
 	protected String m_mail = "";
 	protected String m_motDePasse = "";
 	static final String UNKNOWN = "XXXX";
+	public ArrayList<Client> m_listeCompte;
+
 	
 	public Personne() { //constructeur par defaut
 		this.m_nom =UNKNOWN;
@@ -73,15 +75,32 @@ public abstract class Personne {
 	public abstract boolean modifInfoPerso(int infoAmodif); //methode virtuel a implementer dans les classes filles
 		
 	
-	public boolean deleteCompte(int numCompte) {
-		//A faire
-		return true;
+	public boolean deleteCompte(String mail) { //Verifie l'existance d'un compte
+		int num=0;
+		int ligneNumCompteToDelete;
+		ArrayList<Integer> tab = new ArrayList<Integer>();
+		tab = affListeCompte(mail);
+		do {
+			System.out.println("Saisir le numéro de la ligne correspondant au compte à supprimer");
+			ligneNumCompteToDelete = (int)LectureClavier.saisirDouble();
+		    
+			for(int i = 0; i < tab.size(); i++)
+		      if(ligneNumCompteToDelete == tab.get(i))
+		    	  num = 1;
+			
+		}while(num == 0);
+		
+		if(num == 1) {
+			System.out.println("La Ligne: "+ligneNumCompteToDelete+" est selectionnée pour être supprimée");
+			System.out.println("Le compte est supprimé");
+			return true;
+		}else {
+			
+			
+			return false;
+		}
 	}
 	
-	public int openCompte() {
-		//A faire
-		return 0;
-	}
 	
 	public boolean sendArgent(Compte cptDebit, Compte cptCredit) {
 		//A faire
@@ -92,42 +111,85 @@ public abstract class Personne {
     //Creer le compte
     	double solde;
     	Compte newCompte = new Compte();
+    	String typeDeCompte;
     	char choix;
-    	newCompte.setM_numCompte((int)( Math.random()*( 99999999 - 1111 + 1 ) ) + 1111);
-    	
+    	newCompte.setM_numCompte((int)( Math.random()*( 99999999 - 11111110 + 1 ) ) + 1111110);
     	newCompte.setM_mailTitulaire(p_mailClient);
     	System.out.println("Veuillez choisir un type de compte");
+    	
     	do {
 	    	System.out.println("A-	Livret A\n" + 
 	    			"B-   	Livret de développement durable et solidaire (LDDS)\n" + 
 	    			"C-   	Livret jeune\n" + 
 	    			"D-   	Plan épargne logement (PEL)\n");
 	    	choix = LectureClavier.saisirCaractere();
-	    	
     	}while(choix != 'A' && choix != 'B' && choix != 'C' && choix != 'D');
     	
     	switch (choix){
-	    	case 'A':	newCompte.setM_typeCompte("Livret_A");
+	    	case 'A':
+    			typeDeCompte="Livret_A";
+    			//Compte.verifExistanceDeCompte(p_mailClient,typeDeCompte);//To do 
+    			newCompte.setM_typeCompte(typeDeCompte);
 	    		break;
-	    	case 'B':newCompte.setM_typeCompte("Livret_de_développement_durable_et_solidaire_(LDDS)");
-				break;
-	    	case 'C':newCompte.setM_typeCompte("Livret_jeune");
-				break;
-	    	case 'D':newCompte.setM_typeCompte("Plan_épargne_logement_(PEL)");
-				break;
+	    	case 'B':
+	    		typeDeCompte="Livret_de_développement_durable_et_solidaire_(LDDS)";
+	    		newCompte.setM_typeCompte(typeDeCompte);
+	    		break;
+	    	case 'C':
+	    		typeDeCompte="Livret_jeune";
+	    		newCompte.setM_typeCompte(typeDeCompte);
+	    		break;
+	    	case 'D':
+	    		typeDeCompte="Plan_épargne_logement_(PEL)";
+	    		newCompte.setM_typeCompte(typeDeCompte);
+	    		break;
 	    	default: System.out.println("Choix_non_existant");
 	    		break;
 		}
-    
+    	
    		System.out.println("Veuillez saisir le solde");
    		solde = LectureClavier.saisirDouble();
-    	
-    	newCompte.setM_solde(solde);
-    	
+   		newCompte.setM_solde(solde);
     	LoadSaveFile.setListClientsToFile(newCompte);
 
     	
 
+	}
+    
+	public ArrayList<Client> LClientCompte(){
+		String chemin;
+		chemin = System.getProperty("user.dir");//Permet d'avoir le répertoire courant de l'utilisateur
+		ArrayList<Client> lstCompte = new ArrayList<>();
+		LoadSaveFile.getListFromFile(chemin+"/"+"src\\khaliss_bank_project\\fichiers"+"/"+"listeComptes.csv", lstCompte);
+		return lstCompte;
+	}
+	
+	public ArrayList<Integer> affListeCompte(String c_mail) {
+		m_listeCompte = LClientCompte();
+		int detect = 0 ;
+		int detect1 = 0 ;
+		ArrayList<Integer> tab = new ArrayList<Integer>();
+		
+		for(int i=0; i<m_listeCompte.get(0).getNbValues(); ++i ) {
+			detect1=0;
+			for(int j=0;j<m_listeCompte.size(); ++j) {
+				//System.out.print(i+"\t");
+				detect=0;
+				if (c_mail.equals(m_listeCompte.get(0).getValue(i))){
+					detect1++;
+					if(detect1 == 1) {
+						tab.add(i);
+						System.out.print(i+"\t");//permet l'identification de la ligne
+					}
+					System.out.print(String.format("%-35s",m_listeCompte.get(j).getValue(i)));
+					detect=1;
+				}
+			}
+			if(detect == 1)
+				System.out.println("");						
+		}
+		
+		return tab;
 	}
 
 }

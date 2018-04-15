@@ -50,8 +50,12 @@ public class MainKB {
 		*/
 		//LoadSaveFile.setListToFile(c2);
 		
-		c2.openCompte(c2.getM_mail());
-
+		//c2.openCompte(c2.getM_mail());
+		
+		//c2.deleteCompte(c2.getM_mail());
+		
+		//c2.affListeCompte(c2.getM_mail());
+		c2.deleteCompte(c2.getM_mail());
 
 		//System.out.println(b1);
 		

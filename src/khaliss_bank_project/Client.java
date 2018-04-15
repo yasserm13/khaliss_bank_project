@@ -10,8 +10,10 @@ public class Client extends Personne{
 	private String m_addDomicile = "";
 	private String m_nomConseiller = "";
 	private int m_numCompte;
-	public ArrayList<Compte> m_listeCompte;
+	//public ArrayList<Compte> m_listeCompte;
 	private ArrayList<String> values;
+	//public ArrayList<Client> m_listeCompte;
+
 	
 	public Client() { //constructeur par defaut
 		super ();
@@ -84,4 +86,33 @@ public class Client extends Personne{
 		return lstClient;
 	}
 	
+/*	public ArrayList<Client> LClientCompte(){
+		String chemin;
+		chemin = System.getProperty("user.dir");//Permet d'avoir le répertoire courant de l'utilisateur
+		ArrayList<Client> lstCompte = new ArrayList<>();
+		LoadSaveFile.getListFromFile(chemin+"/"+"src\\khaliss_bank_project\\fichiers"+"/"+"listeComptes.csv", lstCompte);
+		return lstCompte;
+	}
+	
+	public void affListeCompte(String c_mail) {
+		m_listeCompte = LClientCompte();
+		int detect = 0 ;
+		int detect1 = 0 ;
+		for(int i=0; i<m_listeCompte.get(0).getNbValues(); ++i ) {
+			detect1=0;
+			for(int j=0;j<m_listeCompte.size(); ++j) {
+				//System.out.print(i+"\t");
+				detect=0;
+				if (c_mail.equals(m_listeCompte.get(0).getValue(i))){
+					detect1++;
+					if(detect1 == 1)
+						System.out.print(i+"\t");//permet l'identification de la ligne
+					System.out.print(String.format("%-35s",m_listeCompte.get(j).getValue(i)));
+					detect=1;
+				}
+			}
+			if(detect == 1)
+				System.out.println("");						
+		}
+	}*/
 }

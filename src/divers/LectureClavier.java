@@ -89,7 +89,6 @@ public class LectureClavier {
 	    char reponse = '.';
 	    try
 	    {
-	        //System.out.println("Souhaitez-vous convertir une autre température ?(O/N)");
 	        str = sc.nextLine();
 	        str = str.toUpperCase();
 	        reponse = str.charAt(0);
