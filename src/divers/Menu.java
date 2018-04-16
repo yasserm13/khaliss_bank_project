@@ -25,7 +25,6 @@ public class Menu implements InterfaceKB{
 	                    break;
 	               }
 	           } catch (Exception e) {
-	        	   e.printStackTrace();
 	        	   System.out.println("Mauvaise valeur, veuillez saisir un entier !"); 
 	       }
 	   }
