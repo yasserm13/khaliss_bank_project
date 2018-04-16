@@ -27,15 +27,15 @@ public class Chat_ClientServeur implements Runnable {
 			input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			output = new PrintWriter(socket.getOutputStream());
 			
-			Thread t3 = new Thread(new Reception(input,login));
+			t3 = new Thread(new Reception(input,login));
 			t3.start();
 			
-			Thread t4 = new Thread(new Emission(output));
+			t4 = new Thread(new Emission(output));
 			t4.start();
 		
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println(login +"s'est déconnecté ");
+			System.out.println(login +"s'est dï¿½connectï¿½ ");
 		}
 	}
 }

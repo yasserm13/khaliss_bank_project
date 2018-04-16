@@ -42,7 +42,7 @@ public class Connexion_serveur implements Runnable {
 			output.flush();
 			
 			if(input.readLine().equals("connecte")){
-				System.out.println("Je suis connecté "); 
+				System.out.println("Je suis connectï¿½ "); 
 				connect = true;
 			}
 			
@@ -50,12 +50,15 @@ public class Connexion_serveur implements Runnable {
 				System.err.println("Les informations saisies sont incorrectes ");  //affiche le msg en rouge
 			}
 		}
-			t2 = new Thread(new Chat_ClientServeur(socket));
+			//t2 = new Thread(new Chat_ClientServeur(socket));
+			//t2.start();
+			
+			t2 = new Thread(new Aff_Menu(socket));
 			t2.start();
 		
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println("Le serveur ne répond plus ");
+			System.out.println("Le serveur ne rï¿½pond plus ");
 		}
 	}
 }

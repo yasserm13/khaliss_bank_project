@@ -61,12 +61,14 @@ public class Authentification implements Runnable {
 				authentifier = true;	
 			}
 			else {
-				//output.println("erreur"); output.flush();
-				output.println("Mauvais login ou mot de passe !"); output.flush();
+				output.println("Erreur, mauvais login ou mot de passe !"); output.flush();
 			}
 		 }
-			t2 = new Thread(new Chat_ClientServeur(socket,login));
-			t2.start();
+			//t2 = new Thread(new Chat_ClientServeur(socket,login));
+			//t2.start();
+			
+			//t2 = new Thread(new Aff_Menu(socket));
+			//t2.start();
 			
 		} catch (IOException e) {
 			e.printStackTrace();

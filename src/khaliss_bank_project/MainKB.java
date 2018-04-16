@@ -25,6 +25,8 @@ public class MainKB {
 		
 		//Test client serveur
 		//Serveur.getIpLocale();
+		//ClientR.LancerClient();
 		Serveur.LancerServeur();
+		
 	}
 }
