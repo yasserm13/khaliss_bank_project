@@ -81,13 +81,11 @@ public class LoadSaveFile {
 
 				if(fichier.exists() && fichier.isFile()){
 					fich = new PrintWriter(new BufferedWriter(new FileWriter(fichier, true))); //true c'est elle qui permet d'écrire à la suite des données enregistrées et non de les remplacer
-					System.out.println("le fichier existe déjà");
 					fich.println(compte.getM_mailTitulaire()+","+compte.getM_typeCompte()+","+compte.getM_numCompte()+","+compte.getM_solde());
 					fich.close();
 				
 				} else {
 					fich = new PrintWriter(new BufferedWriter(new FileWriter(fichier, true))); //true c'est elle qui permet d'écrire à la suite des données enregistrées et non de les remplacer
-					System.out.println("le fichier vient d'être créé");
 					fich.println("Adresse_Email,Type_de_compte,Numero__De_Compte,Solde");
 					fich.println(compte.getM_mailTitulaire()+","+compte.getM_typeCompte()+","+compte.getM_numCompte()+","+compte.getM_solde());
 					fich.close();
@@ -102,31 +100,26 @@ public class LoadSaveFile {
     
 	public static boolean deleteLine(String fileName, int lineNumber) {
         try {
-            //BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
-        	String chemin;
-    		chemin = System.getProperty("user.dir");
-    		
-            BufferedReader reader = new BufferedReader(new FileReader(chemin+"/"+"src\\khaliss_bank_project\\fichiers\\listeComptes.csv"));
-            /*String line;
-            while ((line = br.readLine()) != null) {
-               // process the line.
-            }
-            br.close();*/
-            
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
+             
+            PrintWriter fich;
             
             StringBuffer sb = new StringBuffer(); 
             String line;    
             int nbLinesRead = 0;       
             while ((line = reader.readLine()) != null) {
+            	System.out.println(line);
                 if (nbLinesRead != lineNumber) {
                     sb.append(line + "\n");
                 }
                 nbLinesRead++;
             }
             reader.close();
-            BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
-            out.write(sb.toString());
-            out.close();
+            
+            fich = new PrintWriter(new BufferedWriter(new FileWriter(fileName)));
+            fich.print(sb);
+            fich.close();
+
  
         } catch (Exception e) {
             return false;

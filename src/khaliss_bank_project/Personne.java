@@ -77,27 +77,32 @@ public abstract class Personne {
 	
 	public boolean deleteCompte(String mail) { //Verifie l'existance d'un compte
 		int num=0;
-		int ligneNumCompteToDelete;
+		int ligneNumCompteToDelete = 999999999;
 		ArrayList<Integer> tab = new ArrayList<Integer>();
-		tab = affListeCompte(mail);
-		do {
-			System.out.println("Saisir le numéro de la ligne correspondant au compte à supprimer");
-			ligneNumCompteToDelete = (int)LectureClavier.saisirDouble();
-		    
-			for(int i = 0; i < tab.size(); i++)
-		      if(ligneNumCompteToDelete == tab.get(i))
-		    	  num = 1;
-			
-		}while(num == 0);
+    	String chemin;
+		chemin = System.getProperty("user.dir");
 		
+		tab = affListeCompte(mail);
+		if(!tab.isEmpty()) {
+			do {
+				
+				System.out.println("Saisir le numéro de la ligne correspondant au compte à supprimer");
+				ligneNumCompteToDelete = (int)LectureClavier.saisirDouble();
+			    
+				for(int i = 0; i < tab.size(); i++)
+			      if(ligneNumCompteToDelete == tab.get(i))
+			    	  num = 1;
+				
+			}while(num == 0);
+		}else {
+			System.out.println("Il n'y a pas de compte associé à ce client !");
+		}
 		if(num == 1) {
 			System.out.println("La Ligne: "+ligneNumCompteToDelete+" est selectionnée pour être supprimée");
-			LoadSaveFile.deleteLine("listeComptes.csv",ligneNumCompteToDelete);
+			LoadSaveFile.deleteLine(chemin+"/"+"src\\khaliss_bank_project\\fichiers\\listeComptes.csv",ligneNumCompteToDelete);
 			System.out.println("Le compte est supprimé");
 			return true;
 		}else {
-			
-			
 			return false;
 		}
 	}
@@ -169,7 +174,8 @@ public abstract class Personne {
 		m_listeCompte = LClientCompte();
 		int detect = 0 ;
 		int detect1 = 0 ;
-		ArrayList<Integer> tab = new ArrayList<Integer>();
+		int count=0;
+		ArrayList<Integer> tab = new ArrayList<Integer>(0);
 		
 		for(int i=0; i<m_listeCompte.get(0).getNbValues(); ++i ) {
 			detect1=0;
@@ -179,8 +185,9 @@ public abstract class Personne {
 				if (c_mail.equals(m_listeCompte.get(0).getValue(i))){
 					detect1++;
 					if(detect1 == 1) {
-						tab.add(i);
-						System.out.print(i+"\t");//permet l'identification de la ligne
+						count = i+1;
+						tab.add(count);
+						System.out.print(count+"\t");//permet l'identification de la ligne
 					}
 					System.out.print(String.format("%-35s",m_listeCompte.get(j).getValue(i)));
 					detect=1;

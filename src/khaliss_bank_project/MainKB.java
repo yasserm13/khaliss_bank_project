@@ -35,8 +35,8 @@ public class MainKB {
 		*/
 		Client c1 = new Client(); 
 		Client c2 = new Client("MOUSSA","Yasser","yasser.moussa@niama.fr","monMDP","Marseille","MOUSSA");
-		System.out.println(c1);
-		System.out.println(c2);
+		//System.out.println(c1);
+		//System.out.println(c2);
 		int numCompte = 0;
 				
 		/*Banquier b1 = new Banquier("MOUSSA","Yasser","yasser.moussa@niama.fr","monMDP");
@@ -52,10 +52,10 @@ public class MainKB {
 		
 		//c2.openCompte(c2.getM_mail());
 		
-		//c2.deleteCompte(c2.getM_mail());
+		boolean deleteStatus = c2.deleteCompte(c2.getM_mail());
 		
 		//c2.affListeCompte(c2.getM_mail());
-		c2.deleteCompte(c2.getM_mail());
+		//c2.deleteCompte(c2.getM_mail());
 
 		//System.out.println(b1);
 		
