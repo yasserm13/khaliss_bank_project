@@ -1,11 +1,15 @@
 package khaliss_bank_project;
 
+import java.util.ArrayList;
+import divers.*;
+
 public abstract class Personne {
 	protected String m_nom = "";
 	protected String m_prenom = ""; 
 	protected String m_mail = "";
 	protected String m_motDePasse = "";
 	static final String UNKNOWN = "XXXX";
+	public ArrayList<Client> m_listeCompte;
 	
 	public Personne() { //constructeur par defaut
 		this.m_nom =UNKNOWN;
@@ -70,13 +74,132 @@ public abstract class Personne {
 		return true;
 	}
 	
-	public boolean openCompte(String addMail) {
-		//A faire
-		return true;
+    public void openCompte(String p_mailClient){
+    //Creer le compte
+    	double solde;
+    	Compte newCompte = new Compte();
+    	String typeDeCompte;
+    	char choix;
+    	newCompte.setM_numCompte((int)( Math.random()*( 99999999 - 11111110 + 1 ) ) + 1111110);
+    	newCompte.setM_mailTitulaire(p_mailClient);
+    	System.out.println("Veuillez choisir un type de compte");
+    	
+    	do {
+	    	System.out.println("A-	Livret A\n" + 
+	    			"B-   	Livret de développement durable et solidaire (LDDS)\n" + 
+	    			"C-   	Livret jeune\n" + 
+	    			"D-   	Plan épargne logement (PEL)\n");
+	    	choix = LectureClavier.saisirCaractere();
+    	}while(choix != 'A' && choix != 'B' && choix != 'C' && choix != 'D');
+    	
+    	switch (choix){
+	    	case 'A':
+    			typeDeCompte="Livret_A";
+    			//Compte.verifExistanceDeCompte(p_mailClient,typeDeCompte);//To do 
+    			newCompte.setM_typeCompte(typeDeCompte);
+	    		break;
+	    	case 'B':
+	    		typeDeCompte="Livret_de_développement_durable_et_solidaire_(LDDS)";
+	    		newCompte.setM_typeCompte(typeDeCompte);
+	    		break;
+	    	case 'C':
+	    		typeDeCompte="Livret_jeune";
+	    		newCompte.setM_typeCompte(typeDeCompte);
+	    		break;
+	    	case 'D':
+	    		typeDeCompte="Plan_épargne_logement_(PEL)";
+	    		newCompte.setM_typeCompte(typeDeCompte);
+	    		break;
+	    	default: System.out.println("Choix_non_existant");
+	    		break;
+		}
+    	
+   		System.out.println("Veuillez saisir le solde");
+   		solde = LectureClavier.saisirDouble();
+   		newCompte.setM_solde(solde);
+    	LoadSaveFile.setListClientsToFile(newCompte);
+
+    	
+
+	}
+    
+	public ArrayList<Client> listeComptesKB(){
+		String chemin;
+		chemin = System.getProperty("user.dir");//Permet d'avoir le répertoire courant de l'utilisateur
+		ArrayList<Client> lstCompte = new ArrayList<>();
+		LoadSaveFile.getListFromFile(chemin+"/"+"src\\khaliss_bank_project\\fichiers"+"/"+"listeComptes.csv", lstCompte);
+		return lstCompte;
 	}
 	
-	public boolean sendArgent(Compte cptDebit, Compte cptCredit) {
-		//A faire
+	public void affListeComptesClient(String p_mail) {
+		ArrayList<String> listeComptes = new ArrayList<>();
+	}
+	
+	public ArrayList<Client> getListeComptesClient(String p_mail)
+	{
+		ArrayList<Client> listeComptes = new ArrayList<>();
+		m_listeCompte = listeComptesKB();
+		
+		for(int i=0; i<m_listeCompte.get(0).getNbValues(); ++i ) 
+		{
+			
+			for(int j=0;j<m_listeCompte.size(); ++j) 
+			{
+				if(m_listeCompte.get(j).getValue(i).equals(p_mail))
+				{
+					listeComptes.add(m_listeCompte.get(j));
+				}
+				
+			}
+		
+		}
+		
+		return listeComptes;
+	}
+	
+	public void afficheListeComptesClient(String p_mail)
+	{
+		ArrayList<Client> listeComptes = new ArrayList<>();
+		
+		listeComptes = getListeComptesClient(p_mail);
+		
+		
+		for(int i=0; i<listeComptes.get(0).getNbValues(); ++i) 
+		{
+			
+			for(int j=0;j<listeComptes.size(); ++j) 
+			{
+				System.out.print(String.format("%-55s",m_listeCompte.get(j).getValue(i)));
+			}
+			
+			System.out.println("");
+		}
+	}
+
+
+	
+	
+	public boolean sendArgent(String p_mail) {
+		
+		ArrayList<Integer> listeComptesClient = new ArrayList<Integer>();
+		int choix;
+		
+		System.out.println("________________________________________________________________");
+		
+		do {
+		System.out.println("Selectionner le compte à Débiter:");
+		afficheListeComptesClient(p_mail);
+		choix = (int)LectureClavier.saisirDouble();
+		}while(choix < 0 || choix > listeComptesClient.size());
+		
+		System.out.println("Saisir le numéro du compte à créditer :");
+		choix = (int)LectureClavier.saisirDouble();
+		
+		for(int i=0; i<listeComptesClient.size(); i++)
+		{
+			
+		}
+		
 		return true;
 	}
 

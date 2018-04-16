@@ -71,6 +71,37 @@ public class LoadSaveFile {
 			e.printStackTrace();
 		  }
 		  }
+    
+    
+    public static void setListClientsToFile(Compte compte) {
+		PrintWriter fich;
+		
+		String chemin;
+		chemin = System.getProperty("user.dir");//Permet d'avoir le répertoire courant de l'utilisateur
+		
+    	try {
+				File fichier = new File(chemin+"/"+"src\\khaliss_bank_project\\fichiers","listeComptes.csv");//Créer un fichier dans le répertoire donné en paramètre
+
+				if(fichier.exists() && fichier.isFile()){
+					fich = new PrintWriter(new BufferedWriter(new FileWriter(fichier, true))); //true c'est elle qui permet d'écrire à la suite des données enregistrées et non de les remplacer
+					System.out.println("________________________________________________________________");
+					fich.println(compte.getM_mailTitulaire()+","+compte.getM_typeCompte()+","+compte.getM_numCompte()+","+compte.getM_solde());
+					fich.close();
+				
+				} else {
+					fich = new PrintWriter(new BufferedWriter(new FileWriter(fichier, true))); //true c'est elle qui permet d'écrire à la suite des données enregistrées et non de les remplacer
+					System.out.println("________________________________________________________________");
+					fich.println("Adresse_Email,Type_de_compte,Numero__De_Compte,Solde");
+					fich.println(compte.getM_mailTitulaire()+","+compte.getM_typeCompte()+","+compte.getM_numCompte()+","+compte.getM_solde());
+					fich.close();
+				 }
+		
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		  }
+		  }
  
 
 }

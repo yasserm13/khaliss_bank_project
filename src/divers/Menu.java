@@ -169,7 +169,7 @@ public class Menu implements InterfaceKB{
 		newClient.setM_nomConseiller(selectBanquier());
 		System.out.println("");
 		
-		
+		newClient.openCompte(p_mail);
 		LoadSaveFile.setListToFile(newClient);
 		
 		
@@ -182,51 +182,35 @@ public class Menu implements InterfaceKB{
 	public String selectBanquier()
 	
 	{	
-		
-		String nomBanquier = new String(""); 
-		ArrayList<Client> list = new ArrayList<>();
-		ArrayList<String> listBanquiers = new ArrayList<>();
-		String khalissMail = new String("@khaliss-bank.fr");
-		
-		
-		list = Banquier.LClientBanquier();
-
-		for(int i=0; i<list.get(0).getNbValues(); ++i ) 
-		{
-			
-				if (list.get(2).getValue(i).endsWith(khalissMail))
-				{
-					listBanquiers.add(list.get(0).getValue(i));
+				String nomBanquier = new String("");
+				char choix;
+				
+				do {
+			    	System.out.println("A- Yasser MOUSSA\n" + 
+			    			"B- Mamadou MAREGA\n" + 
+			    			"C- El-Arif AHAMADA\n" );
+			    	choix = LectureClavier.saisirCaractere();
+		    	}while(choix != 'A' && choix != 'B' && choix != 'C');
+		    	
+		    	switch (choix){
+			    	case 'A':
+			    		System.out.println("Vous avez choisi comme banquier: M.Yasser MOUSSA\nIl sera trés heureux de travailler avec vous.");
+			    		nomBanquier = "MOUSSA";
+			    		break;
+			    	case 'B':
+			    		System.out.println("Vous avez choisi comme banquier: M.Mamadou MAREGA\nIl sera trés heureux de travailler avec vous.");
+			    		nomBanquier = "MAREGA";
+			    		break;
+			    	case 'C':
+			    		System.out.println("Vous avez choisi comme banquier: El-Arif AHAMADA\nIl sera trés heureux de travailler avec vous.");
+			    		nomBanquier = "AHAMADA";
+			    		break;
+			    	default: System.out.println("Choix_non_existant");
+			    		break;
 				}
-		}
 				
-		
-		int ok = 0;
-		
-		do
-		{
-			
-			for(int i=0; i<listBanquiers.size(); ++i)
-			{
-			System.out.println(i+1 + ": "+listBanquiers.get(i));
-			}
-		
-			int choix = LectureClavier.saisirInt();
-		
-			if(choix > listBanquiers.size())
-			{
-				System.out.println("votre saisie ne correspond à aucune des propositions. \n Veuillez Réesayer!!");
-			}
-			else
-			{
-				ok = 1;
+
 				
-				System.out.println("Vous avez choisi comme banquier: " + listBanquiers.get(choix-1) + "\nIl sera trés heureux de travailler avec vous.");
-				
-				nomBanquier = listBanquiers.get(choix-1) ;
-			}
-			
-		}while(ok != 1 );	
 		
 		
 
