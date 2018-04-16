@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import divers.*;
 
+//ClientR
 public class Aff_Menu implements Runnable {
 	
 	private Socket socket;
@@ -41,7 +42,7 @@ public class Aff_Menu implements Runnable {
 			m.demarrer();
    
 		} catch (IOException e) {
-			System.err.println("Le serveur distant s'est d�connect� !");
+			System.err.println("Le serveur distant s'est deconnecte !");
 		}
 	}
 

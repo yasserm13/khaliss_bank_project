@@ -9,12 +9,13 @@ import java.util.Scanner;
 
 import divers.*;
 
+//Serveur
 public class Aff_Menu implements Runnable {
 	
 	private Socket socket;
 	private PrintWriter out = null;
 	private BufferedReader in = null;
-	
+
 	private Thread t3, t4;
 
 	private Scanner sc;
@@ -33,14 +34,14 @@ public class Aff_Menu implements Runnable {
 			t4 = new Thread(new Emission(out));
 			t4.start();
 			
-			t3 = new Thread(new Reception(in));
+			t3 = new Thread(new Reception(in,login));
 			t3.start();
-			*/
+			
 			Menu m = new Menu();
 			m.demarrer();
-			
+			*/
 		} catch (IOException e) {
-			System.err.println("Le serveur distant s'est d�connect� !");
+			System.err.println("Le serveur distant s'est deconnecte !");
 		}
 	}
 }

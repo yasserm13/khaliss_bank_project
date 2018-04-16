@@ -1,6 +1,7 @@
 package divers;
 
 import java.io.*;
+import java.net.Socket;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
@@ -9,6 +10,7 @@ import khaliss_bank_project.*;
 
 public class Menu implements InterfaceKB{
 	private BufferedReader br;
+	private Socket socket;
 	
 	public Menu() { //constructeur par defaut
         this.br = new BufferedReader (new InputStreamReader (System.in));
@@ -56,7 +58,7 @@ public class Menu implements InterfaceKB{
                 case 0:
                 	System.out.println("");
                 	System.out.println("Vous avez choisi de quitter le programme !");
-                	System.out.println("Le programme est terminé.");
+                	System.out.println("Le programme est termine.");
                     System.exit(0);
                     break;
                 case 1:
@@ -69,7 +71,7 @@ public class Menu implements InterfaceKB{
                 	System.out.println("Fonction 3");
                     break;
                 default:
-                	System.out.println("Mauvais choix, recommencez !"); // Action par défaut en cas de mauvais choix
+                	System.out.println("Mauvais choix, recommencez !"); // Action par dÃ©faut en cas de mauvais choix
             }
         }
     }
@@ -100,7 +102,7 @@ public class Menu implements InterfaceKB{
             	System.out.println("Fonction 2");
                 break;
             default:
-            	 System.out.println("Mauvais choix, recommencez !"); // Action par défaut en cas de mauvais choix
+            	 System.out.println("Mauvais choix, recommencez !"); // Action par dÃ©faut en cas de mauvais choix
 			}
 		}
 	}
@@ -119,7 +121,7 @@ public class Menu implements InterfaceKB{
 		newClient.setM_prenom(LectureClavier.saisirPhrase());
 		System.out.println("");
 		
-		System.out.println("Veuillez saisir la ville dans laquelle vous êtes domicilié: ");
+		System.out.println("Veuillez saisir la ville dans laquelle vous etes domicilie: ");
 		newClient.setM_addDomicile(LectureClavier.saisirPhrase());
 		System.out.println("");
 		
@@ -176,13 +178,13 @@ public class Menu implements InterfaceKB{
 		
 			if(choix > listBanquiers.size())
 			{
-				System.out.println("votre saisie ne correspond à aucune des propositions. \n Veuillez Réesayer!!");
+				System.out.println("votre saisie ne correspond a aucune des propositions. \n Veuillez Reesayer!!");
 			}
 			else
 			{
 				ok = 1;
 				
-				System.out.println("Vous avez choisi comme banquier: " + listBanquiers.get(choix-1) + "\nIl sera trés heureux de travailler avec vous.");
+				System.out.println("Vous avez choisi comme banquier: " + listBanquiers.get(choix-1) + "\nIl sera tres heureux de travailler avec vous.");
 				
 				nomBanquier = listBanquiers.get(choix-1) ;
 			}

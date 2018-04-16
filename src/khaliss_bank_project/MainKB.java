@@ -13,7 +13,7 @@ public class MainKB {
 		/*
 		Menu m = new Menu();
 		m.demarrer();
-		m.creerClient("test");
+		//m.creerClient("test");
 		
 		Client c2 = new Client("MOUSSA","Yasser","yasser.moussa@niama.fr","f71dbe52628a3f83a77ab494817525c6","Marseille","MOUSSA");
 		//System.out.println(c2);
@@ -27,6 +27,5 @@ public class MainKB {
 		//Serveur.getIpLocale();
 		//ClientR.LancerClient();
 		Serveur.LancerServeur();
-		
 	}
 }

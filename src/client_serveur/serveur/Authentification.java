@@ -7,7 +7,8 @@ import java.util.Scanner;
 
 import divers.CryptageMdpMD5;
 import divers.LoadSaveFile;
-import khaliss_bank_project.Client;
+import divers.*;
+import khaliss_bank_project.*;
 
 import java.io.*;
 
@@ -54,7 +55,7 @@ public class Authentification implements Runnable {
 				output.println("connecte");
 				System.out.println(login +" vient de se connecter ");
 				
-				System.out.println("Il est le client numero "+nbClient+" connect� !");
+				System.out.println("Il est le client numero "+nbClient+" connecte !");
 				nbClient ++;
 				
 				output.flush();
@@ -72,7 +73,7 @@ public class Authentification implements Runnable {
 			
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println(login+" ne r�pond pas !");
+			System.out.println(login+" ne repond pas !");
 		}
 	}
 	
@@ -105,7 +106,7 @@ public class Authentification implements Runnable {
 		chemin = System.getProperty("user.dir");//Permet d'avoir le r�pertoire courant de l'utilisateur
 		
 		ArrayList<Client> lstClient = new ArrayList<>();
-		LoadSaveFile.getListFromFile(chemin+"/"+"src/khaliss_bank_project/fichiers"+"/"+"listeBanquiersClients.csv", lstClient);
+		LoadSaveFile.getListFromFile(chemin+"/"+"src\\khaliss_bank_project\\fichiers"+"/"+"listeBanquiersClients.csv", lstClient);
 		return lstClient;
 	}
 	
@@ -145,7 +146,7 @@ public class Authentification implements Runnable {
 		lgMdp = a.affListeLoginMdp(login);
 		try{
 			mdp_recup = lgMdp.get(0);
-			//System.out.println("Le mot de passe r�cup�r� est : "+mdp);
+			//System.out.println("Le mot de passe recupere est : "+mdp);
 			connexion = CryptageMdpMD5.CryptageMdp(mdp, mdp_recup);
 			
 		}catch(IndexOutOfBoundsException e){

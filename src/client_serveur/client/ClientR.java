@@ -3,7 +3,7 @@ package client_serveur.client;
 import java.io.*;
 import java.net.*;
 
-//Client Réseau
+//Client Reseau
 public class ClientR {
 	
 	public static Socket socket = null;
@@ -13,8 +13,8 @@ public class ClientR {
 		try {
 			
 			System.out.println("Demande de connexion");
-			socket = new Socket("127.0.0.1", 2018); // ou ("localhost", 2018) pour faire les tests
-			System.out.println("Connexion etablie avec le serveur !");// Si le message s'affiche c'est que je suis connect�
+			socket = new Socket("10.188.48.36", 2018); // ou ("localhost", 2018) pour faire les tests
+			System.out.println("Connexion etablie avec le serveur !");// Si le message s'affiche c'est que je suis connecte
 			System.out.println("┌─────────────────────────────────────────────────┐");
 			System.out.println("│             WELCOME TO KHALISS BANK             │");
 			System.out.println("├─────────────────────────────────────────────────┤");
@@ -26,10 +26,10 @@ public class ClientR {
 			
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
-			System.out.println("Impossible de se connecter � l'adresse "+socket.getLocalAddress());
+			System.out.println("Impossible de se connecter a l'adresse "+socket.getLocalAddress());
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println("Aucun serveur � l'�coute du port "+socket.getLocalPort());
+			System.out.println("Aucun serveur a l'ecoute du port "+socket.getLocalPort());
 		}
 		
 	}

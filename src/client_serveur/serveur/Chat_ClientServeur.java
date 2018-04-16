@@ -35,7 +35,7 @@ public class Chat_ClientServeur implements Runnable {
 		
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println(login +"s'est d�connect� ");
+			System.out.println(login +"s'est deconnecte ");
 		}
 	}
 }

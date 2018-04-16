@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+import divers.*;
+
 public class Emission implements Runnable {
 
 	private PrintWriter output;
@@ -17,9 +19,10 @@ public class Emission implements Runnable {
 	public void run() {
 		
 	  sc = new Scanner(System.in);
-	  
+	  Menu m = new Menu();
+		
 	  while(true){
-		    System.out.println("Votre message :");
+			System.out.println("Votre message :");
 			message = sc.nextLine();
 			output.println(message);
 		    output.flush();

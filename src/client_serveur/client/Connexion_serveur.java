@@ -42,7 +42,7 @@ public class Connexion_serveur implements Runnable {
 			output.flush();
 			
 			if(input.readLine().equals("connecte")){
-				System.out.println("Je suis connect� "); 
+				System.out.println("Je suis connecte "); 
 				connect = true;
 			}
 			
@@ -58,7 +58,7 @@ public class Connexion_serveur implements Runnable {
 		
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println("Le serveur ne r�pond plus ");
+			System.out.println("Le serveur ne repond plus ");
 		}
 	}
 }

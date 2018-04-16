@@ -8,7 +8,7 @@ public class Serveur {
 	//Pour la methode getIpLocale();
 	public static InetAddress m_localAddress;
 	
-	//Pour la méthode  ServerMethode()
+	//Pour la mï¿½thode  ServerMethode()
 	public static ServerSocket m_socketServeur = null;
 	public Socket m_socketDuServeur;
 	public static  Thread m_t;
@@ -30,14 +30,14 @@ public class Serveur {
 		
 		try {
 			m_socketServeur = new ServerSocket(2018);
-			System.out.println("Le serveur est à l'écoute du port : "+m_socketServeur.getLocalPort());
+			System.out.println("Le serveur est a l'ecoute du port: "+m_socketServeur.getLocalPort());
 		
 			m_t = new Thread(new Accepter_connexion_clients(m_socketServeur));
 			m_t.start();
 			
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println("Le port "+m_socketServeur.getLocalPort()+" est déjà utilisé !");
+			System.out.println("Le port "+m_socketServeur.getLocalPort()+" est deja utilise !");
 		}
 	}
 }
