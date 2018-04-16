@@ -33,8 +33,4 @@ public class ClientR {
 		}
 		
 	}
-
-	public static void main(String[] args) {
-		LancerClient();
-	}
 }

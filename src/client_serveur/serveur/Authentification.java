@@ -65,9 +65,6 @@ public class Authentification implements Runnable {
 				output.println("Erreur, mauvais login ou mot de passe !"); output.flush();
 			}
 		 }
-			//t2 = new Thread(new Chat_ClientServeur(socket,login));
-			//t2.start();
-			
 			//t2 = new Thread(new Aff_Menu(socket));
 			//t2.start();
 			
@@ -126,7 +123,6 @@ public class Authentification implements Runnable {
 					if(detect1 == 1) {
 						lgMdp.add(m_listeLoginMdp.get(3).getValue(i));
 					}
-					//System.out.print(String.format("%-35s",m_listeLoginMdp.get(j).getValue(i)));
 					detect=1;
 				}
 			}
@@ -146,7 +142,6 @@ public class Authentification implements Runnable {
 		lgMdp = a.affListeLoginMdp(login);
 		try{
 			mdp_recup = lgMdp.get(0);
-			//System.out.println("Le mot de passe recupere est : "+mdp);
 			connexion = CryptageMdpMD5.CryptageMdp(mdp, mdp_recup);
 			
 		}catch(IndexOutOfBoundsException e){
