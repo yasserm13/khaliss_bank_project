@@ -19,17 +19,10 @@ public class MainKB {
 		//System.out.println(c2);
 		//System.out.println();
 		
-		String mdp;
-		ArrayList<String> lgMdp = new ArrayList<String>();
-		
-		Authentification a = new Authentification();
-		lgMdp=a.affListeLoginMdp("ououi");
-		mdp = lgMdp.get(0);
-		System.out.println("Le mot de passe récupéré est "+mdp);
-		
 		// Cryptage MD5	
-		CryptageMdpMD5.CryptageMdp("toto", c2.getM_motDePasse());
+		CryptageMdpMD5.CryptageMdp("moussa","639583119441bd84c373c314afd2814d");
 		*/
+		
 		//Test client serveur
 		//Serveur.getIpLocale();
 		Serveur.LancerServeur();

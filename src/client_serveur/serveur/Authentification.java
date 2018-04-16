@@ -54,15 +54,15 @@ public class Authentification implements Runnable {
 				output.println("connecte");
 				System.out.println(login +" vient de se connecter ");
 				
-				System.out.println("Il est le client numero "+nbClient+" connecté !");
+				System.out.println("Il est le client numero "+nbClient+" connectï¿½ !");
 				nbClient ++;
 				
 				output.flush();
 				authentifier = true;	
 			}
 			else {
-				output.println("erreur"); output.flush();
-				output.println("erreur de login"); output.flush();
+				//output.println("erreur"); output.flush();
+				output.println("Mauvais login ou mot de passe !"); output.flush();
 			}
 		 }
 			t2 = new Thread(new Chat_ClientServeur(socket,login));
@@ -70,7 +70,7 @@ public class Authentification implements Runnable {
 			
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println(login+" ne répond pas !");
+			System.out.println(login+" ne rï¿½pond pas !");
 		}
 	}
 	
@@ -85,12 +85,11 @@ public class Authentification implements Runnable {
 				Scanner sc = new Scanner(new File(chemin+"/"+"src\\client_serveur\\serveur"+"/"+"clients.txt"));//cible to do : listeBanquiersClients.csv
 			
 				while(sc.hasNext()){
-					if(sc.nextLine().equals(login+" "+mdp)){ //on suppose que le fichier se presente comme ça : (login mdp) to do
+					if(sc.nextLine().equals(login+" "+mdp)){ //on suppose que le fichier se presente comme ï¿½a : (login mdp) to do
 	              	  connexion=true;
 	              	  break;
 					}
 	             }
-			
 		} catch (FileNotFoundException e) {	
 			e.printStackTrace();
 			System.out.println("Le fichier n'existe pas !");
@@ -101,10 +100,10 @@ public class Authentification implements Runnable {
 	//adaptation pour lire dans notre fichier csv
 	public static ArrayList<Client> LloginMdp(){
 		String chemin;
-		chemin = System.getProperty("user.dir");//Permet d'avoir le répertoire courant de l'utilisateur
+		chemin = System.getProperty("user.dir");//Permet d'avoir le rï¿½pertoire courant de l'utilisateur
 		
 		ArrayList<Client> lstClient = new ArrayList<>();
-		LoadSaveFile.getListFromFile(chemin+"/"+"src\\khaliss_bank_project\\fichiers"+"/"+"listeBanquiersClients.csv", lstClient);
+		LoadSaveFile.getListFromFile(chemin+"/"+"src/khaliss_bank_project/fichiers"+"/"+"listeBanquiersClients.csv", lstClient);
 		return lstClient;
 	}
 	
@@ -137,16 +136,20 @@ public class Authentification implements Runnable {
 	private static boolean isValid2(String login, String mdp) {
 		
 		boolean connexion = false;
-		String mdp_recup;
+		String mdp_recup = null;
 		ArrayList<String> lgMdp = new ArrayList<String>();
 		
 		Authentification a = new Authentification();
-		lgMdp=a.affListeLoginMdp(login);
-		
-		mdp_recup = lgMdp.get(0);
-		
-		//System.out.println("Le mot de passe récupéré est : "+mdp);
-		connexion = CryptageMdpMD5.CryptageMdp(mdp, mdp_recup);
-		return connexion;
+		lgMdp = a.affListeLoginMdp(login);
+		try{
+			mdp_recup = lgMdp.get(0);
+			//System.out.println("Le mot de passe rï¿½cupï¿½rï¿½ est : "+mdp);
+			connexion = CryptageMdpMD5.CryptageMdp(mdp, mdp_recup);
+			
+		}catch(IndexOutOfBoundsException e){
+			System.out.println("Le login ou le mot de passe du client n'est pas bon !");
+			connexion = CryptageMdpMD5.CryptageMdp(mdp, mdp_recup);
+		}	
+		return connexion;	
 	}
 }
