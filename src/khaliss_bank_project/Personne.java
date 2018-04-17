@@ -15,7 +15,7 @@ public abstract class Personne {
 	public ArrayList<Client> m_listeCompte;
 	
 	public Personne() { //constructeur par defaut
-		this.m_nom =UNKNOWN;
+		this.m_nom = UNKNOWN;
 		this.m_prenom = UNKNOWN;
 		this.m_mail = UNKNOWN;
 		this.m_motDePasse = UNKNOWN;
@@ -74,7 +74,7 @@ public abstract class Personne {
 		ArrayList<Integer> tab = new ArrayList<Integer>();
 		tab = affListeCompte(mail);
 		do {
-			System.out.println("Saisir le numéro de la ligne correspondant au compte à supprimer");
+			System.out.println("Saisir le numï¿½ro de la ligne correspondant au compte ï¿½ supprimer");
 			ligneNumCompteToDelete = (int)LectureClavier.saisirDouble();
 		    
 			for(int i = 0; i < tab.size(); i++)
@@ -84,8 +84,8 @@ public abstract class Personne {
 		}while(num == 0);
 		
 		if(num == 1) {
-			System.out.println("La Ligne: "+ligneNumCompteToDelete+" est selectionnée pour être supprimée");
-			System.out.println("Le compte est supprimé");
+			System.out.println("La Ligne: "+ligneNumCompteToDelete+" est selectionnï¿½e pour ï¿½tre supprimï¿½e");
+			System.out.println("Le compte est supprimï¿½");
 			return true;
 		}else {
 			
@@ -112,9 +112,9 @@ public abstract class Personne {
     	
     	do {
 	    	System.out.println("A-	Livret A\n" + 
-	    			"B-   	Livret de développement durable et solidaire (LDDS)\n" + 
+	    			"B-   	Livret de dï¿½veloppement durable et solidaire (LDDS)\n" + 
 	    			"C-   	Livret jeune\n" + 
-	    			"D-   	Plan épargne logement (PEL)\n");
+	    			"D-   	Plan ï¿½pargne logement (PEL)\n");
 	    	choix = LectureClavier.saisirCaractere();
     	}while(choix != 'A' && choix != 'B' && choix != 'C' && choix != 'D');
     	
@@ -125,7 +125,7 @@ public abstract class Personne {
     			newCompte.setM_typeCompte(typeDeCompte);
 	    		break;
 	    	case 'B':
-	    		typeDeCompte="Livret_de_développement_durable_et_solidaire_(LDDS)";
+	    		typeDeCompte="Livret_de_dï¿½veloppement_durable_et_solidaire_(LDDS)";
 	    		newCompte.setM_typeCompte(typeDeCompte);
 	    		break;
 	    	case 'C':
@@ -133,7 +133,7 @@ public abstract class Personne {
 	    		newCompte.setM_typeCompte(typeDeCompte);
 	    		break;
 	    	case 'D':
-	    		typeDeCompte="Plan_épargne_logement_(PEL)";
+	    		typeDeCompte="Plan_ï¿½pargne_logement_(PEL)";
 	    		newCompte.setM_typeCompte(typeDeCompte);
 	    		break;
 	    	default: System.out.println("Choix_non_existant");
@@ -151,7 +151,7 @@ public abstract class Personne {
     
 	public ArrayList<Client> LClientCompte(){
 		String chemin;
-		chemin = System.getProperty("user.dir");//Permet d'avoir le répertoire courant de l'utilisateur
+		chemin = System.getProperty("user.dir");//Permet d'avoir le rï¿½pertoire courant de l'utilisateur
 		ArrayList<Client> lstCompte = new ArrayList<>();
 		LoadSaveFile.getListFromFile(chemin+"/"+"src\\khaliss_bank_project\\fichiers"+"/"+"listeComptes.csv", lstCompte);
 		return lstCompte;
