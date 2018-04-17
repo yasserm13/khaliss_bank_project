@@ -26,6 +26,8 @@ public class MainKB {
 		//Test client serveur
 		//Serveur.getIpLocale();
 		//ClientR.LancerClient();
-		Serveur.LancerServeur();
+		//Serveur.LancerServeur();
+		Banquier b1 = new Banquier("MAREGA", "mamadou", "mamadou.marega@khaliss-bank.fr", "toto");
+		b1.affListeClient();
 	}
 }

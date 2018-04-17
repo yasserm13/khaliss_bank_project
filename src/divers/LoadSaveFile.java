@@ -11,9 +11,9 @@ public class LoadSaveFile {
         String[] names = null;
         
         try {
-            Scanner inputStream = new Scanner(file); //Flux d'entrée
+            Scanner inputStream = new Scanner(file); //Flux d'entrï¿½e
             String str = inputStream.next();
-            names = str.split(","); // On choisit la virgule comme séparateur
+            names = str.split(","); // On choisit la virgule comme sï¿½parateur
             int nbG = names.length; //Avoir le nombre de courbe
 
             ArrayList<String[]> lines = new ArrayList<>();// On stocke les lignes dans un objet ArrayList
@@ -36,7 +36,7 @@ public class LoadSaveFile {
             inputStream.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-			System.out.println("L'ouverture du fichier a échoué !");
+			System.out.println("L'ouverture du fichier a echoue !");
         }        
     }
     
@@ -44,20 +44,20 @@ public class LoadSaveFile {
 		PrintWriter fich;
 		
 		String chemin;
-		chemin = System.getProperty("user.dir");//Permet d'avoir le répertoire courant de l'utilisateur
+		chemin = System.getProperty("user.dir");//Permet d'avoir le rï¿½pertoire courant de l'utilisateur
 		
     	try {
-				File fichier = new File(chemin+"/"+"src\\khaliss_bank_project\\fichiers","listeBanquiersClients.csv");//Créer un fichier dans le répertoire donné en paramètre
+				File fichier = new File(chemin+"/"+"src\\khaliss_bank_project\\fichiers","listeBanquiersClients.csv");//Crï¿½er un fichier dans le rï¿½pertoire donnï¿½ en paramï¿½tre
 
 				if(fichier.exists() && fichier.isFile()){
-					fich = new PrintWriter(new BufferedWriter(new FileWriter(fichier, true))); //true c'est elle qui permet d'écrire à la suite des données enregistrées et non de les remplacer
-					System.out.println("le fichier existe déjà");
+					fich = new PrintWriter(new BufferedWriter(new FileWriter(fichier, true))); //true c'est elle qui permet d'ï¿½crire ï¿½ la suite des donnï¿½es enregistrï¿½es et non de les remplacer
+					System.out.println("le fichier existe deja");
 					fich.println(clBanque.getM_nom()+","+clBanque.getM_prenom()+","+clBanque.getM_mail()+","+clBanque.getM_addDomicile()+","+clBanque.getM_nomConseiller());
 					fich.close();
 				
 				} else {
-					fich = new PrintWriter(new BufferedWriter(new FileWriter(fichier, true))); //true c'est elle qui permet d'écrire à la suite des données enregistrées et non de les remplacer
-					System.out.println("le fichier vient d'être créé");
+					fich = new PrintWriter(new BufferedWriter(new FileWriter(fichier, true))); //true c'est elle qui permet d'ï¿½crire ï¿½ la suite des donnï¿½es enregistrï¿½es et non de les remplacer
+					System.out.println("le fichier vient d'etre cree");
 					fich.println("Nom,Prenom,Adresse_Email,Mot_De_Passe_Crypte,Adresse_Domicile,Numero__De_Compte,Nom_Conseiller");
 					fich.println(clBanque.getM_nom()+","+clBanque.getM_prenom()+","+clBanque.getM_mail()+","+clBanque.getM_motDePasse()+","+clBanque.getM_addDomicile()+","+clBanque.getM_numCompte()+","+clBanque.getM_nomConseiller());
 					fich.close();
@@ -65,7 +65,7 @@ public class LoadSaveFile {
 		
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			System.out.println("L'ouverture du fichier a échoué !");
+			System.out.println("L'ouverture du fichier a echoue !");
 		} catch (IOException e) {
 			e.printStackTrace();
 		  }
@@ -75,20 +75,20 @@ public class LoadSaveFile {
     	
 		PrintWriter fich;
 		String chemin;
-		chemin = System.getProperty("user.dir");//Permet d'avoir le répertoire courant de l'utilisateur
+		chemin = System.getProperty("user.dir");//Permet d'avoir le rï¿½pertoire courant de l'utilisateur
 		
     	try {
-				File fichier = new File(chemin+"/"+"src\\khaliss_bank_project\\fichiers","listeComptes.csv");//Créer un fichier dans le répertoire donné en paramètre
+				File fichier = new File(chemin+"/"+"src\\khaliss_bank_project\\fichiers","listeComptes.csv");//Crï¿½er un fichier dans le rï¿½pertoire donnï¿½ en paramï¿½tre
 
 				if(fichier.exists() && fichier.isFile()){
-					fich = new PrintWriter(new BufferedWriter(new FileWriter(fichier, true))); //true c'est elle qui permet d'écrire à la suite des données enregistrées et non de les remplacer
-					System.out.println("le fichier existe déjà");
+					fich = new PrintWriter(new BufferedWriter(new FileWriter(fichier, true))); //true c'est elle qui permet d'ï¿½crire ï¿½ la suite des donnï¿½es enregistrï¿½es et non de les remplacer
+					System.out.println("le fichier existe deja");
 					fich.println(compte.getM_mailTitulaire()+","+compte.getM_typeCompte()+","+compte.getM_numCompte()+","+compte.getM_solde());
 					fich.close();
 				
 				} else {
-					fich = new PrintWriter(new BufferedWriter(new FileWriter(fichier, true))); //true c'est elle qui permet d'écrire à la suite des données enregistrées et non de les remplacer
-					System.out.println("le fichier vient d'être créé");
+					fich = new PrintWriter(new BufferedWriter(new FileWriter(fichier, true))); //true c'est elle qui permet d'ï¿½crire ï¿½ la suite des donnï¿½es enregistrï¿½es et non de les remplacer
+					System.out.println("le fichier vient d'etre cree");
 					fich.println("Adresse_Email,Type_de_compte,Numero_De_Compte,Solde");
 					fich.println(compte.getM_mailTitulaire()+","+compte.getM_typeCompte()+","+compte.getM_numCompte()+","+compte.getM_solde());
 					fich.close();
@@ -96,9 +96,38 @@ public class LoadSaveFile {
 		
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			System.out.println("L'ouverture du fichier a échoué !");
+			System.out.println("L'ouverture du fichier a echoue !");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+    }
+    
+    public static boolean deleteLine(String fileName, int lineNumber) {
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
+             
+            PrintWriter fich;
+            
+            StringBuffer sb = new StringBuffer(); 
+            String line;    
+            int nbLinesRead = 0;       
+            while ((line = reader.readLine()) != null) {
+            	System.out.println(line);
+                if (nbLinesRead != lineNumber) {
+                    sb.append(line + "\n");
+                }
+                nbLinesRead++;
+            }
+            reader.close();
+            
+            fich = new PrintWriter(new BufferedWriter(new FileWriter(fileName)));
+            fich.print(sb);
+            fich.close();
+
+ 
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 }
