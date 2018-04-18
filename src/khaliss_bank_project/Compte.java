@@ -19,10 +19,11 @@ public class Compte {
 		this.m_solde = 0;
 	} 
 	
-	public Compte(int nc, String mt, String tc) {
+	public Compte(String mt, String tc, int nc, double solde) {
 		this.m_numCompte = nc;
 		this.m_mailTitulaire = mt;
 		this.m_typeCompte = tc;
+		this.m_solde = solde;
 	}
 	
 	public int getM_numCompte() {

@@ -172,6 +172,9 @@ public class Menu implements InterfaceKB{
 		newClient.openCompte(p_mail);
 		LoadSaveFile.setListToFile(newClient);
 		
+		System.out.println("\t_________________________________________________________________________");
+		System.out.println("\n\t****Bienvenu Chez Khaliss Bank!\n\tLet Us Make Your Money Great Again****\n");
+		System.out.println("\t_________________________________________________________________________");
 		
 		return newClient;
 	}

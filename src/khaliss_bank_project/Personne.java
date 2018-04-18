@@ -69,9 +69,70 @@ public abstract class Personne {
 	public abstract boolean modifInfoPerso(int infoAmodif); //methode virtuel a implementer dans les classes filles
 		
 	
-	public boolean deleteCompte(int numCompte) {
-		//A faire
-		return true;
+	public boolean deleteCompte(String p_mail) { //Verifie l'existance d'un compte
+		int num=0;
+		int ligneNumCompteToDelete = 999999999;
+		ArrayList<Integer> tab = new ArrayList<Integer>();
+    	String chemin;
+		chemin = System.getProperty("user.dir");
+		
+		tab = selectToDelete(p_mail);
+		if(!tab.isEmpty()) {
+			do {
+				
+				System.out.println("Saisir le numéro de la ligne correspondant au compte à supprimer");
+				ligneNumCompteToDelete = (int)LectureClavier.saisirDouble();
+			    
+				for(int i = 0; i < tab.size(); i++)
+			      if(ligneNumCompteToDelete == tab.get(i))
+			    	  num = 1;
+				
+			}while(num == 0);
+		}else {
+			System.out.println("Il n'y a pas de compte associé à ce client !");
+		}
+		if(num == 1) {
+			System.out.println("La Ligne: "+ligneNumCompteToDelete+" est selectionnée pour être supprimée");
+			LoadSaveFile.deleteLine(chemin+"/"+"src\\khaliss_bank_project\\fichiers\\listeComptes.csv",ligneNumCompteToDelete);
+			System.out.println("Le compte est supprimé");
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	
+  
+    
+	
+	public ArrayList<Integer> selectToDelete(String c_mail) {
+		m_listeCompte = listeComptesKB();
+		int detect = 0 ;
+		int detect1 = 0 ;
+		int count=0;
+		ArrayList<Integer> tab = new ArrayList<Integer>(0);
+		
+		for(int i=0; i<m_listeCompte.get(0).getNbValues(); ++i ) {
+			detect1=0;
+			for(int j=0;j<m_listeCompte.size(); ++j) {
+				//System.out.print(i+"\t");
+				detect=0;
+				if (c_mail.equals(m_listeCompte.get(0).getValue(i))){
+					detect1++;
+					if(detect1 == 1) {
+						count = i+1;
+						tab.add(count);
+						System.out.print(count+"\t");//permet l'identification de la ligne
+					}
+					System.out.print(String.format("%-35s",m_listeCompte.get(j).getValue(i)));
+					detect=1;
+				}
+			}
+			if(detect == 1)
+				System.out.println("");						
+		}
+		
+		return tab;
 	}
 	
     public void openCompte(String p_mailClient){
@@ -135,44 +196,24 @@ public abstract class Personne {
 		ArrayList<String> listeComptes = new ArrayList<>();
 	}
 	
-	public ArrayList<Client> getListeComptesClient(String p_mail)
-	{
-		ArrayList<Client> listeComptes = new ArrayList<>();
-		m_listeCompte = listeComptesKB();
+	public void afficheListeComptesClient(String p_mail)
+	{		
+		System.out.println("type de compte:"+ "						  Numéro de compte:"+"					 Sole:");
 		
-		for(int i=0; i<m_listeCompte.get(0).getNbValues(); ++i ) 
+		for(int i=0; i<m_listeCompte.get(0).getNbValues(); ++i) 
 		{
-			
-			for(int j=0;j<m_listeCompte.size(); ++j) 
+			if(m_listeCompte.get(0).getValue(i).equals(p_mail))
 			{
-				if(m_listeCompte.get(j).getValue(i).equals(p_mail))
+				System.out.print(i+1+": ");
+				
+				for(int j=1;j<m_listeCompte.size(); ++j) 
 				{
-					listeComptes.add(m_listeCompte.get(j));
+					System.out.print(String.format("%-55s",m_listeCompte.get(j).getValue(i)));
 				}
 				
-			}
-		
-		}
-		
-		return listeComptes;
-	}
-	
-	public void afficheListeComptesClient(String p_mail)
-	{
-		ArrayList<Client> listeComptes = new ArrayList<>();
-		
-		listeComptes = getListeComptesClient(p_mail);
-		
-		
-		for(int i=0; i<listeComptes.get(0).getNbValues(); ++i) 
-		{
-			
-			for(int j=0;j<listeComptes.size(); ++j) 
-			{
-				System.out.print(String.format("%-55s",m_listeCompte.get(j).getValue(i)));
+				System.out.println("");
 			}
 			
-			System.out.println("");
 		}
 	}
 
@@ -181,24 +222,71 @@ public abstract class Personne {
 	
 	public boolean sendArgent(String p_mail) {
 		
-		ArrayList<Integer> listeComptesClient = new ArrayList<Integer>();
 		int choix;
+		String numeroCompteCredit = new String("");
+		double montantVirement = 0, newSoldeDebit = 0, newSoldeCredit = 0;
+		
+		m_listeCompte = listeComptesKB();
 		
 		System.out.println("________________________________________________________________");
 		
-		do {
-		System.out.println("Selectionner le compte à Débiter:");
-		afficheListeComptesClient(p_mail);
-		choix = (int)LectureClavier.saisirDouble();
-		}while(choix < 0 || choix > listeComptesClient.size());
-		
-		System.out.println("Saisir le numéro du compte à créditer :");
-		choix = (int)LectureClavier.saisirDouble();
-		
-		for(int i=0; i<listeComptesClient.size(); i++)
+		do 
 		{
 			
+			System.out.println("Selectionner le compte à Débiter:");
+			afficheListeComptesClient(p_mail);
+			choix = (int)LectureClavier.saisirDouble();
+		
+			if(choix < 0 || choix==0 || choix > m_listeCompte.size()+1 || !m_listeCompte.get(0).getValue(choix-1).equals(p_mail))
+			{
+				System.out.println("Le compte saisie ne correspond à aucun des comptes proposés!!");
+			}
+		
+		}while(choix < 0 || choix==0 || choix > m_listeCompte.size()+1 ||!m_listeCompte.get(0).getValue(choix-1).equals(p_mail));
+		
+		 
+		
+		System.out.println("Vous avez selectionné le compte numéro: "+m_listeCompte.get(2).getValue(choix-1) + "\n");
+		
+		System.out.println("Saisir le numéro du compte à créditer :");
+		numeroCompteCredit = LectureClavier.saisirPhrase();
+		
+		System.out.println("Saisir le montant du virement :");
+		montantVirement = LectureClavier.saisirDouble(); //gérer le découvert
+		
+		newSoldeDebit = Double.parseDouble(m_listeCompte.get(3).getValue(choix-1)) - montantVirement;
+		
+		System.out.println("\nVotre virement de "+montantVirement  +"€ vres le compte: "+ numeroCompteCredit+ " a été effectuer avec succès!! \nVotre nouveau solde est de :\n"+newSoldeDebit+"€");
+		
+		Compte newCompteDebit  = new Compte(m_listeCompte.get(0).getValue(choix-1),m_listeCompte.get(1).getValue(choix-1),Integer.parseInt(m_listeCompte.get(2).getValue(choix-1)),newSoldeDebit);
+		LoadSaveFile.setCompteToFile(newCompteDebit);
+		LoadSaveFile.deleteLine(System.getProperty("user.dir")+"/"+"src\\khaliss_bank_project\\fichiers\\listeComptes.csv",choix);
+		
+		m_listeCompte = listeComptesKB();
+		
+		for(int i=0; i<m_listeCompte.get(0).getNbValues(); ++i )
+		{
+			
+				if(numeroCompteCredit.equals(m_listeCompte.get(2).getValue(i)))
+				{
+					newSoldeCredit = Double.parseDouble(m_listeCompte.get(3).getValue(i)) + montantVirement;
+					
+					Compte newCompteCredit  = new Compte(m_listeCompte.get(0).getValue(i),m_listeCompte.get(1).getValue(i),Integer.parseInt(m_listeCompte.get(2).getValue(i)),newSoldeCredit);
+					
+					LoadSaveFile.deleteLine(System.getProperty("user.dir")+"/"+"src\\khaliss_bank_project\\fichiers\\listeComptes.csv",i+1);
+					
+					LoadSaveFile.setCompteToFile(newCompteCredit);
+					
+					
+					
+					break;
+				}
+			
 		}
+		
+		
+		
+		
 		
 		return true;
 	}

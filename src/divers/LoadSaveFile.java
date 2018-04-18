@@ -51,7 +51,6 @@ public class LoadSaveFile {
 
 				if(fichier.exists() && fichier.isFile()){
 					fich = new PrintWriter(new BufferedWriter(new FileWriter(fichier, true))); //true c'est elle qui permet d'écrire à la suite des données enregistrées et non de les remplacer
-					System.out.println("le fichier existe déjà");
 					fich.println(clBanque.getM_nom()+","+clBanque.getM_prenom()+","+clBanque.getM_mail()+","+clBanque.getM_motDePasse()+","+clBanque.getM_addDomicile()+","+clBanque.getM_nomConseiller());
 					fich.close();
 				
@@ -102,6 +101,55 @@ public class LoadSaveFile {
 			e.printStackTrace();
 		  }
 		  }
+    
+    public static boolean deleteLine(String fileName, int lineNumber) {
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
+             
+            PrintWriter fich;
+            
+            StringBuffer sb = new StringBuffer(); 
+            String line;    
+            int nbLinesRead = 0;       
+            while ((line = reader.readLine()) != null) {
+            	//System.out.println(line);
+                if (nbLinesRead != lineNumber) {
+                    sb.append(line + "\n");
+                }
+                nbLinesRead++;
+            }
+            reader.close();
+            
+            fich = new PrintWriter(new BufferedWriter(new FileWriter(fileName)));
+            fich.print(sb);
+            fich.close();
+
  
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+ 
+    public static void setCompteToFile(Compte newCompte)
+    {
+    	PrintWriter fich;
+		
+		String chemin;
+		chemin = System.getProperty("user.dir");//Permet d'avoir le répertoire courant de l'utilisateur
+    
+    	File fichier = new File(chemin+"/"+"src\\khaliss_bank_project\\fichiers","listeComptes.csv");//Créer un fichier dans le répertoire donné en paramètre
+
+		if(fichier.exists() && fichier.isFile()){
+			try {
+				fich = new PrintWriter(new BufferedWriter(new FileWriter(fichier, true)));
+				fich.println(newCompte.getM_mailTitulaire()+","+newCompte.getM_typeCompte()+","+newCompte.getM_numCompte()+","+newCompte.getM_solde());
+				fich.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+			} //true c'est elle qui permet d'écrire à la suite des données enregistrées et non de les remplacer
+			
+		}
+    }
 
 }
