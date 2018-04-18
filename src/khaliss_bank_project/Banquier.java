@@ -11,6 +11,11 @@ public class Banquier extends Personne {
 		super ();
 	}; 
 	
+	public Banquier(String N) {
+		
+		super(N);
+	}
+	
 	public Banquier(String N,String P, String M, String MDP) { //constructeur 2
 		super (N,P,M,MDP);
 	}; 

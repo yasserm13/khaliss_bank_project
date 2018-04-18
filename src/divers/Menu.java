@@ -5,12 +5,16 @@ import java.net.Socket;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
-
+import client_serveur.serveur.Authentification;
 import khaliss_bank_project.*;
 
 public class Menu implements InterfaceKB{
 	private BufferedReader br;
 	private Socket socket;
+	public ArrayList<Client> m_listeLoginMdp;
+	
+	
+	public String p_mail;
 	
 	public Menu() { //constructeur par defaut
         this.br = new BufferedReader (new InputStreamReader (System.in));
@@ -38,16 +42,18 @@ public class Menu implements InterfaceKB{
 		System.out.println("│             WELCOME TO KHALISS BANK             │");
 		System.out.println("├─────────────────────────────────────────────────┤");
 		System.out.println("│                                                 │");
-		System.out.println("│  1: Fonction 1                                  │");
-		System.out.println("│  2: Fonction 2                                  │");
-		System.out.println("│  3: Fonction 3                                  │");
+		System.out.println("│  1: Modifier mes informations personnelles      │");
+		System.out.println("│  2: Afficher ma liste de clients			      │");
+		System.out.println("│  3: Ouvrir un nouveau compte client             │");
+		System.out.println("│  4: Effectuer un virement d'un compte client    │");
+		System.out.println("│  5: Supprimer un compte client                  │");
 		System.out.println("│  0: Quitter                                     │");
 		System.out.println("│                                                 │");
 		System.out.println("│*****************KHALISS BANK********************│");
 		System.out.println("│                                       [Banquier]│");
 		System.out.println("└─────────────────────────────────────────────────┘");
 		System.out.print("Votre choix : ");
-		choix = lireEntreeInt(0, 3);
+		choix = lireEntreeInt(0, 5);
 		return choix;
 	}
 	
@@ -58,20 +64,38 @@ public class Menu implements InterfaceKB{
 		System.out.println("│             WELCOME TO KHALISS BANK             │");
 		System.out.println("├─────────────────────────────────────────────────┤");
 		System.out.println("│                                                 │");
-		System.out.println("│  1: Fonction 1                                  │");
-		System.out.println("│  2: Fonction 2                                  │");
-		System.out.println("│  3: Fonction 3                                  │");
+		System.out.println("│  1: Modifier mes informations personnelles      │");
+		System.out.println("│  2: Afficher mes comptes                        │");
+		System.out.println("│  3: Effectuer un virement                       │");
+		System.out.println("│  4: Ouvrir un nouveau compte bancaire           │");
+		System.out.println("│  5: Supprimer un compte client                  │");
 		System.out.println("│  0: Quitter                                     │");
 		System.out.println("│                                                 │");
 		System.out.println("│*****************KHALISS BANK********************│");
 		System.out.println("│                                         [Client]│");
 		System.out.println("└─────────────────────────────────────────────────┘");
 		System.out.print("Votre choix : ");
-		choix = lireEntreeInt(0, 3);
+		choix = lireEntreeInt(0, 5);
 		return choix;
 	}
 	
-	private void menu_03() {
+	private int menu_03() {
+		int choix;
+		System.out.println("");
+		System.out.println("┌─────────────────────────────────────────────────┐");
+		System.out.println("│              WELCOME TO KHALISS BANK            │");
+		System.out.println("├─────────────────────────────────────────────────┤");
+		System.out.println("│  1: Login                                       │");
+		System.out.println("│                                                 │");
+		System.out.println("│*****************KHALISS BANK********************│");
+		System.out.println("│ [0]: Menu principal                             │");
+		System.out.println("└─────────────────────────────────────────────────┘");
+		System.out.print("Votre choix : ");
+		choix = lireEntreeInt(0, 1);
+		return choix;
+	}
+	
+	private void menu_04() {
 		int choix;
 		while (true) {
 			System.out.println("");
@@ -102,6 +126,82 @@ public class Menu implements InterfaceKB{
 		}
 	}
 	
+	private void menu_05() {
+		int choix;
+		while (true) {
+			System.out.println("");
+			System.out.println("┌─────────────────────────────────────────────────┐");
+			System.out.println("│              WELCOME TO KHALISS BANK            │");
+			System.out.println("├─────────────────────────────────────────────────┤");
+			System.out.println("│  1: Fonction 1                                  │");
+			System.out.println("│  2: Fonction 2                                  │");
+			System.out.println("│                                                 │");
+			System.out.println("│*****************KHALISS BANK********************│");
+			System.out.println("│ [0]: Menu principal                             │");
+			System.out.println("└─────────────────────────────────────────────────┘");
+			System.out.print("Votre choix : ");
+			choix = lireEntreeInt(0, 2);
+			switch (choix) {
+            case 0:
+            	demarrerB();
+                break;
+            case 1:
+            	System.out.println("Fonction 1");
+                break;
+            case 2: 
+            	System.out.println("Fonction 2");
+                break;
+            default:
+            	 System.out.println("Mauvais choix, recommencez !"); // Action par dÃ©faut en cas de mauvais choix
+			}
+		}
+	}
+	
+	public void demarrer() {
+        while (true) {
+            int choix = menu_03();
+            switch (choix) {
+                case 0:
+                	System.out.println("");
+                	System.out.println("Vous avez choisi de quitter le programme !");
+                	System.out.println("Le programme est termine.");
+                    System.exit(0);
+                    break;
+                case 1:
+                	//@mail
+        			System.out.println("Entrez votre adresse email : ");
+        			String email = new String(LectureClavier.saisirPhrase());
+        			p_mail = email;
+        			if(rechercheClient(email)) {
+        				//@mail
+        				String mdp;
+        				do {
+        				System.out.println("Entrez votre mot de passe : ");
+        			    mdp = new String(LectureClavier.saisirPhrase());
+        			
+        					
+        				}while(!isValid(email, mdp));	
+            			
+        			}else {
+        				System.out.println("\nVotre @mail est inconnu de notre BDD, création de votre compte: ");
+        				creerClient(email);
+        			}
+        			
+        			if (email.endsWith("khaliss-bank.fr")) {
+        				demarrerB();
+        				
+        			}else {
+        				int m2 = menu_02();
+        				demarrerC();
+        			}
+        			
+                    break;
+                default:
+                	System.out.println("Mauvais choix, recommencez !"); // Action par dÃ©faut en cas de mauvais choix
+            }
+        }
+    }
+	
 	public void demarrerB() {
         while (true) {
             int choix = menu_01();
@@ -113,13 +213,29 @@ public class Menu implements InterfaceKB{
                     System.exit(0);
                     break;
                 case 1:
-                	System.out.println("Fonction 1");
+                	System.out.println("Cette fonction est en cours de devellopement (2 mai)");
                     break;
                 case 2: 
-                	System.out.println("Fonction 2");
+                	System.out.println("Liste de clients :");
+                	System.out.println("Cette fonction est en cours de devellopement (2 mai)");
                     break;
+                    
                 case 3:
-                	menu_03();
+                	System.out.println("Ouvrir un nouveau compte client: ");
+                	System.out.println("Entrez  l'adresse email du nouveau client: ");
+        			String email = new String(LectureClavier.saisirPhrase());
+        			creerClient(email);
+                    break;
+                
+                case 4:
+                	System.out.println("Transferer de l'argent d'un compte client: ");
+                	System.out.println("Cette fonction est en cours de devellopement (2 mai)");
+                	
+                    break;
+                case 5:
+                	System.out.println("Supprimer un compte: ");
+                	System.out.println("Cette fonction est en cours de devellopement (2 mai)");
+                	
                     break;
                 default:
                 	System.out.println("Mauvais choix, recommencez !"); // Action par dÃ©faut en cas de mauvais choix
@@ -138,13 +254,24 @@ public class Menu implements InterfaceKB{
                     System.exit(0);
                     break;
                 case 1:
-                	System.out.println("Fonction 1");
+                	System.out.println("Cette fonction est en cours de devellopement (2 mai)");
                     break;
                 case 2: 
-                	System.out.println("Fonction 2");
+                	System.out.println("Liste des comptes:");
+                	Personne.afficheListeComptesClient(p_mail);
                     break;
                 case 3:
-                	System.out.println("Fonction 3");
+                	System.out.println("Effectuer un virement :");
+                	Personne.sendArgent(p_mail);
+                    break;
+                case 4:
+                	System.out.println("Ouvrir un nouveau compte bancaire:");
+                	Personne.openCompte(p_mail);
+                    break;
+                case 5:
+                	System.out.println("Supprimer un compte: ");
+                	System.out.println("Cette fonction est en cours de devellopement (2 mai)");
+                	
                     break;
                 default:
                 	System.out.println("Mauvais choix, recommencez !"); // Action par dÃ©faut en cas de mauvais choix
@@ -185,6 +312,9 @@ public class Menu implements InterfaceKB{
 		System.out.println("");
 		
 		newClient.openCompte(p_mail);
+		
+		//newClient.setM_nomConseiller("XX");
+		
 		LoadSaveFile.setListToFile(newClient);
 		
 		System.out.println("┌─────────────────────────────────────────────────┐");
@@ -234,5 +364,77 @@ public class Menu implements InterfaceKB{
 				
 	return nomBanquier;
 
+	}
+	
+	public boolean rechercheClient(String p_mail)
+	{		
+		String chemin;
+		chemin = System.getProperty("user.dir");//Permet d'avoir le r�pertoire courant de l'utilisateur
+		
+		ArrayList<Client> lstClient = new ArrayList<>();
+		LoadSaveFile.getListFromFile(chemin+"/"+"src\\khaliss_bank_project\\fichiers"+"/"+"listeBanquiersClients.csv", lstClient);
+		
+		for(int i=0; i<lstClient.get(0).getNbValues(); ++i) 
+		{
+			if(lstClient.get(2).getValue(i).equals(p_mail))
+			{
+				return true;
+			}
+			
+		}
+		return false;
+	}
+	
+	public static ArrayList<Client> LloginMdp(){
+		String chemin;
+		chemin = System.getProperty("user.dir");//Permet d'avoir le r�pertoire courant de l'utilisateur
+		
+		ArrayList<Client> lstClient = new ArrayList<>();
+		LoadSaveFile.getListFromFile(chemin+"/"+"src\\khaliss_bank_project\\fichiers"+"/"+"listeBanquiersClients.csv", lstClient);
+		return lstClient;
+	}
+	
+	public ArrayList<String> affListeLoginMdp(String c_mail) {
+		
+		m_listeLoginMdp = LloginMdp();
+		int detect = 0 ;
+		int detect1 = 0 ;
+		ArrayList<String> lgMdp = new ArrayList<String>();
+		
+		for(int i=0; i<m_listeLoginMdp.get(0).getNbValues(); ++i ) {
+			detect1=0;
+			for(int j=0;j<m_listeLoginMdp.size(); ++j) {
+				detect=0;
+				if (c_mail.equals(m_listeLoginMdp.get(2).getValue(i))){
+					detect1++;
+					if(detect1 == 1) {
+						lgMdp.add(m_listeLoginMdp.get(3).getValue(i));
+					}
+					detect=1;
+				}
+			}
+			if(detect == 1)
+				System.out.println("");						
+		}
+		return lgMdp;
+	}
+	
+	private static boolean isValid(String login, String mdp) {
+		
+		boolean connexion = false;
+		String mdp_recup = null;
+		ArrayList<String> lgMdp = new ArrayList<String>();
+		
+		Authentification a = new Authentification();
+		lgMdp = a.affListeLoginMdp(login);
+		try{
+			mdp_recup = lgMdp.get(0);
+			connexion = CryptageMdpMD5.CryptageMdp(mdp, mdp_recup);
+			
+		}catch(IndexOutOfBoundsException e){
+			System.out.println("Le login ou le mot de passe du client n'est pas bon !");
+			connexion = CryptageMdpMD5.CryptageMdp(mdp, mdp_recup);
+		}	
+		return connexion;	
 	}
 }
