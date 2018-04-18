@@ -166,7 +166,7 @@ public class Menu implements InterfaceKB{
 		newClient.setM_prenom(LectureClavier.saisirPhrase());
 		System.out.println("");
 		
-		System.out.println("Veuillez saisir la ville dans laquelle vous etes domicilie: ");
+		System.out.println("Veuillez saisir la ville dans laquelle vous êtes domicilié: ");
 		newClient.setM_addDomicile(LectureClavier.saisirPhrase());
 		System.out.println("");
 		
@@ -175,66 +175,64 @@ public class Menu implements InterfaceKB{
 		System.out.println("Veuillez saisir votre mot de passe: ");
 		try {
 				newClient.setM_motDePasse(CryptageMdpMD5.avoirMdpCrypte(LectureClavier.saisirPhrase()));	
-		} catch (NoSuchAlgorithmException e) {
+			} catch (NoSuchAlgorithmException e) {
 				e.printStackTrace();
-		} 
+			} 
 		
 		
 		System.out.println("Veuillez selectioner un conseiller bancaire: ");
 		newClient.setM_nomConseiller(selectBanquier());
 		System.out.println("");
-
+		
+		newClient.openCompte(p_mail);
 		LoadSaveFile.setListToFile(newClient);
+		
+		System.out.println("┌─────────────────────────────────────────────────┐");
+		System.out.println("│             WELCOME TO KHALISS BANK             │");
+		System.out.println("├─────────────────────────────────────────────────┤");
+		System.out.println("│    __$__                                        │");
+		System.out.println("│     ***Let Us Make Your Money Great Again***    │");
+		System.out.println("│                                                 │");
+		System.out.println("└─────────────────────────────────────────────────┘");
 		
 		return newClient;
 	}
-
+	
+	
+	
+	
 	public String selectBanquier()
+	
 	{	
-		String nomBanquier = new String(""); 
-		ArrayList<Client> list = new ArrayList<>();
-		ArrayList<String> listBanquiers = new ArrayList<>();
-		String khalissMail = new String("@khaliss-bank.fr");
-		
-		
-		list = Banquier.LClientBanquier();
-
-		for(int i=0; i<list.get(0).getNbValues(); ++i ) 
-		{
-			
-				if (list.get(2).getValue(i).endsWith(khalissMail))
-				{
-					listBanquiers.add(list.get(0).getValue(i));
+				String nomBanquier = new String("");
+				char choix;
+				
+				do {
+			    	System.out.println("A- Yasser MOUSSA\n" + 
+			    			"B- Mamadou MAREGA\n" + 
+			    			"C- El-Arif AHAMADA\n" );
+			    	choix = LectureClavier.saisirCaractere();
+		    	}while(choix != 'A' && choix != 'B' && choix != 'C');
+		    	
+		    	switch (choix){
+			    	case 'A':
+			    		System.out.println("\nVous avez choisi comme banquier: M.Yasser MOUSSA\nIl sera trés heureux de travailler avec vous.");
+			    		nomBanquier = "MOUSSA";
+			    		break;
+			    	case 'B':
+			    		System.out.println("\nVous avez choisi comme banquier: M.Mamadou MAREGA\nIl sera trés heureux de travailler avec vous.");
+			    		nomBanquier = "MAREGA";
+			    		break;
+			    	case 'C':
+			    		System.out.println("\nVous avez choisi comme banquier: El-Arif AHAMADA\nIl sera trés heureux de travailler avec vous.");
+			    		nomBanquier = "AHAMADA";
+			    		break;
+			    	default:
+			    		System.out.println("Choix_non_existant");
+			    		break;
 				}
-		}
 				
-		
-		int ok = 0;
-		
-		do
-		{
-			
-			for(int i=0; i<listBanquiers.size(); ++i)
-			{
-			System.out.println(i+1 + ": "+listBanquiers.get(i));
-			}
-		
-			int choix = LectureClavier.saisirInt();
-		
-			if(choix > listBanquiers.size())
-			{
-				System.out.println("votre saisie ne correspond a aucune des propositions. \n Veuillez Reesayer!!");
-			}
-			else
-			{
-				ok = 1;
-				
-				System.out.println("Vous avez choisi comme banquier: " + listBanquiers.get(choix-1) + "\nIl sera tres heureux de travailler avec vous.");
-				
-				nomBanquier = listBanquiers.get(choix-1) ;
-			}
-			
-		}while(ok != 1 );	
 	return nomBanquier;
+
 	}
 }

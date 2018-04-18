@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import client_serveur.client.Chat_ClientServeur;
 import divers.CryptageMdpMD5;
 import divers.LoadSaveFile;
 import divers.*;
@@ -20,6 +21,7 @@ public class Authentification implements Runnable {
 	private String login = "clients", mdp =  null;
 	public boolean authentifier = false;
 	public Thread t2;
+	private Scanner sc = null;
 	private int nbClient = 1;
 	public ArrayList<Client> m_listeLoginMdp;
 	
@@ -45,11 +47,24 @@ public class Authentification implements Runnable {
 			output.flush();
 			login = input.readLine();
 			
+			if(rechercheClient(login)) {
+				//@mail
+				output.println("Entrez votre mot de passe : ");
+				output.flush();
+				mdp = input.readLine();
+			}else {
+				Menu m = new Menu();
+				System.out.println("\nVotre @mail est inconnu de notre BDD, création de votre compte: ");
+				m.creerClient(login);
+			}
+			/*
 			//@mail
 			output.println("Entrez votre mot de passe : ");
 			output.flush();
 			mdp = input.readLine();
-
+			*/
+		
+			
 			if(isValid(login, mdp)){
 				
 				output.println("connecte");
@@ -125,5 +140,21 @@ public class Authentification implements Runnable {
 			connexion = CryptageMdpMD5.CryptageMdp(mdp, mdp_recup);
 		}	
 		return connexion;	
+	}
+	
+	public boolean rechercheClient(String p_mail)
+	{		
+		ArrayList<Client> listeCompte = new ArrayList<>();
+		listeCompte = Personne.listeComptesKB();
+		
+		for(int i=0; i<listeCompte.get(0).getNbValues(); ++i) 
+		{
+			if(listeCompte.get(0).getValue(i).equals(p_mail))
+			{
+				return true;
+			}
+			
+		}
+		return false;
 	}
 }

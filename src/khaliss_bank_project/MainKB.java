@@ -10,17 +10,15 @@ import client_serveur.client.*;
 /**
  * <b>MainKB est la classe principale du programme</b>
  * <p>
- * Voici les membres de la classe :
+ * Projet JAVA : KHALIS BANK
  * <ul>
- * <li>m_nom</li>
- * <li> m_prenom</li>
- * <li>m_mail</li>
- * <li>m_motDePasse</li>
- * <li>m_listeCompte</li>
+ * <li>Corps de texte</li>
+ * <li>Corps de texte</li>
+ * <li>Corps de texte</li>
  * </ul>
  * </p>
  * <p>
- * <b>Note : </b>Les classe qui heritres de Personne sont : Client et Banquier
+ * <b>Note : </b>Corps de texte
  * </p>
  * 
  * @author Mamadou, Yasser, El-Arif
@@ -29,11 +27,11 @@ import client_serveur.client.*;
 public class MainKB {
 
 	public static void main(String[] args) {
-		/*
-		Menu m = new Menu();
-		m.demarrer();
-		//m.creerClient("test");
 		
+		Menu m = new Menu();
+		m.demarrerB();
+		//m.creerClient("test");
+		/*
 		Client c2 = new Client("MOUSSA","Yasser","yasser.moussa@niama.fr","f71dbe52628a3f83a77ab494817525c6","Marseille","MOUSSA");
 		//System.out.println(c2);
 		//System.out.println();
@@ -48,7 +46,7 @@ public class MainKB {
 		//Test client serveur
 		//Serveur.getIpLocale();
 		//ClientR.LancerClient();
-		Serveur.LancerServeur();
+		//Serveur.LancerServeur();
 		
 	}
 }

@@ -41,7 +41,7 @@ public class Banquier extends Personne {
 			
 			for(int j=0;j<m_listeClient.size(); ++j) {
 				detect=0;
-				if (this.m_nom.equals(m_listeClient.get(6).getValue(i)))
+				if (this.m_nom.equals(m_listeClient.get(5).getValue(i)))
 				{
 					System.out.print(String.format("%-20s",m_listeClient.get(j).getValue(i)));
 					detect=1;

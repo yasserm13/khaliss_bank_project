@@ -1,12 +1,16 @@
 package khaliss_bank_project;
 
+import java.util.*;
+import divers.*;
+
 public class Compte {
 	
 	private String m_mailTitulaire;
-	private int m_numCompte; 
+	private int m_numCompte;
 	private String m_typeCompte;
 	private String m_historique; //Fichier
 	private double m_solde;
+	
 	
 	//Constructeur par defaut
 	public Compte() { 
@@ -16,10 +20,11 @@ public class Compte {
 		this.m_solde = 0;
 	} 
 	
-	public Compte(int nc, String mt, String tc) {
+	public Compte(String mt, String tc, int nc, double solde) {
 		this.m_numCompte = nc;
 		this.m_mailTitulaire = mt;
 		this.m_typeCompte = tc;
+		this.m_solde = solde;
 	}
 	
 	public int getM_numCompte() {
@@ -57,4 +62,17 @@ public class Compte {
 	public void affHistoriqueCompte(String nomFichier) { //a changer par un fichier
 		
 	}
+	
+	
+	public static boolean verifExistanceDeCompte(String mail, String typeCompte) { //Verifie l'existance d'un compte
+		int i=0;
+		
+		if(i == 0) {
+			
+			return true;
+		}else {
+			
+			return false;
+		}
+	}	
 }

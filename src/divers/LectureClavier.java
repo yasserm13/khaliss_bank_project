@@ -1,8 +1,10 @@
 package divers;
+
 import java.util.*;
 
-import java.io.*;
-
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class LectureClavier {
 	
@@ -14,24 +16,20 @@ public class LectureClavier {
 
 
 	public float lireEntreeFloat(int min, float max) {
-		float montant=0;
-		int erreur = 0; 
-	    	do{
-	    		erreur = 0;
+		float montant;
+	    	while (true) {
 	            try {
 	                montant = Float.parseFloat(br.readLine());
 	                if (montant >= min && montant <= max) {
 	                    break;
 	                }
 	            } catch (Exception e) {
-	              	erreur=1;
+	              	e.printStackTrace();
 	                System.out.println("Mauvaise valeur, veuillez saisir un reel !");
-	                }
-	    }while(erreur == 1);
+	        }
+	    }
 	    return montant;
 	}
-	
-	
 	
 	public static String saisirPhrase()
 	{
@@ -48,19 +46,20 @@ public class LectureClavier {
 		Scanner saisie = new Scanner(System.in);
 		
 		int Int = 0;
-				
+		
             try 
             {
-            	
             	Int = saisie.nextInt();
             	saisie.nextLine();
-            	
-            } catch (Exception e){
-           System.out.println("Mauvaise valeur, veuillez saisir un entier!");
-                Int = saisie.nextInt();
             }
+            catch (Exception e) 
+            {
+              	e.printStackTrace();
+                System.out.println("Mauvaise valeur, veuillez saisir un entier!");
+                Int=saisirInt();
+            }
+            
             return Int;
-    	
 	}
 	
 	
@@ -69,19 +68,26 @@ public class LectureClavier {
 	public static double saisirDouble()
 	{
 		Scanner saisie = new Scanner(System.in);
+		
 		double Double = 0;
-			
-			try {
-				Double = saisie.nextDouble();
+		
+            try 
+            {
+            	Double = saisie.nextDouble();
             	saisie.nextLine();
             	
-				}catch(InputMismatchException e) {
-					System.out.println("Mauvaise valeur, veuillez saisir un chiffre correct!");
-					Double = saisirDouble();
-				}
+            	return Double;
+            }
+            catch (Exception e) 
+            {
+              	e.printStackTrace();
+                System.out.println("Mauvaise valeur, veuillez saisir un entier!");
+                Double = saisirDouble();
+            }
+            return Double;
+    }
 	
-          return Double;
-    	}
+	
 	public static char saisirCaractere()
 	{
 	    Scanner sc = new Scanner(System.in);
@@ -89,11 +95,10 @@ public class LectureClavier {
 	    char reponse = '.';
 	    try
 	    {
-	        //System.out.println("Souhaitez-vous convertir une autre température ?(O/N)");
 	        str = sc.nextLine();
 	        str = str.toUpperCase();
 	        reponse = str.charAt(0);
-	        System.out.println("Lettre le charactère entré est: "+reponse);
+	        System.out.println("Vous avez saisi: "+reponse);
 	    } catch(StringIndexOutOfBoundsException e) {
 	    	System.out.println("Saisie non valide");
 	    	reponse = saisirCaractere();

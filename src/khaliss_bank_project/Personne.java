@@ -95,36 +95,70 @@ public abstract class Personne {
 	 
 	public abstract boolean modifInfoPerso(int infoAmodif); //methode virtuel a implementer dans les classes filles
 			
-	public boolean deleteCompte(String mail) { //Verifie l'existance d'un compte
+	public boolean deleteCompte(String p_mail) { //Verifie l'existance d'un compte
 		int num=0;
-		int ligneNumCompteToDelete;
+		int ligneNumCompteToDelete = 999999999;
 		ArrayList<Integer> tab = new ArrayList<Integer>();
-		tab = affListeCompte(mail);
-		do {
-			System.out.println("Saisir le numero de la ligne correspondant au compte � supprimer");
-			ligneNumCompteToDelete = (int)LectureClavier.saisirDouble();
-		    
-			for(int i = 0; i < tab.size(); i++)
-		      if(ligneNumCompteToDelete == tab.get(i))
-		    	  num = 1;
-			
-		}while(num == 0);
+    	String chemin;
+		chemin = System.getProperty("user.dir");
 		
+		tab = selectToDelete(p_mail);
+		if(!tab.isEmpty()) {
+			do {
+				
+				System.out.println("Saisir le numéro de la ligne correspondant au compte à supprimer");
+				ligneNumCompteToDelete = (int)LectureClavier.saisirDouble();
+			    
+				for(int i = 0; i < tab.size(); i++)
+			      if(ligneNumCompteToDelete == tab.get(i))
+			    	  num = 1;
+				
+			}while(num == 0);
+		}else {
+			System.out.println("Il n'y a pas de compte associé à ce client !");
+		}
 		if(num == 1) {
-			System.out.println("La Ligne: "+ligneNumCompteToDelete+" est selectionnee pour etre supprime");
-			System.out.println("Le compte est supprime");
+			System.out.println("La Ligne: "+ligneNumCompteToDelete+" est selectionnée pour être supprimée");
+			LoadSaveFile.deleteLine(chemin+"/"+"src\\khaliss_bank_project\\fichiers\\listeComptes.csv",ligneNumCompteToDelete);
+			System.out.println("Le compte est supprimé");
 			return true;
 		}else {
-			
-			
 			return false;
 		}
 	}
 	
 	
-	public boolean sendArgent(Compte cptDebit, Compte cptCredit) {
-		//A faire
-		return true;
+  
+    
+	
+	public ArrayList<Integer> selectToDelete(String c_mail) {
+		m_listeCompte = listeComptesKB();
+		int detect = 0 ;
+		int detect1 = 0 ;
+		int count=0;
+		ArrayList<Integer> tab = new ArrayList<Integer>(0);
+		
+		for(int i=0; i<m_listeCompte.get(0).getNbValues(); ++i ) {
+			detect1=0;
+			for(int j=0;j<m_listeCompte.size(); ++j) {
+				//System.out.print(i+"\t");
+				detect=0;
+				if (c_mail.equals(m_listeCompte.get(0).getValue(i))){
+					detect1++;
+					if(detect1 == 1) {
+						count = i+1;
+						tab.add(count);
+						System.out.print(count+"\t");//permet l'identification de la ligne
+					}
+					System.out.print(String.format("%-35s",m_listeCompte.get(j).getValue(i)));
+					detect=1;
+				}
+			}
+			if(detect == 1)
+				System.out.println("");						
+		}
+		
+		return tab;
 	}
 	
     public void openCompte(String p_mailClient){
@@ -139,9 +173,9 @@ public abstract class Personne {
     	
     	do {
 	    	System.out.println("A-	Livret A\n" + 
-	    			"B-   	Livret de d�veloppement durable et solidaire (LDDS)\n" + 
+	    			"B-   	Livret de développement durable et solidaire (LDDS)\n" + 
 	    			"C-   	Livret jeune\n" + 
-	    			"D-   	Plan �pargne logement (PEL)\n");
+	    			"D-   	Plan épargne logement (PEL)\n");
 	    	choix = LectureClavier.saisirCaractere();
     	}while(choix != 'A' && choix != 'B' && choix != 'C' && choix != 'D');
     	
@@ -152,7 +186,7 @@ public abstract class Personne {
     			newCompte.setM_typeCompte(typeDeCompte);
 	    		break;
 	    	case 'B':
-	    		typeDeCompte="Livret_de_d�veloppement_durable_et_solidaire_(LDDS)";
+	    		typeDeCompte="Livret_de_développement_durable_et_solidaire_(LDDS)";
 	    		newCompte.setM_typeCompte(typeDeCompte);
 	    		break;
 	    	case 'C':
@@ -160,7 +194,7 @@ public abstract class Personne {
 	    		newCompte.setM_typeCompte(typeDeCompte);
 	    		break;
 	    	case 'D':
-	    		typeDeCompte="Plan_�pargne_logement_(PEL)";
+	    		typeDeCompte="Plan_épargne_logement_(PEL)";
 	    		newCompte.setM_typeCompte(typeDeCompte);
 	    		break;
 	    	default: System.out.println("Choix_non_existant");
@@ -176,38 +210,107 @@ public abstract class Personne {
 
 	}
     
-	public ArrayList<Client> LClientCompte(){
+	public static ArrayList<Client> listeComptesKB(){
 		String chemin;
-		chemin = System.getProperty("user.dir");//Permet d'avoir le r�pertoire courant de l'utilisateur
+		chemin = System.getProperty("user.dir");//Permet d'avoir le répertoire courant de l'utilisateur
 		ArrayList<Client> lstCompte = new ArrayList<>();
 		LoadSaveFile.getListFromFile(chemin+"/"+"src\\khaliss_bank_project\\fichiers"+"/"+"listeComptes.csv", lstCompte);
 		return lstCompte;
 	}
 	
-	public ArrayList<Integer> affListeCompte(String c_mail) {
-		m_listeCompte = LClientCompte();
-		int detect = 0 ;
-		int detect1 = 0 ;
-		ArrayList<Integer> tab = new ArrayList<Integer>();
+	public void affListeComptesClient(String p_mail) {
+		ArrayList<String> listeComptes = new ArrayList<>();
+	}
+	
+	public void afficheListeComptesClient(String p_mail)
+	{		
+		System.out.println("type de compte:"+ "						  Numéro de compte:"+"					 Solde:");
 		
-		for(int i=0; i<m_listeCompte.get(0).getNbValues(); ++i ) {
-			detect1=0;
-			for(int j=0;j<m_listeCompte.size(); ++j) {
-				//System.out.print(i+"\t");
-				detect=0;
-				if (c_mail.equals(m_listeCompte.get(0).getValue(i))){
-					detect1++;
-					if(detect1 == 1) {
-						tab.add(i);
-						System.out.print(i+"\t");//permet l'identification de la ligne
-					}
-					System.out.print(String.format("%-35s",m_listeCompte.get(j).getValue(i)));
-					detect=1;
+		for(int i=0; i<m_listeCompte.get(0).getNbValues(); ++i) 
+		{
+			if(m_listeCompte.get(0).getValue(i).equals(p_mail))
+			{
+				System.out.print(i+1+": ");
+				
+				for(int j=1;j<m_listeCompte.size(); ++j) 
+				{
+					System.out.print(String.format("%-55s",m_listeCompte.get(j).getValue(i)));
 				}
+				
+				System.out.println("");
 			}
-			if(detect == 1)
-				System.out.println("");						
+			
 		}
-		return tab;
+	}
+
+	public boolean sendArgent(String p_mail) {
+		
+		int choix;
+		String numeroCompteCredit = new String("");
+		double montantVirement = 0, newSoldeDebit = 0, newSoldeCredit = 0;
+		
+		m_listeCompte = listeComptesKB();
+		
+		System.out.println("________________________________________________________________");
+		
+		do 
+		{
+			
+			System.out.println("Selectionner le compte à Débiter:");
+			afficheListeComptesClient(p_mail);
+			choix = (int)LectureClavier.saisirDouble();
+		
+			if(choix < 0 || choix==0 || choix > m_listeCompte.size()+1 || !m_listeCompte.get(0).getValue(choix-1).equals(p_mail))
+			{
+				System.out.println("Le compte saisie ne correspond à aucun des comptes proposés!!");
+			}
+		
+		}while(choix < 0 || choix==0 || choix > m_listeCompte.size()+1 ||!m_listeCompte.get(0).getValue(choix-1).equals(p_mail));
+		
+		 
+		
+		System.out.println("Vous avez selectionné le compte numéro: "+m_listeCompte.get(2).getValue(choix-1) + "\n");
+		
+		System.out.println("Saisir le numéro du compte à créditer :");
+		numeroCompteCredit = LectureClavier.saisirPhrase();
+		
+		System.out.println("Saisir le montant du virement :");
+		montantVirement = LectureClavier.saisirDouble(); //gérer le découvert
+		
+		newSoldeDebit = Double.parseDouble(m_listeCompte.get(3).getValue(choix-1)) - montantVirement;
+		
+		System.out.println("\nVotre virement de "+montantVirement  +"€ vres le compte: "+ numeroCompteCredit+ " a été effectuer avec succès!! \nVotre nouveau solde est de :\n"+newSoldeDebit+"€");
+		
+		Compte newCompteDebit  = new Compte(m_listeCompte.get(0).getValue(choix-1),m_listeCompte.get(1).getValue(choix-1),Integer.parseInt(m_listeCompte.get(2).getValue(choix-1)),newSoldeDebit);
+		LoadSaveFile.setCompteToFile(newCompteDebit);
+		LoadSaveFile.deleteLine(System.getProperty("user.dir")+"/"+"src\\khaliss_bank_project\\fichiers\\listeComptes.csv",choix);
+		
+		m_listeCompte = listeComptesKB();
+		
+		for(int i=0; i<m_listeCompte.get(0).getNbValues(); ++i )
+		{
+			
+				if(numeroCompteCredit.equals(m_listeCompte.get(2).getValue(i)))
+				{
+					newSoldeCredit = Double.parseDouble(m_listeCompte.get(3).getValue(i)) + montantVirement;
+					
+					Compte newCompteCredit  = new Compte(m_listeCompte.get(0).getValue(i),m_listeCompte.get(1).getValue(i),Integer.parseInt(m_listeCompte.get(2).getValue(i)),newSoldeCredit);
+					
+					LoadSaveFile.deleteLine(System.getProperty("user.dir")+"/"+"src\\khaliss_bank_project\\fichiers\\listeComptes.csv",i+1);
+					
+					LoadSaveFile.setCompteToFile(newCompteCredit);
+					
+					
+					
+					break;
+				}
+			
+		}
+		
+		
+		
+		
+		
+		return true;
 	}
 }
