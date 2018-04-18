@@ -5,8 +5,35 @@ import java.util.*;
 import java.lang.*;
 import divers.*;
 import java.math.*;
-
+/**
+ * <b>Personne est une class abstraite</b>
+ * <p>
+ * Voici les membres de la classe :
+ * <ul>
+ * <li>m_nom</li>
+ * <li> m_prenom</li>
+ * <li>m_mail</li>
+ * <li>m_motDePasse</li>
+ * <li>m_listeCompte</li>
+ * </ul>
+ * Voici les constructeurs et méthodes de la classe :
+ * <ul>
+ * <li>Personne()</li>
+ * <li>Personne(String N,String P, String M, String MDP)</li>
+ * <li>Setter + Getter ex: String getM_nom(), setM_nom(String m_nom) </li>
+ * <li>boolean deleteCompte(String mail)</li>
+ * <li>ArrayList<Integer> affListeCompte(String c_mail)</li>
+ * </ul>
+ * </p>
+ * <p>
+ * <b>Note : </b>Les classes qui heritres de Personne sont : Client et Banquier.
+ * </p>
+ * 
+ * @author Mamadou, Yasser, El-Arif
+ * @version 1.0
+ */
 public abstract class Personne {
+	
 	protected String m_nom = "";
 	protected String m_prenom = ""; 
 	protected String m_mail = "";
@@ -74,7 +101,7 @@ public abstract class Personne {
 		ArrayList<Integer> tab = new ArrayList<Integer>();
 		tab = affListeCompte(mail);
 		do {
-			System.out.println("Saisir le num�ro de la ligne correspondant au compte � supprimer");
+			System.out.println("Saisir le numero de la ligne correspondant au compte � supprimer");
 			ligneNumCompteToDelete = (int)LectureClavier.saisirDouble();
 		    
 			for(int i = 0; i < tab.size(); i++)
@@ -84,8 +111,8 @@ public abstract class Personne {
 		}while(num == 0);
 		
 		if(num == 1) {
-			System.out.println("La Ligne: "+ligneNumCompteToDelete+" est selectionn�e pour �tre supprim�e");
-			System.out.println("Le compte est supprim�");
+			System.out.println("La Ligne: "+ligneNumCompteToDelete+" est selectionnee pour etre supprime");
+			System.out.println("Le compte est supprime");
 			return true;
 		}else {
 			

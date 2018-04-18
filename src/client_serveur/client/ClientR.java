@@ -13,7 +13,7 @@ public class ClientR {
 		try {
 			
 			System.out.println("Demande de connexion");
-			socket = new Socket("10.188.48.36", 2018); // ou ("localhost", 2018) pour faire les tests
+			socket = new Socket("172.17.0.25", 2018); // ou ("localhost", 2018) pour faire les tests
 			System.out.println("Connexion etablie avec le serveur !");// Si le message s'affiche c'est que je suis connecte
 			System.out.println("┌─────────────────────────────────────────────────┐");
 			System.out.println("│             WELCOME TO KHALISS BANK             │");

@@ -1,4 +1,5 @@
 package khaliss_bank_project;
+
 import java.io.*;
 import java.util.*;
 import divers.*;
@@ -38,7 +39,6 @@ public class Banquier extends Personne {
 		int detect = 0 ;
 		for(int i=0; i<m_listeClient.get(0).getNbValues(); ++i ) {
 			
-				
 			for(int j=0;j<m_listeClient.size(); ++j) {
 				detect=0;
 				if (this.m_nom.equals(m_listeClient.get(6).getValue(i)))

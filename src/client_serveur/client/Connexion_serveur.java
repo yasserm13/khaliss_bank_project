@@ -7,8 +7,8 @@ import java.io.*;
 public class Connexion_serveur implements Runnable {
 
 	private Socket socket = null;
-	public static Thread t2;
-	public static String login = null, mdp = null, msg1 = null, msg2 = null, msg3 = null;
+	public static Thread t2,t3;
+	public static String login = null, mdp = null, msg1 = null;
 	private PrintWriter output = null;
 	private BufferedReader input = null;
 	private Scanner sc = null;
@@ -50,11 +50,14 @@ public class Connexion_serveur implements Runnable {
 				System.err.println("Les informations saisies sont incorrectes ");  //affiche le msg en rouge
 			}
 		}
-			//t2 = new Thread(new Chat_ClientServeur(socket));
-			//t2.start();
-			
-			t2 = new Thread(new Aff_Menu(socket));
+		
+		if (login.endsWith("khaliss-bank.fr")) {
+			t2 = new Thread(new Aff_Menu_Banquier(socket));
 			t2.start();
+		}else {
+			t3 = new Thread(new Aff_Menu_Client(socket));
+			t3.start();
+		}
 		
 		} catch (IOException e) {
 			e.printStackTrace();

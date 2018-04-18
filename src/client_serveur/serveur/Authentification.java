@@ -50,7 +50,7 @@ public class Authentification implements Runnable {
 			output.flush();
 			mdp = input.readLine();
 
-			if(isValid2(login, mdp)){
+			if(isValid(login, mdp)){
 				
 				output.println("connecte");
 				System.out.println(login +" vient de se connecter ");
@@ -65,36 +65,12 @@ public class Authentification implements Runnable {
 				output.println("Erreur, mauvais login ou mot de passe !"); output.flush();
 			}
 		 }
-			//t2 = new Thread(new Aff_Menu(socket));
-			//t2.start();
+			//Thread coter serveur
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println(login+" ne repond pas !");
 		}
-	}
-	
-	//Lecture du fichier contenant la liste des clients/banquiers
-	private static boolean isValid(String login, String mdp) {
-		
-		boolean connexion = false;
-		String chemin;
-		chemin = System.getProperty("user.dir");
-		
-		try {
-				Scanner sc = new Scanner(new File(chemin+"/"+"src\\client_serveur\\serveur"+"/"+"clients.txt"));//cible to do : listeBanquiersClients.csv
-			
-				while(sc.hasNext()){
-					if(sc.nextLine().equals(login+" "+mdp)){ //on suppose que le fichier se presente comme �a : (login mdp) to do
-	              	  connexion=true;
-	              	  break;
-					}
-	             }
-		} catch (FileNotFoundException e) {	
-			e.printStackTrace();
-			System.out.println("Le fichier n'existe pas !");
-		}
-		return connexion;
 	}
 	
 	//adaptation pour lire dans notre fichier csv
@@ -132,7 +108,7 @@ public class Authentification implements Runnable {
 		return lgMdp;
 	}
 	
-	private static boolean isValid2(String login, String mdp) {
+	private static boolean isValid(String login, String mdp) {
 		
 		boolean connexion = false;
 		String mdp_recup = null;
