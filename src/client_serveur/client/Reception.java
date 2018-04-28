@@ -20,8 +20,7 @@ public class Reception implements Runnable {
 	        try {
 	        	
 			message = input.readLine();
-			System.out.println(message);
-			//System.out.println("Le serveur vous dit :" +message);
+			System.out.println("Le serveur vous dit :" +message);
 			
 		    } catch (IOException e) {
 				

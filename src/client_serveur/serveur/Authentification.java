@@ -1,13 +1,12 @@
 package client_serveur.serveur;
 
 import java.net.*;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import client_serveur.client.Chat_ClientServeur;
-import divers.CryptageMdpMD5;
-import divers.LoadSaveFile;
 import divers.*;
 import khaliss_bank_project.*;
 
@@ -23,7 +22,7 @@ public class Authentification implements Runnable {
 	public Thread t2;
 	private Scanner sc = null;
 	private int nbClient = 1;
-	public ArrayList<Client> m_listeLoginMdp;
+	public static ArrayList<Client> m_listeLoginMdp;
 	
 	public Authentification(){
 		 super();
@@ -40,24 +39,19 @@ public class Authentification implements Runnable {
 			input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			output = new PrintWriter(socket.getOutputStream());
 			
+			
 		while(!authentifier){
 			
 			//@mail
-			output.println("Entrez votre adresse email : ");
+			output.println("Entrez votre @mail : ");
 			output.flush();
 			login = input.readLine();
 			
-			if(rechercheClient(login)) {
-				//@mail
-				output.println("Entrez votre mot de passe : ");
-				output.flush();
-				mdp = input.readLine();
-			}else {
-				Menu m = new Menu();
-				System.out.println("\nVotre @mail est inconnu de notre BDD, création de votre compte: ");
-				m.creerClient(login);
-			}
-		
+			//mdp
+			output.println("Entrez votre mot de passe : ");
+			output.flush();
+			mdp = input.readLine();
+			
 			
 			if(isValid(login, mdp)){
 				
@@ -70,16 +64,16 @@ public class Authentification implements Runnable {
 				output.flush();
 				authentifier = true;	
 			}
+			
 			else {
-				output.println("Erreur, mauvais login ou mot de passe !"); output.flush();
+				output.println("Erreur, mauvais login ou mot de passe !"); 
+				output.flush();	
 			}
+			
 		 }
 			//Thread coter serveur
 			t2 = new Thread(new Chat_ServeurClient(socket,login));
 			t2.start();
-			
-			//t2 = new Thread(new Aff_Menu(socket));
-			//t2.start();
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -88,72 +82,26 @@ public class Authentification implements Runnable {
 	}
 	
 	//adaptation pour lire dans notre fichier csv
-	public static ArrayList<Client> LloginMdp(){
-		String chemin;
-		chemin = System.getProperty("user.dir");//Permet d'avoir le r�pertoire courant de l'utilisateur
-		
-		ArrayList<Client> lstClient = new ArrayList<>();
-		LoadSaveFile.getListFromFile(chemin+"/"+"src\\khaliss_bank_project\\fichiers"+"/"+"listeBanquiersClients.csv", lstClient);
-		return lstClient;
-	}
 	
-	public ArrayList<String> affListeLoginMdp(String c_mail) {
+	private static boolean isValid(String login, String pass) {	
+	
+		boolean connexion = false, verifMail = false, verifMdp = false ;
 		
-		m_listeLoginMdp = LloginMdp();
-		int detect = 0 ;
-		int detect1 = 0 ;
-		ArrayList<String> lgMdp = new ArrayList<String>();
+		m_listeLoginMdp = Banquier.LClientBanquier();
 		
-		for(int i=0; i<m_listeLoginMdp.get(0).getNbValues(); ++i ) {
-			detect1=0;
-			for(int j=0;j<m_listeLoginMdp.size(); ++j) {
-				detect=0;
-				if (c_mail.equals(m_listeLoginMdp.get(2).getValue(i))){
-					detect1++;
-					if(detect1 == 1) {
-						lgMdp.add(m_listeLoginMdp.get(3).getValue(i));
-					}
-					detect=1;
+		for(int i=0; i<m_listeLoginMdp.get(0).getNbValues(); ++i) 
+		{
+			if(m_listeLoginMdp.get(2).getValue(i).equals(login)){
+				
+				verifMail = true;
+				if(verifMail == true) {
+					
+					verifMdp = CryptageMdpMD5.CryptageMdp(pass, m_listeLoginMdp.get(3).getValue(i));
+					if(verifMdp == true) 
+						connexion=true;
 				}
 			}
-			if(detect == 1)
-				System.out.println("");						
 		}
-		return lgMdp;
-	}
-	
-	private static boolean isValid(String login, String mdp) {
-		
-		boolean connexion = false;
-		String mdp_recup = null;
-		ArrayList<String> lgMdp = new ArrayList<String>();
-		
-		Authentification a = new Authentification();
-		lgMdp = a.affListeLoginMdp(login);
-		try{
-			mdp_recup = lgMdp.get(0);
-			connexion = CryptageMdpMD5.CryptageMdp(mdp, mdp_recup);
-			
-		}catch(IndexOutOfBoundsException e){
-			System.out.println("Le login ou le mot de passe du client n'est pas bon !");
-			connexion = CryptageMdpMD5.CryptageMdp(mdp, mdp_recup);
-		}	
-		return connexion;	
-	}
-	
-	public boolean rechercheClient(String p_mail)
-	{		
-		ArrayList<Client> listeCompte = new ArrayList<>();
-		listeCompte = Personne.listeComptesKB();
-		
-		for(int i=0; i<listeCompte.get(0).getNbValues(); ++i) 
-		{
-			if(listeCompte.get(0).getValue(i).equals(p_mail))
-			{
-				return true;
-			}
-			
-		}
-		return false;
+		return connexion;
 	}
 }

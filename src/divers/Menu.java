@@ -157,6 +157,7 @@ public class Menu implements InterfaceKB{
 		}
 	}
 	
+	/*
 	public void demarrer() {
         while (true) {
             int choix = menu_03();
@@ -200,7 +201,7 @@ public class Menu implements InterfaceKB{
                 	System.out.println("Mauvais choix, recommencez !"); // Action par dÃ©faut en cas de mauvais choix
             }
         }
-    }
+    }*/
 	
 	public void demarrerB() {
         while (true) {
@@ -419,6 +420,7 @@ public class Menu implements InterfaceKB{
 		return lgMdp;
 	}
 	
+	/*
 	private static boolean isValid(String login, String mdp) {
 		
 		boolean connexion = false;
@@ -436,5 +438,5 @@ public class Menu implements InterfaceKB{
 			connexion = CryptageMdpMD5.CryptageMdp(mdp, mdp_recup);
 		}	
 		return connexion;	
-	}
+	}*/
 }

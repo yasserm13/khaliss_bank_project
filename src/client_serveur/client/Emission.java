@@ -27,49 +27,12 @@ public class Emission implements Runnable {
 
 	public void run() {
 		
-		  sc = new Scanner(System.in);
-		 System.out.println("Saisir mail");
-		 login = sc.nextLine();
-		 
-		 if(rechercheClient(login)) {
-				//Saisi du mdp
-				try {
-					System.out.println(input.readLine());
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				mdp = sc.nextLine();
-				output.println(mdp);
-				output.flush();
-			}else {
-				Menu m = new Menu();
-				System.out.println("\nVotre @mail est inconnu de notre BDD, création de votre compte: ");
-				m.creerClient(login);
-			}
-		 
-		  /*
+		  sc = new Scanner(System.in);  
 		  while(true){
 			    System.out.println("Votre message :");
 				message = sc.nextLine();
 				output.println(message);
 			    output.flush();
-			  }*/
-	}
-	
-	public boolean rechercheClient(String p_mail)
-	{		
-		ArrayList<Client> listeCompte = new ArrayList<>();
-		listeCompte = Personne.listeComptesKB();
-		
-		for(int i=0; i<listeCompte.get(0).getNbValues(); ++i) 
-		{
-			if(listeCompte.get(0).getValue(i).equals(p_mail))
-			{
-				return true;
-			}
-			
-		}
-		return false;
+			  }
 	}
 }

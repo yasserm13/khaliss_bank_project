@@ -28,7 +28,7 @@ public class CryptageMdpMD5 {
 		
 		try {
 			
-			if (CryptageMdpMD5.testMdp(mdp, mdpHashe)){
+			if (testMdp(mdp, mdpHashe)){
 				System.out.println("Le mdp est verifie");
 				return true;
 			}

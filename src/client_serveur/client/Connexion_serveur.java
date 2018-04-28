@@ -34,75 +34,35 @@ public class Connexion_serveur implements Runnable {
 		sc = new Scanner(System.in);
 		
 		while(!connect ){
-			/*
-			//Saisi du mail
+			
+			//Recup saisi du mail
 			System.out.println(input.readLine());
 			login = sc.nextLine();
 			output.println(login);
 			output.flush();
 			
-			if(rechercheClient(login)) {
-				//Saisi du mdp
-				System.out.println(input.readLine());
-				mdp = sc.nextLine();
-				output.println(mdp);
-				output.flush();
-			}else {
-				Menu m = new Menu();
-				System.out.println("\nVotre @mail est inconnu de notre BDD, création de votre compte: ");
-				m.creerClient(login);
-			}
-			
-			if (login.endsWith("khaliss-bank.fr")) {
-				t2 = new Thread(new Aff_Menu_Banquier(socket));
-				t2.start();
-			}else {
-				t3 = new Thread(new Aff_Menu_Client(socket));
-				t3.start();
-			}
-			
+			//Recup saisi du mdp
+			System.out.println(input.readLine());
+			mdp = sc.nextLine();
+			output.println(mdp);
+			output.flush();
+		
+		
 			if(input.readLine().equals("connecte")){
 				System.out.println("Je suis connecte "); 
 				connect = true;
 			}
-			
 			else {
-				System.err.println("Les informations saisies sont incorrectes ");  //affiche le msg en rouge
+				System.err.println("Les informations saisies sont incorrectes");  //affiche le msg en rouge
 			}
 		}
-		*/
+		
 		t2 = new Thread(new Chat_ClientServeur(socket));
 		t2.start();
-		
-		/*
-		if (login.endsWith("khaliss-bank.fr")) {
-			t2 = new Thread(new Aff_Menu_Banquier(socket));
-			t2.start();
-		}else {
-			t3 = new Thread(new Aff_Menu_Client(socket));
-			t3.start();
-		}*/
-		}
 		
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("Le serveur ne repond plus ");
 		}
-	}
-	
-	public boolean rechercheClient(String p_mail)
-	{		
-		ArrayList<Client> listeCompte = new ArrayList<>();
-		listeCompte = Personne.listeComptesKB();
-		
-		for(int i=0; i<listeCompte.get(0).getNbValues(); ++i) 
-		{
-			if(listeCompte.get(0).getValue(i).equals(p_mail))
-			{
-				return true;
-			}
-			
-		}
-		return false;
 	}
 }
