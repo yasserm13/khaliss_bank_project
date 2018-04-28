@@ -43,7 +43,7 @@ public class Menu implements InterfaceKB{
 		System.out.println("├─────────────────────────────────────────────────┤");
 		System.out.println("│                                                 │");
 		System.out.println("│  1: Modifier mes informations personnelles      │");
-		System.out.println("│  2: Afficher ma liste de clients			      │");
+		System.out.println("│  2: Afficher ma liste de clients                │");
 		System.out.println("│  3: Ouvrir un nouveau compte client             │");
 		System.out.println("│  4: Effectuer un virement d'un compte client    │");
 		System.out.println("│  5: Supprimer un compte client                  │");
@@ -88,7 +88,7 @@ public class Menu implements InterfaceKB{
 		System.out.println("│  1: Login                                       │");
 		System.out.println("│                                                 │");
 		System.out.println("│*****************KHALISS BANK********************│");
-		System.out.println("│ [0]: Menu principal                             │");
+		System.out.println("│ [0]: Quitter le programme                       │");
 		System.out.println("└─────────────────────────────────────────────────┘");
 		System.out.print("Votre choix : ");
 		choix = lireEntreeInt(0, 1);

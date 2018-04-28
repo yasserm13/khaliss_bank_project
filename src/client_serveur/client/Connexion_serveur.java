@@ -81,7 +81,8 @@ public class Connexion_serveur implements Runnable {
 		}else {
 			t3 = new Thread(new Aff_Menu_Client(socket));
 			t3.start();
-		}*/}
+		}*/
+		}
 		
 		} catch (IOException e) {
 			e.printStackTrace();

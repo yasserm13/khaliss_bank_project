@@ -8,7 +8,7 @@ public class Serveur {
 	//Pour la methode getIpLocale();
 	public static InetAddress m_localAddress;
 	
-	//Pour la m�thode  ServerMethode()
+	//Pour la methode  ServerMethode()
 	public static ServerSocket m_socketServeur = null;
 	public Socket m_socketDuServeur;
 	public static  Thread m_t;

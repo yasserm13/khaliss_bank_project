@@ -135,26 +135,27 @@ public abstract class Personne {
   
     
 	
-	public ArrayList<Integer> selectToDelete(String c_mail) {
-		m_listeCompte = listeComptesKB();
+	public static ArrayList<Integer> selectToDelete(String c_mail) {
+		ArrayList<Client> listeCompte = new ArrayList<>();
+		listeCompte = listeComptesKB();
 		int detect = 0 ;
 		int detect1 = 0 ;
 		int count=0;
 		ArrayList<Integer> tab = new ArrayList<Integer>(0);
 		
-		for(int i=0; i<m_listeCompte.get(0).getNbValues(); ++i ) {
+		for(int i=0; i<listeCompte.get(0).getNbValues(); ++i ) {
 			detect1=0;
-			for(int j=0;j<m_listeCompte.size(); ++j) {
+			for(int j=0;j<listeCompte.size(); ++j) {
 				//System.out.print(i+"\t");
 				detect=0;
-				if (c_mail.equals(m_listeCompte.get(0).getValue(i))){
+				if (c_mail.equals(listeCompte.get(0).getValue(i))){
 					detect1++;
 					if(detect1 == 1) {
 						count = i+1;
 						tab.add(count);
 						System.out.print(count+"\t");//permet l'identification de la ligne
 					}
-					System.out.print(String.format("%-35s",m_listeCompte.get(j).getValue(i)));
+					System.out.print(String.format("%-35s",listeCompte.get(j).getValue(i)));
 					detect=1;
 				}
 			}

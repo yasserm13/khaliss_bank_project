@@ -2,5 +2,5 @@ Nom,Prenom,Adresse_Email,Mot_De_Passe_Crypte,Adresse_Domicile,Nom_Conseiller
 AHAMADA,El-Arif,ahamada@khaliss-bank.fr,177af9ad2e6dc869e425ee5ea85ddfbe,Marseille,XX
 MOUSSA,Yasser,moussa@khaliss-bank.fr,639583119441bd84c373c314afd2814d,Nice,XX
 Marega,Mamadou,marega@khaliss-bank.fr,59877244cdbe819a4db19d381190,Paris,XX
-Ali,Said,said@gmail.com,86318e52f5ed481abe1d13d509443de,Marseille,AHAMADA
-BRAZA,Mael,Braza@gmail.com,8cf5c8eb6f699d6cc0790f9c4a04cf,Nice,MAREGA
+Ali,Said,ali@gmail.com,86318e52f5ed481abe1d13d509443de,Marseille,AHAMADA
+BRAZA,Mael,braza@gmail.com,8cf5c8eb6f699d6cc0790f9c4a04cf,Nice,MAREGA

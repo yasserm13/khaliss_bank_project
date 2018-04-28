@@ -57,12 +57,6 @@ public class Authentification implements Runnable {
 				System.out.println("\nVotre @mail est inconnu de notre BDD, création de votre compte: ");
 				m.creerClient(login);
 			}
-			/*
-			//@mail
-			output.println("Entrez votre mot de passe : ");
-			output.flush();
-			mdp = input.readLine();
-			*/
 		
 			
 			if(isValid(login, mdp)){
@@ -81,6 +75,11 @@ public class Authentification implements Runnable {
 			}
 		 }
 			//Thread coter serveur
+			t2 = new Thread(new Chat_ServeurClient(socket,login));
+			t2.start();
+			
+			//t2 = new Thread(new Aff_Menu(socket));
+			//t2.start();
 			
 		} catch (IOException e) {
 			e.printStackTrace();
