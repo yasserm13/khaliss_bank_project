@@ -19,7 +19,7 @@ public class Authentification implements Runnable {
 	private BufferedReader input = null;
 	private String login = "clients", mdp =  null;
 	public boolean authentifier = false;
-	public Thread t2;
+	public Thread t2,t3;
 	private Scanner sc = null;
 	private int nbClient = 1;
 	public static ArrayList<Client> m_listeLoginMdp;
@@ -52,24 +52,25 @@ public class Authentification implements Runnable {
 			output.flush();
 			mdp = input.readLine();
 			
-			
 			if(isValid(login, mdp)){
-				
-				output.println("connecte");
-				System.out.println(login +" vient de se connecter ");
-				
-				System.out.println("Il est le client numero "+nbClient+" connecte !");
-				nbClient ++;
-				
-				output.flush();
-				authentifier = true;	
-			}
-			
-			else {
-				output.println("Erreur, mauvais login ou mot de passe !"); 
-				output.flush();	
-			}
-			
+						
+						output.println("connecte");
+						System.out.println(login +" vient de se connecter ");
+						
+						System.out.println("Il est le client numero "+nbClient+" connecte !");
+						nbClient ++;
+						
+						output.flush();
+						authentifier = true;	
+					}
+					
+					else {
+				   /*1*/output.println("non_connecte");
+				   /*2*/output.println("\nVotre @mail est inconnu de notre BDD, création de votre compte: ");
+						output.flush();
+					t3 = new Thread(new Creation_Client(socket,login));
+					t3.start();
+					}
 		 }
 			//Thread coter serveur
 			t2 = new Thread(new Chat_ServeurClient(socket,login));

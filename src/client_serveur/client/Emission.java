@@ -21,8 +21,7 @@ public class Emission implements Runnable {
 	private BufferedReader input = null;
 	
 	public Emission(PrintWriter out) {
-		this.output = out;
-		
+		this.output = out;		
 	}
 
 	public void run() {

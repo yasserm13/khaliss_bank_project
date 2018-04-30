@@ -275,7 +275,7 @@ public class Menu implements InterfaceKB{
                 	
                     break;
                 default:
-                	System.out.println("Mauvais choix, recommencez !"); // Action par dÃ©faut en cas de mauvais choix
+                	System.out.println("Mauvais choix, recommencez !"); // Action par défaut en cas de mauvais choix
             }
         }
     }
@@ -284,7 +284,7 @@ public class Menu implements InterfaceKB{
 	{
 		Client newClient = new Client();
 				
-		newClient.setM_mail(p_mail);
+		//newClient.setM_mail(p_mail);
 		
 		System.out.println("Veuillez saisir votre nom: ");
 		newClient.setM_nom(LectureClavier.saisirPhrase());
@@ -326,10 +326,12 @@ public class Menu implements InterfaceKB{
 		System.out.println("│                                                 │");
 		System.out.println("└─────────────────────────────────────────────────┘");
 		
+		//output.println(newClient.getM_addDomicile());
+		//output.println(newClient.getM_mail());
+		//output.println(newClient.getM_motDePasse());
+		
 		return newClient;
 	}
-	
-	
 	
 	
 	public String selectBanquier()
@@ -370,7 +372,7 @@ public class Menu implements InterfaceKB{
 	public boolean rechercheClient(String p_mail)
 	{		
 		String chemin;
-		chemin = System.getProperty("user.dir");//Permet d'avoir le r�pertoire courant de l'utilisateur
+		chemin = System.getProperty("user.dir");//Permet d'avoir le répertoire courant de l'utilisateur
 		
 		ArrayList<Client> lstClient = new ArrayList<>();
 		LoadSaveFile.getListFromFile(chemin+"/"+"src\\khaliss_bank_project\\fichiers"+"/"+"listeBanquiersClients.csv", lstClient);
