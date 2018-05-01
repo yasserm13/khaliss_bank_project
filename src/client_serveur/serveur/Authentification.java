@@ -53,30 +53,36 @@ public class Authentification implements Runnable {
 			mdp = input.readLine();
 			
 			if(isValid(login, mdp)){
-						
-						output.println("connecte");
-						System.out.println(login +" vient de se connecter ");
-						
-						System.out.println("Il est le client numero "+nbClient+" connecte !");
-						nbClient ++;
-						
-						output.flush();
-						authentifier = true;	
-					}
-					
-					else {
-				   /*1*/output.println("non_connecte");
-				   /*2*/output.println("\nVotre @mail est inconnu de notre BDD, création de votre compte: ");
-						output.flush();
-					t3 = new Thread(new Creation_Client(socket,login));
-					t3.start();
-					}
+				
+				output.println("connecte");
+				System.out.println(login +" vient de se connecter ");
+				
+				System.out.println("Il est le client numero "+nbClient+" connecte !");
+				nbClient ++;
+				
+				output.flush();
+				authentifier = true;	
+				
+				t2 = new Thread(new Chat_ServeurClient(socket,login));
+				t2.start();
+			}
+			
+			else {
+		   /*1*/output.println("non_connecte");
+		   /*2*/output.println("\nVotre @mail est inconnu de notre BDD, création de votre compte: ");
+				output.flush();
+				System.out.println("J'attends d'etre reveillé ");
+				t3.wait();
+				System.out.println("Je suis reveillé ");
+			t3 = new Thread(new  Chat_ServeurClient(socket,login));
+			t3.start();
+			
+			}
 		 }
 			//Thread coter serveur
-			t2 = new Thread(new Chat_ServeurClient(socket,login));
-			t2.start();
+		System.out.println("J'ai quitté la boucle while");
 			
-		} catch (IOException e) {
+		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 			System.out.println(login+" ne repond pas !");
 		}

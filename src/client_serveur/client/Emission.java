@@ -15,7 +15,6 @@ public class Emission implements Runnable {
 
 	private String login = null, message = null;
 	private Scanner sc = null;
-	private String mdp = null;
 	
 	private PrintWriter output = null;
 	private BufferedReader input = null;

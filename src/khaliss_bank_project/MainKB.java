@@ -45,9 +45,9 @@ public class MainKB {
 		*/
 		
 		//Test client serveur
-		//Serveur.getIpLocale();
+		Serveur.getIpLocale();
 		//ClientR.LancerClient();
-		Serveur.LancerServeur();
+		//Serveur.LancerServeur();
 		
 	}
 }

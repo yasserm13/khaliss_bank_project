@@ -30,7 +30,7 @@ public class Chat_ClientServeur implements Runnable {
 			t3.start();
    
 		} catch (IOException e) {
-			System.err.println("Le serveur distant s'est d�connect� !");
+			System.err.println("Le serveur distant s'est deconnecte !");
 		}
 	}
 }

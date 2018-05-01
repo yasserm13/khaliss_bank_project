@@ -3,9 +3,10 @@ package client_serveur.client;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.locks.Lock;
 
-import divers.Menu;
-import divers.ToolsNewClient;
+import client_serveur.serveur.Chat_ServeurClient;
+import divers.*;
 import khaliss_bank_project.Client;
 import khaliss_bank_project.Personne;
 
@@ -21,13 +22,11 @@ public class Connexion_serveur implements Runnable {
 	private Scanner sc = null;
 	private boolean connect = false;
 	
-	public Connexion_serveur(Socket s){
-		
+	public Connexion_serveur(Socket s){	
 		socket = s;
 	}
 	
-	public void run() {
-		
+	public void run() {	
 		try {
 			
 		output = new PrintWriter(socket.getOutputStream());
@@ -54,15 +53,27 @@ public class Connexion_serveur implements Runnable {
 			switch (status) {
 	            case "connecte":
 	            	System.out.println("Je suis connecte");
+	            	connect = true;
 	            	t2 = new Thread(new Chat_ClientServeur(socket));
 	        		t2.start();
 	                break;
 	            case "non_connecte":
-	            	System.out.println("Les informations saisies sont incorrectes"); 
-	           /*2*/System.out.println(input.readLine());
-	           
-	           		t3 = new Thread(new Creation_Client(socket, login));
+	            	System.out.println("Les informations saisies sont incorrectes");
+	            	System.out.println("Je ne suis pas connecte");
+	           /*2*/System.out.println(input.readLine());	
+	          
+	           		Menu m = new Menu();
+	           		m.creerClient(login);	
+	           		System.out.println("Je reveille le thread principal ");
+	           		notifyAll();
+	           		System.out.println("Je commence le tchat");
+	           		t3 = new Thread(new  Creation_Client(socket,login));
 	           		t3.start();
+	           		//connect = true;
+	                        		
+	           		//t2 = new Thread(new Chat_ClientServeur(socket));
+	        		//t2.start();
+	        		
 	                break;
 	            case "c": 
 	            	System.out.println("Fonction 3");
@@ -88,6 +99,7 @@ public class Connexion_serveur implements Runnable {
 			}
 			*/
 		}
+		System.out.println("J'ai quitté la boucle while");
 		
 		//t2 = new Thread(new Chat_ClientServeur(socket));
 		//t2.start();

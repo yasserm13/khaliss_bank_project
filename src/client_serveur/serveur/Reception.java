@@ -23,7 +23,6 @@ public class Reception implements Runnable {
 			System.out.println(login+" : "+message);
 			
 		    } catch (IOException e) {
-				
 				e.printStackTrace();
 			}
 		}

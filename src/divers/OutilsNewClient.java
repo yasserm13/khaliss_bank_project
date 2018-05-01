@@ -22,7 +22,7 @@ public class OutilsNewClient implements InterfaceKB, Runnable {
 
 	@Override
 	public Client creerClient(String p_mail){
-		
+		System.out.println("Je suis dans creerClient");
 		Client newClient = new Client();
 				
 		//newClient.setM_mail(p_mail);
@@ -74,7 +74,7 @@ public class OutilsNewClient implements InterfaceKB, Runnable {
 	public String selectBanquier(){	
 					String nomBanquier = new String("");
 					char choix;
-					
+					System.out.println("Je suis dans banquier");
 					do {
 				    	System.out.println("A- Yasser MOUSSA\n" + 
 				    			"B- Mamadou MAREGA\n" + 
@@ -107,7 +107,8 @@ public class OutilsNewClient implements InterfaceKB, Runnable {
 	public void run() {
 		
 		try {
-			
+			System.out.println("Je suis dans le run de la fonction créer client");
+
 			input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			output = new PrintWriter(socket.getOutputStream());
 			
